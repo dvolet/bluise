@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - ELOC</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- Header same as index -->
+<header>
+    ...same as above...
+</header>
+
+<section class="contact">
+    <h1>Contact Us</h1>
+    <form>
+        <input type="text" placeholder="Your Name" required><br><br>
+        <input type="email" placeholder="Your Email" required><br><br>
+        <textarea placeholder="Your Message" rows="5" required></textarea><br><br>
+        <button type="submit" class="btn">Send Message</button>
+    </form>
+</section>
+
+<!-- Social Icons -->
+<div class="social-icons">
+    ...same social icon div...
+</div>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2026 E-Learning One Creativity</p>
+</footer>
+
+<!-- Hamburger JS -->
+<script>
+const hamburger = document.querySelector(".hamburger");
+const nav = document.querySelector("nav");
+
+hamburger.addEventListener("click", () => {
+    nav.classList.toggle("active");
+});
+</script>
+
+</body>
+</html>

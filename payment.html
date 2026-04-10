@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - ELOC</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Flutterwave Script -->
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
+</head>
+
+<body>
+
+<!-- ✅ NAVBAR -->
+<nav class="navbar">
+    <div class="nav-logo">
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='images/logo.png') }}">
+        </a>
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('home') }}#kits">Kits</a></li>
+
+        {% if session.get('user_id') %}
+            <li><a href="{{ url_for('profile') }}">Profile</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        {% else %}
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('signup') }}" class="nav-btn">Join</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
+<!-- ✅ PAYMENT SECTION -->
+<section class="payment-section">
+    <h2>Complete Your Purchase</h2>
+
+    <p><strong>Kit:</strong> {{ level|capitalize }}</p>
+    <p><strong>Amount:</strong> ₦{{ price }}</p>
+
+    <button class="btn-pay" onclick="makePayment()">
+        Pay Now
+    </button>
+</section>
+
+<!-- ✅ SOCIAL ICONS -->
+<div class="social-fixed">
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+</div>
+
+<!-- ✅ FOOTER -->
+<footer class="footer">
+    <p>© 2026 ELOC - E-Learning One Creativity. All Rights Reserved</p>
+    <p>Built for future web designers 🚀</p>
+</footer>
+
+<!-- ✅ FLUTTERWAVE PAYMENT SCRIPT -->
+<script>
+function makePayment() {
+    FlutterwaveCheckout({
+        public_key: "FLWPUBK-8807b70890bcf3bdb24832d155251e2f-X",
+        tx_ref: "tx_" + Date.now(),
+        amount: {{ price }},
+
+        currency: "NGN",   // ✅ Nigeria currency fixed
+        country: "NG",     // ✅ Nigeria country added
+
+        payment_options: "card, mobilemoney",
+
+        redirect_url: "http://127.0.0.1:5000/payment-callback?level={{ level }}", // ✅ ADDED
+
+        customer: {
+            email: "test@email.com",
+            name: "{{ session['user_name'] }}"
+        },
+
+        meta: { // ✅ backup tracking
+            level: "{{ level }}"
+        },
+
+        callback: function (data) {
+            fetch("/verify-payment", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    transaction_id: data.transaction_id,
+                    tx_ref: data.tx_ref,
+                    level: "{{ level }}"
+                })
+            })
+            .then(res => res.json())
+            .then(res => {
+                if(res.status === "success"){
+                    window.location.href = "/success";
+                } else {
+                    alert("Payment failed");
+                }
+            });
+        },
+
+        customizations: {
+            title: "ELOC Kits",
+            description: "Payment for {{ level }} kit",
+        }
+    });
+}
+</script>
+
+</body>
+</html>

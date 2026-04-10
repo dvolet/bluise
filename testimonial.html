@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonials - ELOC</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- Header same as index -->
+<header>
+    ...same as above...
+</header>
+
+<section class="testimonial">
+    <h1>What Our Students Say</h1>
+    <div class="testimonial-cards">
+        <div class="card">
+            <p>"ELOC made learning web design simple and fun!"</p>
+            <h4>- Student A</h4>
+        </div>
+        <div class="card">
+            <p>"The kits are step-by-step and very beginner-friendly."</p>
+            <h4>- Student B</h4>
+        </div>
+        <div class="card">
+            <p>"I feel confident now to start freelancing projects."</p>
+            <h4>- Student C</h4>
+        </div>
+    </div>
+</section>
+
+<!-- Social Icons -->
+<div class="social-icons">
+    ...same social icon div...
+</div>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2026 E-Learning One Creativity</p>
+</footer>
+
+<!-- Hamburger JS -->
+<script>
+const hamburger = document.querySelector(".hamburger");
+const nav = document.querySelector("nav");
+
+hamburger.addEventListener("click", () => {
+    nav.classList.toggle("active");
+});
+</script>
+
+</body>
+</html>

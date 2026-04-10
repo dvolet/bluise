@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title }} - ELOC</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* Success animation inside kit page */
+.kit-success-box {
+    max-width: 500px;
+    margin: 20px auto 0;
+    padding: 30px;
+    background: #fff;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    animation: fadeIn 1s ease-in-out;
+}
+
+.kit-success-box .checkmark {
+    font-size: 60px;
+    color: #28a745;
+    margin-bottom: 15px;
+    animation: popIn 0.8s ease forwards;
+}
+
+.kit-success-box .delivery-msg {
+    font-size: 16px;
+    margin: 10px 0 20px;
+    animation: slideUp 1s ease forwards;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(-20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+@keyframes popIn {
+    0% { transform: scale(0); }
+    60% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+@keyframes slideUp {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+/* Download button inside kit */
+.btn-main.download {
+    background: #28a745;
+    color: #fff;
+    font-weight: bold;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 15px;
+    transition: background 0.3s ease;
+}
+
+.btn-main.download:hover {
+    background: #218838;
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-logo">
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='images/logo.png') }}">
+        </a>
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('home') }}#kits">Kits</a></li>
+
+        {% if session.get('user_id') %}
+            <li><a href="{{ url_for('profile') }}">Profile</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        {% else %}
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('signup') }}" class="nav-btn">Join</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
+<!-- KIT DETAIL -->
+<section class="kit-detail">
+
+    <div class="kit-box">
+
+        <!-- SAFE IMAGE -->
+        <img src="{{ url_for('static', filename='images/' + key + '.jpg') }}"
+             onerror="this.src='{{ url_for('static', filename='images/logo.png') }}'"
+             class="kit-detail-img">
+
+        <h1>{{ title }}</h1>
+
+        <ul class="kit-list">
+            {% for item in items %}
+            <li>✔ {{ item }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- FREE KIT DOWNLOAD OR PURCHASED -->
+        <!-- BUTTON -->
+{% if key == 'beginner' %}
+    {% if session.get('user_id') %}
+        <a href="{{ url_for('download', level=key, filename='sample.pdf') }}"
+           class="btn-main">
+            Download Kit
+        </a>
+    {% else %}
+        <a href="{{ url_for('login') }}"
+           class="btn-main">
+            Login to Download
+        </a>
+    {% endif %}
+{% else %}
+    {% if price == 0 or purchased %}
+        <a href="{{ url_for('download', level=key, filename='sample.pdf') }}"
+           class="btn-main">
+            Download Kit
+        </a>
+    {% else %}
+        <a href="{{ url_for('payment', level=key) }}"
+           class="btn-main">
+            Buy Now - {{ price }} NGN
+        </a>
+    {% endif %}
+{% endif %}
+    </div>
+
+</section>
+
+<div class="social-fixed">
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+</div>
+
+<footer class="footer">
+    <p>© 2026 ELOC - E-Learning One Creativity. All Rights Reserved</p>
+    <p>Built for future web designers 🚀</p>
+</footer>
+
+</body>
+</html>
