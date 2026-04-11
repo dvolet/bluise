@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Success - {{ title }} Kit | ELOC</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* SUCCESS PAGE STYLES */
+.success-container {
+    max-width: 500px;
+    margin: 120px auto 60px;
+    padding: 30px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.success-container h1 {
+    color: #28a745;
+    margin-bottom: 20px;
+}
+
+.success-container i {
+    font-size: 60px;
+    color: #28a745;
+    margin-bottom: 15px;
+    animation: pop 0.5s ease forwards;
+}
+
+@keyframes pop {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.success-message {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.download-btn {
+    display: inline-block;
+    background: #ff6600;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: background 0.3s ease;
+}
+
+.download-btn:hover {
+    background: #e65c00;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+    .success-container {
+        margin: 100px 20px 40px;
+        padding: 20px;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-logo">
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='images/logo.png') }}">
+        </a>
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('home') }}#kits">Kits</a></li>
+
+        {% if session.get('user_id') %}
+            <li><a href="{{ url_for('profile') }}">Profile</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        {% else %}
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('signup') }}" class="nav-btn">Join</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
+<!-- SUCCESS SECTION -->
+<div class="success-container">
+    <i class="fa fa-check-circle"></i>
+    <h1>Payment Successful!</h1>
+    <p class="success-message">
+        Congratulations! Your <strong>{{ title }} Kit</strong> is now ready to download.
+    </p>
+
+    <!-- DOWNLOAD BUTTON -->
+    <a href="{{ url_for('download', level=key, filename='sample.pdf') }}" class="download-btn">
+        Download Kit
+    </a>
+</div>
+
+<div class="social-fixed">
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+</div>
+
+<footer class="footer">
+    <p>© 2026 ELOC - E-Learning One Creativity. All Rights Reserved</p>
+    <p>Built for future web designers 🚀</p>
+</footer>
+
+</body>
+</html>
