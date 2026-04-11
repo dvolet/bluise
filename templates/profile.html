@@ -1,34 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment - ELOC</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ name }}'s Profile - ELOC</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<style>
+/* ==================== PAGE RESET ==================== */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* prevent horizontal scroll */
+    background: #f9f9f9;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+}
+.profile-container {
+    flex: 1; /* takes remaining space before footer */
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 0 15px;
+}
 
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+/* ==================== NAVBAR ==================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #111;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    z-index: 1000;
+}
+.navbar img { height: 40px; }
+.nav-links { list-style: none; display: flex; gap: 20px; }
+.nav-links a { color: #fff; text-decoration: none; }
+.nav-btn { background: #ff6600; padding: 8px 15px; border-radius: 5px; }
 
-    <!-- Flutterwave Script -->
-    <script src="https://checkout.flutterwave.com/v3.js"></script>
+/* ==================== PROFILE HEADER ==================== */
+.profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.profile-header h2 { margin: 0; font-size: 1.5em; }
+.profile-header img {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+/* Dropdown */
+.dropdown { position: relative; display: inline-block; }
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    min-width: 220px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    z-index: 10;
+}
+.dropdown-content input,
+.dropdown-content button { width: 100%; padding: 6px; margin-bottom: 8px; }
+.dropdown-content button { background: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
+.dropdown-content button:hover { background: #0056b3; }
+.dropdown:hover .dropdown-content { display: block; }
+
+/* ==================== CARDS ==================== */
+.card { background: #fff; padding: 20px; border-radius: 10px; margin-top: 20px; }
+.card h3 { margin-top: 0; }
+.purchased-list li { margin-bottom: 8px; }
+
+/* Buttons */
+.btn-hero {
+    background: #007bff; color: #fff;
+    padding: 5px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.btn-hero:hover { background: #0056b3; }
+
+/* ==================== PASSWORD TOOLTIPS ==================== */
+.password-container { position: relative; margin-top: 10px; }
+.toggle-pass {
+    position: absolute;
+    right: 10px; top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #555;
+    transition: color 0.2s;
+}
+.toggle-pass.active { color: #007bff; }
+.pass-tooltip {
+    display: none;
+    position: absolute;
+    bottom: -65px;
+    left: 0;
+    background: #333;
+    color: #fff;
+    padding: 8px 10px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    width: 220px;
+    z-index: 100;
+}
+.password-container:focus-within .pass-tooltip { display: block; }
+
+/* ==================== SETTINGS PANEL ==================== */
+.settings-panel {
+    display: none;
+    margin-top: 15px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+.settings-panel input { width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc; }
+.settings-panel button {
+    width: 100%; padding: 8px;
+    background: #007bff; color: #fff;
+    border: none; border-radius: 5px;
+    cursor: pointer;
+}
+.settings-panel button:hover { background: #0056b3; }
+
+/* ==================== FOOTER ==================== */
+footer.footer {
+    width: 100%;       /* full width of body */
+    margin: 0;
+    background: #111;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+}
+body {
+    margin: 0;
+}
+.footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 15px 10px;
+
+    width: 100%;
+    position: relative;
+
+    /* 🔥 THIS FIXES THE WHITE EDGES */
+    margin: 0;
+    left: 0;
+}
+</style>
 </head>
-
 <body>
-
-<!-- ✅ NAVBAR -->
+<body style="display:flex; flex-direction:column; min-height:100vh;">
 <nav class="navbar">
     <div class="nav-logo">
         <a href="{{ url_for('home') }}">
-            <img src="{{ url_for('static', filename='images/logo.png') }}">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="ELOC Logo">
         </a>
     </div>
-
     <ul class="nav-links">
         <li><a href="{{ url_for('home') }}">Home</a></li>
         <li><a href="{{ url_for('home') }}#kits">Kits</a></li>
-
         {% if session.get('user_id') %}
             <li><a href="{{ url_for('profile') }}">Profile</a></li>
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
@@ -39,82 +197,123 @@
     </ul>
 </nav>
 
-<!-- ✅ PAYMENT SECTION -->
-<section class="payment-section">
-    <h2>Complete Your Purchase</h2>
+<div class="profile-container" style="margin-top: 80px; flex:1;">
 
-    <p><strong>Kit:</strong> {{ level|capitalize }}</p>
-    <p><strong>Amount:</strong> ₦{{ price }}</p>
+    <!-- HEADER -->
+    <div class="profile-header">
+        <h2>Hello, {{ name }}!</h2>
+        <div class="dropdown">
+            {% if session.get('profile_pic') %}
+                <img src="{{ url_for('static', filename='uploads/' + session.get('profile_pic')) }}" alt="Profile Picture">
+            {% else %}
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Profile Picture">
+            {% endif %}
+            <div class="dropdown-content">
+                <form action="{{ url_for('upload_profile') }}" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="profile_pic" required>
+                    <button type="submit" class="btn-hero">Upload Picture</button>
+                </form>
+            </div>
+        </div>
+        <button id="openSettings" class="btn-hero">
+            <i class="fas fa-cog"></i> Settings
+        </button>
+    </div>
 
-    <button class="btn-pay" onclick="makePayment()">
-        Pay Now
-    </button>
-</section>
+    <!-- SETTINGS PANEL -->
+    <div id="settingsPanel" class="settings-panel">
+        <form id="settings-form">
+            <input type="text" name="name" placeholder="Change Name">
+            <input type="email" value="{{ email }}" readonly>
+            <input type="email" name="new_email" placeholder="Change Email (optional)">
+            <input type="text" name="phone" placeholder="Phone Number (optional)">
+            <input type="text" name="address" placeholder="Address (optional)">
 
-<!-- ✅ SOCIAL ICONS -->
-<div class="social-fixed">
-    <a href="#"><i class="fab fa-facebook-f"></i></a>
-    <a href="#"><i class="fab fa-twitter"></i></a>
-    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-    <a href="#"><i class="fab fa-instagram"></i></a>
+            <div class="password-container">
+                <input type="password" name="old_password" placeholder="Current Password" id="old_password">
+                <i class="fas fa-eye toggle-pass"></i>
+                <span class="pass-tooltip">Enter your current password</span>
+            </div>
+
+            <div class="password-container">
+                <input type="password" name="password" placeholder="New Password" id="password">
+                <i class="fas fa-eye toggle-pass"></i>
+                <span class="pass-tooltip">
+                    Password must contain:<br>
+                    • Min 8 characters<br>
+                    • 1 uppercase letter<br>
+                    • 1 number<br>
+                    • 1 symbol (!@#$ etc.)
+                </span>
+            </div>
+
+            <button type="submit" class="btn-hero">Update Settings</button>
+        </form>
+    </div>
+
+    <!-- Logout -->
+    <a href="{{ url_for('logout') }}" class="btn-hero" style="margin-top: 15px;">Logout</a>
+
+    <!-- Purchased Kits -->
+ <div class="card">
+    <h3>Purchased Kits</h3>
+    {% if downloads %}
+    <ul class="purchased-list">
+        {% for kit in downloads %}
+        <li>
+            {{ kit.kit|capitalize }} Kit (Expires: {{ kit.expiry }})
+            
+            {% if kit.expired %}
+                <span class="expired-label" style="color:red; font-weight:bold;">Expired</span>
+            {% else %}
+                <a href="{{ url_for('download', level=kit.kit, filename=kit.kit + '.zip') }}" class="btn-hero">
+                    Download
+                </a>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No purchases yet.</p>
+    {% endif %}
 </div>
 
-<!-- ✅ FOOTER -->
+    <!-- Activity Card -->
+    <div class="card">
+        <h3>Activity Summary</h3>
+        {% if activities %}
+<ul>
+    {% for activity, time in activities %}
+        <li>{{ time }} - {{ activity }}</li>
+    {% endfor %}
+</ul>
+        {% else %}
+        <p>No activity yet.</p>
+        {% endif %}
+    </div>
+ </div>
+ 
 <footer class="footer">
     <p>© 2026 ELOC - E-Learning One Creativity. All Rights Reserved</p>
     <p>Built for future web designers 🚀</p>
 </footer>
 
-<!-- ✅ FLUTTERWAVE PAYMENT SCRIPT -->
 <script>
-function makePayment() {
-    FlutterwaveCheckout({
-        public_key: "FLWPUBK-8807b70890bcf3bdb24832d155251e2f-X",
-        tx_ref: "tx_" + Date.now(),
-        amount: {{ price }},
-
-        currency: "NGN",   // ✅ Nigeria currency fixed
-        country: "NG",     // ✅ Nigeria country added
-
-        payment_options: "card, mobilemoney",
-
-        redirect_url: "http://127.0.0.1:5000/payment-callback?level={{ level }}", // ✅ ADDED
-
-        customer: {
-            email: "test@email.com",
-            name: "{{ session['user_name'] }}"
-        },
-
-        meta: { // ✅ backup tracking
-            level: "{{ level }}"
-        },
-
-        callback: function (data) {
-            fetch("/verify-payment", {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({
-                    transaction_id: data.transaction_id,
-                    tx_ref: data.tx_ref,
-                    level: "{{ level }}"
-                })
-            })
-            .then(res => res.json())
-            .then(res => {
-                if(res.status === "success"){
-                    window.location.href = "/success";
-                } else {
-                    alert("Payment failed");
-                }
-            });
-        },
-
-        customizations: {
-            title: "ELOC Kits",
-            description: "Payment for {{ level }} kit",
-        }
+// Toggle password visibility
+document.querySelectorAll(".toggle-pass").forEach(icon => {
+    icon.addEventListener("click", () => {
+        const input = icon.previousElementSibling;
+        input.type = input.type === "password" ? "text" : "password";
+        icon.classList.toggle("fa-eye-slash");
     });
-}
+});
+
+// Toggle settings panel
+const openBtn = document.getElementById("openSettings");
+const panel = document.getElementById("settingsPanel");
+openBtn.onclick = () => {
+    panel.style.display = panel.style.display === "block" ? "none" : "block";
+};
 </script>
 
 </body>
