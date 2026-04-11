@@ -57,6 +57,7 @@ init_db()
 # ----------------- ADD COLUMNS SAFELY -----------------
 conn = sqlite3.connect('eloc.db')
 c = conn.cursor()
+
 try:
     c.execute("ALTER TABLE purchases ADD COLUMN purchased_at TEXT")
 except:
@@ -97,30 +98,12 @@ def has_purchased(user_id, level):
     conn.close()
     return result is not None
 
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-def send_email(to_email, subject, body):
-    try:
-        msg = MIMEMultipart()
-        msg['From'] = EMAIL_ADDRESS
-        msg['To'] = to_email
-        msg['Subject'] = subject
-        msg.attach(MIMEText(body, 'plain'))
-
-        server = smtplib.SMTP('smtp.gmail.com', 587)
-        server.starttls()
-        server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-        server.send_message(msg)
-        server.quit()
-    except Exception as e:
-        print("Email error:", e)
-
-# ----------------- ROUTES -----------------
+# ----------------- HOME -----------------
 @app.route('/')
 def home():
     return render_template('index.html')
 
+# ----------------- KIT -----------------
 @app.route('/kit/<level>')
 def kit(level):
     kits = {
@@ -146,7 +129,7 @@ def kit(level):
         purchased=purchased
     )
 
-# ----------------- PAYMENT VERIFY -----------------
+# ----------------- VERIFY PAYMENT (FIXED) -----------------
 @app.route('/verify-payment', methods=['POST'])
 def verify_payment():
     data = request.json
@@ -160,32 +143,39 @@ def verify_payment():
     res = requests.get(url, headers=headers)
     response = res.json()
 
-    if response["status"] == "success":
+    if response.get("status") == "success":
         conn = sqlite3.connect('eloc.db')
         c = conn.cursor()
 
         try:
-            c.execute(
-                "INSERT INTO purchases (user_id, kit_level, amount, tx_ref) VALUES (?,?,?,?)",
-                (session['user_id'], level, response["data"]["amount"], tx_ref)
-            )
-            conn.commit()
+            # prevent duplicates
+            c.execute("SELECT id FROM purchases WHERE tx_ref=?", (tx_ref,))
+            exists = c.fetchone()
+
+            if not exists:
+                c.execute(
+                    "INSERT INTO purchases (user_id, kit_level, amount, tx_ref, purchased_at) VALUES (?,?,?,?,?)",
+                    (
+                        session.get('user_id', 0),
+                        level,
+                        response["data"]["amount"],
+                        tx_ref,
+                        datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    )
+                )
+                conn.commit()
 
             log_activity(session['user_id'], f"Purchased {level} kit")
-
-            # OPTIONAL EMAIL
-            # send_email(user_email, "Payment Success", "Download your kit in your profile")
 
         except Exception as e:
             print("DB error:", e)
 
         conn.close()
-
         return jsonify({"status": "success"})
 
     return jsonify({"status": "failed"})
 
-# ----------------- PAYMENT CALLBACK (FIXED - NO DUPLICATE INSERT) -----------------
+# ----------------- CALLBACK (FIXED SAFETY) -----------------
 @app.route('/payment-callback')
 def payment_callback():
     tx_id = request.args.get('transaction_id')
@@ -193,7 +183,7 @@ def payment_callback():
     level = request.args.get('level')
 
     if not tx_id:
-        return "Transaction failed", 400
+        return redirect(url_for('home'))
 
     url = f"https://api.flutterwave.com/v3/transactions/{tx_id}/verify"
     headers = {"Authorization": f"Bearer {FLW_SECRET_KEY}"}
@@ -201,17 +191,40 @@ def payment_callback():
     res = requests.get(url, headers=headers)
     response = res.json()
 
-    if response["status"] == "success":
-        log_activity(session['user_id'], f"Payment verified for {level}")
+    if response.get("status") == "success":
+        try:
+            conn = sqlite3.connect('eloc.db')
+            c = conn.cursor()
+
+            c.execute("SELECT id FROM purchases WHERE tx_ref=?", (tx_ref,))
+            exists = c.fetchone()
+
+            if not exists:
+                c.execute(
+                    "INSERT INTO purchases (user_id, kit_level, amount, tx_ref, purchased_at) VALUES (?,?,?,?,?)",
+                    (
+                        session.get('user_id', 0),
+                        level,
+                        response["data"]["amount"],
+                        tx_ref,
+                        datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    )
+                )
+                conn.commit()
+
+            conn.close()
+
+        except Exception as e:
+            print("Callback error:", e)
 
         return redirect(url_for('success'))
 
-    return "Payment verification failed"
+    return redirect(url_for('home'))
 
 # ----------------- SUCCESS -----------------
 @app.route('/success')
 def success():
-    return redirect(url_for('profile'))
+    return render_template("success.html")
 
 # ----------------- DOWNLOAD -----------------
 @app.route('/download/<level>/<filename>')
