@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
+    <!-- ✅ FIXED FLUTTERWAVE SCRIPT -->
     <script src="https://checkout.flutterwave.com/v3.js"></script>
 </head>
 
@@ -40,7 +41,9 @@
     <p><strong>Kit:</strong> {{ level|capitalize }}</p>
     <p><strong>Amount:</strong> ₦{{ price }}</p>
 
-    <button class="btn-pay" onclick="makePayment()">Pay Now</button>
+    <button class="btn-pay" onclick="makePayment()">
+        Pay Now
+    </button>
 </section>
 
 <div class="social-fixed">
@@ -52,6 +55,7 @@
 
 <footer class="footer">
     <p>© 2026 ELOC - E-Learning One Creativity. All Rights Reserved</p>
+    <p>Built for future web designers 🚀</p>
 </footer>
 
 <script>
@@ -69,41 +73,24 @@ function makePayment() {
 
         payment_options: "card, mobilemoney",
 
-        // ✅ IMPORTANT: LIVE DOMAIN (NOT LOCALHOST)
+        // ✅ VERY IMPORTANT: USE YOUR LIVE DOMAIN
         redirect_url: "https://e-learning-one-creativity.onrender.com/payment-callback?level={{ level }}&tx_ref=" + txRef,
 
         customer: {
-            email: "{{ session['user_email'] if session.get('user_email') else 'test@email.com' }}",
-            name: "{{ session['user_name'] }}"
+            email: "{{ session.get('user_email', 'test@email.com') }}",
+            name: "{{ session.get('user_name', 'User') }}"
         },
 
         meta: {
             level: "{{ level }}"
         },
 
-        callback: function (data) {
-            fetch("/verify-payment", {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({
-                    transaction_id: data.transaction_id,
-                    tx_ref: txRef,
-                    level: "{{ level }}"
-                })
-            })
-            .then(res => res.json())
-            .then(res => {
-                if(res.status === "success"){
-                    window.location.href = "/success";
-                } else {
-                    alert("Payment verification failed");
-                }
-            });
-        },
+        // ❌ REMOVE CALLBACK COMPLETELY (IMPORTANT)
+        // callback removed to avoid double verification
 
         customizations: {
             title: "ELOC Kits",
-            description: "Payment for {{ level }} kit"
+            description: "Payment for {{ level }} kit",
         }
     });
 }
