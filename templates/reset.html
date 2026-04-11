@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reset Password - ELOC</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* Password container and toggle eye */
+.password-container {
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 5px; /* spacing below for tooltip */
+}
+.password-container input {
+    width: 100%;
+    box-sizing: border-box;
+}
+.toggle-pass {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #555;
+}
+.toggle-pass.active { color: #007bff; }
+
+/* Tooltip below input without blocking button */
+.pass-tooltip {
+    display: none;
+    position: absolute;
+    background: #222;
+    color: #fff;
+    padding: 10px;
+    font-size: 12px;
+    border-radius: 5px;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+/* show on focus */
+.password-container input:focus + .toggle-pass + .pass-tooltip {
+    display: block;
+}
+.password-container:hover .pass-tooltip { display: block; }
+
+/* Inline password validation message */
+#password-msg {
+    font-size: 0.9rem;
+    color: red;
+    margin-top: 5px;
+    word-wrap: break-word;
+}
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-container input {
+    width: 100%;
+    padding-right: 40px; /* space for eye icon */
+    box-sizing: border-box;
+}
+
+.toggle-pass {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-logo">
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="ELOC Logo">
+        </a>
+    </div>
+    <ul class="nav-links">
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('home') }}#kits">Kits</a></li>
+        {% if session.get('user_id') %}
+            <li><a href="{{ url_for('profile') }}">Profile</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        {% else %}
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('signup') }}" class="nav-btn">Join</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
+<div class="social-fixed">
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+</div>
+
+<div class="form-container">
+    <h2>Reset Password</h2>
+
+    {% if message %}
+        <p style="color: green;">{{ message }}</p>
+    {% endif %}
+
+    <form method="POST" id="reset-form">
+        <div class="password-container">
+            <input type="password" name="password" id="password" placeholder="New Password" required>
+            <i class="fas fa-eye toggle-pass"></i>
+            <span class="pass-tooltip">Minimum 8 characters, uppercase, number, symbol</span>
+        </div>
+        <div id="password-msg"></div>
+
+        <button type="submit" class="btn-hero" style="margin-top:15px;">Update Password</button>
+    </form>
+</div>
+
+<script>
+// Toggle password visibility
+document.querySelectorAll(".toggle-pass").forEach(icon => {
+    icon.addEventListener("click", () => {
+        const input = icon.previousElementSibling;
+        input.type = input.type === "password" ? "text" : "password";
+        icon.classList.toggle("fa-eye-slash");
+    });
+});
+
+// Inline password validation
+document.getElementById('reset-form').addEventListener('submit', function(e){
+    const password = document.getElementById('password').value;
+    const msgDiv = document.getElementById('password-msg');
+
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+    if (!regex.test(password)) {
+        e.preventDefault();
+        msgDiv.textContent = 'Password must be at least 8 characters with uppercase, number, and symbol.';
+    } else {
+        msgDiv.textContent = '';
+    }
+});
+</script>
+
+<footer class="footer">
+    <p>© 2026 ELOC - E-Learning One Creativity. All Rights Reserved</p>
+    <p>Built for future web designers 🚀</p>
+</footer>
+
+</body>
+</html>
