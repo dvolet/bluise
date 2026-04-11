@@ -398,8 +398,8 @@ def payment(level):
         return redirect(url_for('login'))
 
     prices = {
-        "intermediate": 5000,
-        "professional": 10000
+        "intermediate": 100,
+        "professional": 300
     }
 
     return render_template('payment.html',
