@@ -165,8 +165,8 @@ def home():
 def kit(level):
     kits = {
         "beginner": {"title":"Beginner Kit","price":0,"items":["HTML Ebook","Videos","Project"]},
-        "intermediate": {"title":"Intermediate Kit","price":5000,"items":["Responsive Design","Templates"]},
-        "professional": {"title":"Professional Kit","price":10000,"items":["Client Projects","Freelancing Guide"]}
+        "intermediate": {"title":"Intermediate Kit","price":100,"items":["Responsive Design","Templates"]},
+        "professional": {"title":"Professional Kit","price":300,"items":["Client Projects","Freelancing Guide"]}
     }
 
     kit = kits.get(level)
