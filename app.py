@@ -442,6 +442,56 @@ def verify_payment():
 
     return jsonify({"status": "failed"})
 
+@app.route('/payment-callback')
+def payment_callback():
+    try:
+        tx_id = request.args.get('transaction_id')
+        tx_ref = request.args.get('tx_ref')
+
+        if not tx_id:
+            return "Transaction ID missing", 200
+
+        url = f"https://api.flutterwave.com/v3/transactions/{tx_id}/verify"
+        headers = {
+            "Authorization": f"Bearer {FLW_SECRET_KEY}"
+        }
+
+        res = requests.get(url, headers=headers)
+        response = res.json()
+
+        if response.get("status") == "success":
+            user_id = session.get('user_id')
+
+            # 🔥 safer way to get level
+            level = "intermediate"  # adjust if needed
+
+            if user_id:
+                conn = sqlite3.connect('eloc.db')
+                c = conn.cursor()
+
+                try:
+                    c.execute(
+                        "INSERT OR IGNORE INTO purchases (user_id, kit_level, amount, tx_ref) VALUES (?,?,?,?)",
+                        (user_id, level, response["data"]["amount"], tx_ref)
+                    )
+                    conn.commit()
+                except Exception as e:
+                    print("DB ERROR:", e)
+
+                conn.close()
+
+                try:
+                    log_activity(user_id, f"Purchased {level} kit")
+                except:
+                    pass
+
+            return redirect(url_for('success'))
+
+        return "Payment verification failed", 200
+
+    except Exception as e:
+        print("CALLBACK ERROR:", e)
+        return "Server error", 200
 # ----------------- SUCCESS -----------------
 @app.route('/success')
 def success():
