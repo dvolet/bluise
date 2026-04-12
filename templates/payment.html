@@ -74,7 +74,7 @@ function makePayment() {
         payment_options: "card, mobilemoney",
 
         // ✅ VERY IMPORTANT: USE YOUR LIVE DOMAIN
-        redirect_url: "https://eloc.onrender.com/payment-callback?level={{ level }}&tx_ref=" + txRef,
+        redirect_url: "https://eloc.onrender.com/payment-callback?level={{ level }}",
 
         customer: {
             email: "{{ session.get('user_email', 'test@email.com') }}",
