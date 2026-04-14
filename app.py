@@ -445,13 +445,20 @@ def verify_payment():
 @app.route('/payment-callback')
 def payment_callback():
     try:
-        tx_id = request.args.get('transaction_id')
+        status = request.args.get('status')
         tx_ref = request.args.get('tx_ref')
+        level = request.args.get('level')
 
-        if not tx_id:
-            return "Transaction ID missing", 200
+        # ✅ If payment failed or cancelled
+        if status != "successful":
+            return "Payment not successful", 200
 
-        url = f"https://api.flutterwave.com/v3/transactions/{tx_id}/verify"
+        # ✅ Ensure tx_ref exists
+        if not tx_ref:
+            return "Transaction reference missing", 200
+
+        # ✅ VERIFY using tx_ref (THIS IS THE FIX)
+        url = f"https://api.flutterwave.com/v3/transactions/verify_by_reference?tx_ref={tx_ref}"
         headers = {
             "Authorization": f"Bearer {FLW_SECRET_KEY}"
         }
@@ -461,9 +468,6 @@ def payment_callback():
 
         if response.get("status") == "success":
             user_id = session.get('user_id')
-
-            # 🔥 safer way to get level
-            level = "intermediate"  # adjust if needed
 
             if user_id:
                 conn = sqlite3.connect('eloc.db')
