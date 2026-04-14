@@ -73,7 +73,6 @@ function makePayment() {
 
         payment_options: "card, mobilemoney",
 
-        // ✅ VERY IMPORTANT: USE YOUR LIVE DOMAIN
         redirect_url: "https://eloc.onrender.com/payment-callback?level={{ level }}",
 
         customer: {
@@ -85,8 +84,19 @@ function makePayment() {
             level: "{{ level }}"
         },
 
-        // ❌ REMOVE CALLBACK COMPLETELY (IMPORTANT)
-        // callback removed to avoid double verification
+        // ✅ ADD THIS BACK (VERY IMPORTANT)
+        callback: function (data) {
+            console.log("Payment complete:", data);
+
+            // 🔥 FORCE REDIRECT MANUALLY
+            window.location.href =
+                "/payment-callback?status=successful&tx_ref=" + txRef + "&level={{ level }}";
+        },
+
+        // ✅ ALSO HANDLE USER CLOSE
+        onclose: function() {
+            console.log("Payment closed");
+        },
 
         customizations: {
             title: "ELOC Kits",
