@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="dashboard-container">
+
+    <h2>📚 Explore Courses</h2>
+    <p>Choose a course and start learning</p>
+
+    <div class="course-grid">
+
+        {% for course in all_courses or [] %}
+
+        <div class="course-card">
+
+            <h4>{{ course.title }}</h4>
+            <p>{{ course.description }}</p>
+
+            <!-- 🎥 VIDEO SUPPORT -->
+            {% if course.video_url %}
+            <iframe width="100%" height="200"
+                src="{{ course.video_url }}"
+                frameborder="0"
+                allowfullscreen>
+            </iframe>
+            {% endif %}
+
+            <a href="/course/{{ course.id }}" class="view-btn">
+                View Course
+            </a>
+
+            {% if course.id in enrolled_ids %}
+                <button class="admin-btn" disabled style="margin-top:10px;">
+                    Enrolled ✅
+                </button>
+            {% else %}
+                <a href="/enroll/{{ course.id }}" class="admin-btn" style="margin-top:10px;">
+                    Enroll
+                </a>
+            {% endif %}
+
+            <!-- 🗑️ ADMIN DELETE -->
+            {% if session.get('email') == 'elearningonecreativity@gmail.com' %}
+                <a href="/admin/delete-course/{{ course.id }}"
+                   style="margin-top:10px; display:block; color:red;">
+                   Delete Course
+                </a>
+            {% endif %}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}
