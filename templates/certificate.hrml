@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Certificate</title>
+    <style>
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #0f172a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .certificate {
+            width: 850px;
+            padding: 50px;
+            background: white;
+            text-align: center;
+            border: 15px solid #6366f1;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .logo {
+            width: 80px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 40px;
+            color: #111827;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #6366f1;
+            margin: 10px 0;
+        }
+
+        .brand {
+            font-size: 18px;
+            font-weight: bold;
+            color: #6366f1;
+            margin-bottom: 10px;
+        }
+
+        .info {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .cert-id {
+            margin-top: 15px;
+            font-size: 14px;
+            color: gray;
+        }
+
+        .qr {
+            margin-top: 20px;
+        }
+
+        /* =========================
+           BUTTON CONTAINER (FIXED)
+        ========================= */
+        .btn-group {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #059669;
+        }
+
+        .btn-secondary {
+            background: #6366f1;
+        }
+
+        .btn-secondary:hover {
+            background: #4f46e5;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="certificate">
+
+    <img src="/static/images/logo.png" class="logo">
+
+    <div class="brand">E-Learning One Creativity</div>
+
+    <h1>Certificate of Completion</h1>
+
+    <p class="info">This certifies that</p>
+
+    <h2>{{ user.username }}</h2>
+
+    <p class="info">has successfully completed</p>
+
+    <h2>{{ course.title }}</h2>
+
+    <p class="info">Date: {{ cert.date_issued }}</p>
+
+    <p class="cert-id">
+        Certificate ID: <b>{{ cert.certificate_id }}</b>
+    </p>
+
+    <img src="/{{ qr_path }}" width="120" class="qr">
+
+    <!-- =========================
+         ACTION BUTTONS (FIXED)
+    ========================= -->
+    <div class="btn-group">
+
+    <button onclick="window.print()" class="btn">
+        🖨 Print Certificate
+    </button>
+
+    <a href="/certificate/pdf/{{ course.id }}">
+        <button class="btn">
+            📄 Download PDF
+        </button>
+    </a>
+
+</div>
+
+</div>
+
+</body>
+</html>
