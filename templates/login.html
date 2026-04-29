@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="auth-container">
+
+    <div class="auth-box">
+
+        <h2>Welcome Back</h2>
+        <p style="margin-bottom:15px;">Login to your account</p>
+
+        <form method="POST">
+
+            <!-- EMAIL -->
+            <input type="email" name="email" placeholder="Email" required>
+
+        <!-- PASSWORD -->
+<div class="password-wrapper">
+
+    <input 
+        type="password" 
+        name="password" 
+        id="password"
+        placeholder="Password"
+        required
+        onkeyup="handlePasswordInput('password','','strength','suggestion','error-msg','submitBtn')"
+    >
+
+    <!-- 👁 TOGGLE BUTTON -->
+    <span class="toggle-eye" onclick="togglePassword('password', this)">
+        👁
+    </span>
+
+</div>
+
+            <!-- OPTIONAL STRENGTH (nice UX but not strict for login) -->
+            <p id="strength" style="font-size:13px;"></p>
+
+            <!-- SUGGESTION -->
+            <p id="suggestion" style="font-size:12px; color:gray;"></p>
+
+            <!-- ERROR -->
+            <p id="error-msg" style="color:red; display:none;"></p>
+
+            <!-- BUTTON -->
+            <button type="submit" id="submitBtn" style="margin-top:15px;">
+                Login
+            </button>
+
+        </form>
+
+        <!-- FORGOT PASSWORD -->
+        <a href="/forgot-password" style="display:block; margin-top:12px; color:#6366f1;">
+            Forgot Password?
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}
