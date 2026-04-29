@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="quick-nav">
+    <a href="/dashboard" class="btn">Back to Dashboard</a>
+</div>
+
+<div class="profile-container">
+
+    <h2>My Profile</h2>
+
+    <div class="profile-box">
+
+        <!-- PROFILE IMAGE (SAFE FIX) -->
+{% if user['profile_pic'] %}
+    <img src="{{ url_for('static', filename='images/' + user['profile_pic']) }}"
+         class="profile-pic">
+{% else %}
+    <img src="{{ url_for('static', filename='images/default.png') }}"
+         class="profile-pic">
+{% endif %}
+
+        <!-- UPLOAD FORM -->
+        <form method="POST" enctype="multipart/form-data">
+
+            <label>Username</label>
+            <input type="text" name="username" value="{{ user['username'] }}" required>
+
+            <label>Email</label>
+            <input type="email" name="email" value="{{ user['email'] }}" required>
+
+            <!-- 🔥 NEW: PROFILE PICTURE UPLOAD -->
+            <label>Profile Picture</label>
+            <input type="file" name="profile_pic" accept="image/*">
+
+            <button type="submit" class="profile-btn">
+                Update Profile
+            </button>
+
+        </form>
+
+        <a href="/logout" class="logout-btn">Logout</a>
+
+    </div>
+
+</div>
+
+{% endblock %}
