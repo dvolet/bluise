@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>E-Learning One Creativity</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- 🌙 DARK MODE PRELOAD FIX (prevents flash) -->
+    <script>
+        (function () {
+            if (localStorage.getItem("theme") === "dark") {
+                document.documentElement.classList.add("dark-mode");
+            }
+        })();
+    </script>
+
+</head>
+
+<body>
+
+<!-- 🌐 NAVBAR -->
+<nav class="navbar">
+
+    <div class="logo">
+        <a href="/">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="ELOC Logo">
+        </a>
+    </div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <ul class="nav-links" id="navLinks">
+
+        <li><a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+
+        {% if session.get('user_id') %}
+
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/courses">All Courses</a></li>
+            <li><a href="/my-courses">My Courses</a></li>
+
+            {% if session.get('email') == 'elearningonecreativity@gmail.com' %}
+                <li><a href="/admin/add-course">Admin</a></li>
+            {% endif %}
+
+            <!-- 🌙 DARK MODE TOGGLE -->
+            <button onclick="toggleDarkMode()" class="dark-toggle">🌙</button>
+
+            <!-- 👤 PROFILE -->
+            <li class="profile-menu">
+                <img src="{{ url_for('static', filename='images/' + session.get('profile_pic', 'default.png')) }}" class="nav-avatar">
+                <div class="dropdown">
+                    <a href="/profile">Profile</a>
+                    <a href="/logout">Logout</a>
+                </div>
+            </li>
+
+        {% else %}
+
+            <li><a href="/login">Login</a></li>
+            <li><a href="/courses">All Courses</a></li>
+            <li><a href="/register">Get Started</a></li>
+
+        {% endif %}
+
+    </ul>
+
+</nav>
+
+<!-- ✅ FLASH MESSAGES -->
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div style="background:#10b981; padding:12px; color:white; margin:10px; border-radius:6px;">
+      {% for message in messages %}
+        <p style="margin:0;">{{ message }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<!-- MAIN CONTENT -->
+<main class="main-content">
+    {% block content %}{% endblock %}
+</main>
+
+<!-- SCRIPTS -->
+<script>
+function toggleMenu() {
+    document.getElementById("navLinks").classList.toggle("show");
+}
+
+/* 🌙 DARK MODE TOGGLE (FIXED + STABLE) */
+function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+
+    localStorage.setItem(
+        "theme",
+        document.body.classList.contains("dark-mode") ? "dark" : "light"
+    );
+}
+
+window.onload = function () {
+    if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+    }
+};
+
+/* 💪 PASSWORD STRENGTH ENGINE (UNCHANGED - SAFE) */
+function checkStrength(password) {
+    let score = 0;
+
+    if (password.length >= 8) score++;
+    if (password.length >= 12) score++;
+    if (/[A-Z]/.test(password)) score++;
+    if (/[0-9]/.test(password)) score++;
+    if (/[^A-Za-z0-9]/.test(password)) score++;
+
+    if (score <= 2) return "Weak";
+    if (score <= 4) return "Medium";
+    return "Strong";
+}
+
+/* 🔄 LIVE VALIDATION */
+function handlePasswordInput(passwordId, confirmId, strengthId, suggestionId, errorId, buttonId) {
+
+    const password = document.getElementById(passwordId).value;
+    const confirm = document.getElementById(confirmId).value;
+
+    const strengthText = document.getElementById(strengthId);
+    const suggestion = document.getElementById(suggestionId);
+    const error = document.getElementById(errorId);
+    const btn = document.getElementById(buttonId);
+
+    const level = checkStrength(password);
+
+    strengthText.innerText = "Strength: " + level;
+
+    if (level === "Weak") strengthText.style.color = "red";
+    if (level === "Medium") strengthText.style.color = "orange";
+    if (level === "Strong") strengthText.style.color = "green";
+
+    let tips = [];
+
+    if (password.length < 8) tips.push("Use at least 8 characters");
+    if (!/[A-Z]/.test(password)) tips.push("Add uppercase letters");
+    if (!/[0-9]/.test(password)) tips.push("Add numbers");
+    if (!/[^A-Za-z0-9]/.test(password)) tips.push("Add symbols like @,#,$");
+
+    suggestion.innerText = tips.length ? "👉 " + tips.join(" | ") : "✅ Strong password setup";
+
+    if (password !== confirm) {
+        error.style.display = "block";
+        error.innerText = "❌ Passwords do not match";
+        btn.disabled = true;
+    } else {
+        error.style.display = "none";
+    }
+
+    if (level !== "Weak" && password === confirm && password.length >= 8) {
+        btn.disabled = false;
+    } else {
+        btn.disabled = true;
+    }
+}
+</script>
+<script>
+function togglePassword(inputId, el) {
+    var input = document.getElementById(inputId);
+
+    if (input.type === "password") {
+        input.type = "text";
+        el.innerHTML = "🙈";
+    } else {
+        input.type = "password";
+        el.innerHTML = "👁";
+    }
+}
+</script>
+</body>
+</html>
