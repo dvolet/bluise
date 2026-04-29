@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="auth-container">
+
+    <div class="auth-box">
+        <h2>Create Account</h2>
+
+        <form method="POST" onsubmit="return validatePasswords()">
+
+            <input type="text" name="username" placeholder="Full Name" required minlength="3">
+
+            <input type="email" name="email" placeholder="Email" required>
+
+            <!-- PASSWORD FIELD -->
+            <div style="position:relative; width:100%; margin-bottom:10px;">
+
+                <input type="password" name="password" id="password"
+                       placeholder="Password" required minlength="8">
+
+                <span class="toggle-eye" onclick="togglePassword('password', this)"
+                      style="position:absolute; right:12px; top:50%; transform:translateY(-50%); cursor:pointer; font-size:18px; color:#64748b;">
+                    👁️
+                </span>
+
+            </div>
+
+            <!-- CONFIRM PASSWORD -->
+            <div style="position:relative; width:100%; margin-bottom:10px;">
+
+                <input type="password" name="confirm_password" id="confirm_password"
+                       placeholder="Confirm Password" required>
+
+                <span class="toggle-eye" onclick="togglePassword('confirm_password', this)"
+                      style="position:absolute; right:12px; top:50%; transform:translateY(-50%); cursor:pointer; font-size:18px; color:#64748b;">
+                    👁️
+                </span>
+
+            </div>
+
+            <!-- ERROR MESSAGE -->
+            <div id="matchError" style="color:red; font-size:13px;"></div>
+
+            <!-- STRENGTH UI -->
+            <div id="strengthText" style="margin-top:8px; font-size:14px;"></div>
+
+            <div style="height:6px; width:100%; background:#334155; border-radius:5px; margin-top:5px;">
+                <div id="strengthFill" style="height:100%; width:0%; background:red; border-radius:5px;"></div>
+            </div>
+
+            <button type="submit" style="margin-top:15px;">Register</button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- PASSWORD STRENGTH SCRIPT -->
+<script>
+const password = document.getElementById("password");
+const fill = document.getElementById("strengthFill");
+const text = document.getElementById("strengthText");
+
+password.addEventListener("input", function () {
+    let value = password.value;
+    let strength = 0;
+
+    if (value.length >= 8) strength++;
+    if (/[A-Z]/.test(value)) strength++;
+    if (/[0-9]/.test(value)) strength++;
+    if (/[@$!%*?&]/.test(value)) strength++;
+
+    if (strength <= 1) {
+        fill.style.width = "25%";
+        fill.style.background = "red";
+        text.innerText = "Weak";
+    } 
+    else if (strength === 2) {
+        fill.style.width = "50%";
+        fill.style.background = "orange";
+        text.innerText = "Fair";
+    } 
+    else if (strength === 3) {
+        fill.style.width = "75%";
+        fill.style.background = "yellow";
+        text.innerText = "Good";
+    } 
+    else {
+        fill.style.width = "100%";
+        fill.style.background = "green";
+        text.innerText = "Strong";
+    }
+});
+</script>
+
+<!-- TOGGLE PASSWORD (UPDATED FOR MULTIPLE FIELDS) -->
+<script>
+function togglePassword(inputId, el) {
+    const input = document.getElementById(inputId);
+
+    if (input.type === "password") {
+        input.type = "text";
+        el.innerHTML = "🙈";
+    } else {
+        input.type = "password";
+        el.innerHTML = "👁️";
+    }
+}
+</script>
+
+<!-- CONFIRM PASSWORD VALIDATION -->
+<script>
+function validatePasswords() {
+    const pass = document.getElementById("password").value;
+    const confirm = document.getElementById("confirm_password").value;
+    const error = document.getElementById("matchError");
+
+    if (pass !== confirm) {
+        error.innerText = "Passwords do not match";
+        return false;
+    }
+
+    error.innerText = "";
+    return true;
+}
+</script>
+
+{% endblock %}

@@ -1,125 +1,120 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELOC - Learn Web Design</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
+{% extends "base.html" %}
 
-<!-- NAVBAR -->
-<nav class="navbar">
-    <div class="nav-logo">
-        <a href="{{ url_for('home') }}">
-            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="ELOC Logo">
-        </a>
+{% block content %}
+
+<div class="hero-section">
+
+    <div class="hero-content">
+
+        <h1>Learn Skills That Build Your Future 🚀</h1>
+
+        <p>
+            Join E-Learning One Creativity and access practical courses 
+            designed to help you grow step by step.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="/register" class="hero-btn primary">
+                Get Started
+            </a>
+
+            <a href="/courses" class="hero-btn secondary">
+                Browse Courses
+            </a>
+
+        </div>
+
     </div>
-    <ul class="nav-links">
-        <li><a href="{{ url_for('home') }}">Home</a></li>
-        <li><a href="{{ url_for('home') }}#kits">Kits</a></li>
 
-        {% if session.get('user_id') %}
-            <li><a href="{{ url_for('profile') }}">Profile</a></li>
-            <li><a href="{{ url_for('logout') }}">Logout</a></li>
-        {% else %}
-            <li><a href="{{ url_for('login') }}">Login</a></li>
-            <li><a href="{{ url_for('signup') }}" class="nav-btn">Join</a></li>
-        {% endif %}
-    </ul>
-</nav>
+</div>
+<section class="stats-section">
 
-<!-- SOCIAL ICONS -->
-<div class="social-fixed">
-    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-    <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-    <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+    <div class="stats-container">
+
+        <div class="stat-box">
+            <h2>50+</h2>
+            <p>Courses Available</p>
+        </div>
+
+        <div class="stat-box">
+            <h2>1,200+</h2>
+            <p>Active Students</p>
+        </div>
+
+        <div class="stat-box">
+            <h2>85%</h2>
+            <p>Completion Rate</p>
+        </div>
+
+    </div>
+
+</section>
+<!-- FEATURES SECTION -->
+<div class="features-section">
+
+    <h2>Why Learn With Us?</h2>
+
+    <div class="features-grid">
+
+        <div class="feature-card">
+            <h3>📚 Simple Learning</h3>
+            <p>Easy to understand structured lessons.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>🎯 Practical Skills</h3>
+            <p>Real-world knowledge you can apply immediately.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>📈 Track Progress</h3>
+            <p>Monitor your learning step by step.</p>
+        </div>
+
+    </div>
+
 </div>
 
-<!-- HERO SECTION -->
-<section class="hero">
-    <div class="hero-content">
-        <h1>Become a Professional Web Designer</h1>
-        <p>Learn step-by-step with practical kits designed to take you from beginner to expert.</p>
-        <a href="#kits" class="btn-hero">Start Learning Now</a>
-    </div>
-</section>
+<!-- CALL TO ACTION -->
+<div class="cta-section">
 
-<!-- TRUST SECTION -->
-<section class="trust">
-    <div class="trust-box">
-        <i class="fa fa-users"></i>
-        <p>100+ Students Learning</p>
-    </div>
-    <div class="trust-box">
-        <i class="fa fa-download"></i>
-        <p>Instant Access After Payment</p>
-    </div>
-    <div class="trust-box">
-        <i class="fa fa-lock"></i>
-        <p>Secure Payment System</p>
-    </div>
-</section>
+    <h2>Start Learning Today</h2>
+    <p>Join thousands of learners improving their skills.</p>
 
-<!-- KITS SECTION -->
-<section id="kits" class="kits">
+    <a href="/register" class="cta-btn">
+        Create Free Account
+    </a>
 
-    <div class="kit-card">
-        <img src="{{ url_for('static', filename='images/beginner.jpg') }}">
-        <h3>Beginner Kit</h3>
-        <p>Start your journey into web design</p>
-        <ul>
-            <li>HTML Ebook</li>
-            <li>Video Tutorials</li>
-            <li>Simple Projects</li>
-        </ul>
-        <h2>FREE</h2>
-        <a href="{{ url_for('kit', level='beginner') }}" class="btn-hero">Get Started</a>
+</div>
+<!-- FEATURED COURSES -->
+<div class="featured-section">
+
+    <h2>Featured Courses</h2>
+
+    <div class="course-grid">
+
+        {% if featured_courses %}
+
+            {% for course in featured_courses %}
+            <div class="course-card">
+
+                <h4>{{ course.title }}</h4>
+                <p>{{ course.description }}</p>
+
+                <a href="/course/{{ course.id }}" class="view-btn">
+                    View Course
+                </a>
+
+            </div>
+            {% endfor %}
+
+        {% else %}
+            <p>No courses available yet.</p>
+        {% endif %}
+
     </div>
 
-    <div class="kit-card popular">
-        <span class="badge">Most Popular</span>
-        <img src="{{ url_for('static', filename='images/intermediate.jpg') }}">
-        <h3>Intermediate Kit</h3>
-        <p>Level up your design skills</p>
-        <ul>
-            <li>Responsive Design</li>
-            <li>Templates</li>
-            <li>Real Projects</li>
-        </ul>
-        <h2>30 NGN</h2>
-        <a href="{{ url_for('kit', level='intermediate') }}" class="btn-hero">Get Access</a>
-    </div>
+</div>
 
-    <div class="kit-card">
-        <img src="{{ url_for('static', filename='images/professional.jpg') }}">
-        <h3>Professional Kit</h3>
-        <p>Start earning as a web designer</p>
-        <ul>
-            <li>Client Projects</li>
-            <li>Freelancing Guide</li>
-            <li>Advanced Techniques</li>
-        </ul>
-        <h2>50 NGN</h2>
-        <a href="{{ url_for('kit', level='professional') }}" class="btn-hero">Go Pro</a>
-    </div>
-
-</section>
-
-<!-- CTA SECTION -->
-<section class="cta">
-    <h2>Start Your Web Design Journey Today</h2>
-    <p>No experience needed. Just start and grow.</p>
-    <a href="#kits" class="btn-hero">Explore Kits</a>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-    <p>© 2026 ELOC - E-Learning One Creativity. All Rights Reserved</p>
-    <p>Built for future web designers 🚀</p>
-</footer>
-
-</body>
-</html>
+{% endblock %}

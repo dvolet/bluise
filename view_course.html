@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="course-view-container">
+
+    <a href="/courses" class="back-btn">← Back to Courses</a>
+
+    <div class="course-view-card">
+
+        <h1>{{ course.title }}</h1>
+        <p class="course-desc">{{ course.description }}</p>
+
+        <!-- 🎥 COURSE INTRO VIDEO -->
+        {% if course.video_url %}
+        <div class="video-wrapper">
+            <iframe src="{{ course.video_url }}" frameborder="0" allowfullscreen></iframe>
+        </div>
+        {% endif %}
+
+        <!-- 📥 PDF -->
+        {% if course.pdf_file %}
+        <div style="margin-top:20px; text-align:center;">
+            <a href="{{ url_for('static', filename='course_pdfs/' + course.pdf_file) }}" 
+               class="enroll-btn" download>
+                📥 Download Course Material (PDF)
+            </a>
+        </div>
+
+        <div style="margin-top:20px;">
+            <h3 style="text-align:center;">📘 Course Material Preview</h3>
+
+            {% if enrolled %}
+                <iframe 
+                    src="{{ url_for('static', filename='course_pdfs/' + course.pdf_file) }}"
+                    width="100%" height="500px"
+                    style="border:1px solid #ccc; border-radius:10px;">
+                </iframe>
+            {% else %}
+                <div style="text-align:center; padding:40px; border:1px dashed #ccc;">
+                    🔒 Enroll to preview PDF
+                </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <!-- 📚 LESSONS -->
+        <h2 style="margin-top:30px;">Lessons</h2>
+
+        {% for lesson in lessons %}
+
+            {% set prev_index = loop.index0 - 1 %}
+            {% set prev_completed = prev_index >= 0 and lessons[prev_index].id in completed_lessons %}
+            {% set unlocked = loop.index == 1 or prev_completed %}
+
+            <div class="course-card" style="margin-top:15px;">
+
+                <h4>{{ lesson.title }}</h4>
+
+                {% if enrolled %}
+
+                    {% if unlocked %}
+
+                        <iframe src="{{ lesson.video_url }}"
+                                width="100%" height="200"
+                                frameborder="0"
+                                allowfullscreen>
+                        </iframe>
+
+                        {% if lesson.id not in completed_lessons %}
+                        <form method="POST" action="/lesson/complete/{{ lesson.id }}">
+                            <button class="complete-btn">
+                                ✅ Mark Lesson Complete
+                            </button>
+                        </form>
+                        {% else %}
+                            <p style="color:#22c55e; font-weight:bold;">
+                                ✅ Completed
+                            </p>
+                        {% endif %}
+
+                    {% else %}
+                        <p style="color:#ef4444;">
+                            🔒 Complete previous lesson to unlock
+                        </p>
+                    {% endif %}
+
+                {% else %}
+                    <p style="color:#ef4444;">
+                        🔒 Enroll to access lessons
+                    </p>
+                {% endif %}
+
+            </div>
+
+        {% endfor %}
+
+        <!-- 📊 PROGRESS -->
+        <div class="progress-container" style="margin-top:30px;">
+            <p>Progress: {{ progress }}%</p>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: {{ progress }}%;"></div>
+            </div>
+        </div>
+
+        <!-- 🎯 ACTIONS -->
+        <div class="course-actions" style="margin-top:20px; text-align:center;">
+
+            {% if enrolled %}
+
+                {% if progress == 100 %}
+
+                    <div style="margin-bottom:15px; font-weight:bold; color:#22c55e;">
+                        🎉 Course Completed
+                    </div>
+
+                    <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+
+                        <a href="/certificate/{{ course.id }}" class="enroll-btn">
+                            🏆 Get Certificate
+                        </a>
+
+                        <a href="/certificate/pdf/{{ course.id }}" class="enroll-btn">
+                            📄 Download Certificate
+                        </a>
+
+                    </div>
+
+                {% endif %}
+
+            {% else %}
+                <a href="/enroll/{{ course.id }}" class="enroll-btn">
+                    🚀 Enroll Now
+                </a>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

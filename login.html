@@ -1,123 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login - ELOC</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% extends "base.html" %}
 
-<style>
-/* Password toggle & tooltip */
-.password-container { position: relative; margin-top: 10px; }
-.toggle-pass {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #555;
-    transition: color 0.2s;
-}
-body {
-    overflow-x: hidden; /* 🔥 stops left/right expansion */
-}
-.toggle-pass.active { color: #007bff; }
-.pass-tooltip {
-    .pass-tooltip {
-    display: none;
-    position: absolute;
+{% block content %}
 
-    background: #222;
-    color: #fff;
+<div class="auth-container">
 
-    padding: 8px;
-    font-size: 11px;
-    border-radius: 5px;
+    <div class="auth-box">
 
-    width: 220px; /* 🔥 fixed width (prevents stretching page) */
-    max-width: 90vw; /* safe for mobile */
+        <h2>Welcome Back</h2>
+        <p style="margin-bottom:15px;">Login to your account</p>
 
-    left: 0;
-    top: 110%;
+        <form method="POST">
 
-    z-index: 1000;
-    box-sizing: border-box;
-}
-.password-container input:focus ~ .pass-tooltip {
-    display: block;
-}
-</style>
-</head>
-<body>
+            <!-- EMAIL -->
+            <input type="email" name="email" placeholder="Email" required>
 
-<nav class="navbar">
-    <div class="nav-logo">
-        <a href="{{ url_for('home') }}">
-            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="ELOC Logo">
+        <!-- PASSWORD -->
+<div class="password-wrapper">
+
+    <input 
+        type="password" 
+        name="password" 
+        id="password"
+        placeholder="Password"
+        required
+        onkeyup="handlePasswordInput('password','','strength','suggestion','error-msg','submitBtn')"
+    >
+
+    <!-- 👁 TOGGLE BUTTON -->
+    <span class="toggle-eye" onclick="togglePassword('password', this)">
+        👁
+    </span>
+
+</div>
+
+            <!-- OPTIONAL STRENGTH (nice UX but not strict for login) -->
+            <p id="strength" style="font-size:13px;"></p>
+
+            <!-- SUGGESTION -->
+            <p id="suggestion" style="font-size:12px; color:gray;"></p>
+
+            <!-- ERROR -->
+            <p id="error-msg" style="color:red; display:none;"></p>
+
+            <!-- BUTTON -->
+            <button type="submit" id="submitBtn" style="margin-top:15px;">
+                Login
+            </button>
+
+        </form>
+
+        <!-- FORGOT PASSWORD -->
+        <a href="/forgot-password" style="display:block; margin-top:12px; color:#6366f1;">
+            Forgot Password?
         </a>
+
     </div>
-    <ul class="nav-links">
-        <li><a href="{{ url_for('home') }}">Home</a></li>
-        <li><a href="{{ url_for('home') }}#kits">Kits</a></li>
-        {% if session.get('user_id') %}
-            <li><a href="{{ url_for('profile') }}">Profile</a></li>
-            <li><a href="{{ url_for('logout') }}">Logout</a></li>
-        {% else %}
-            <li><a href="{{ url_for('login') }}">Login</a></li>
-            <li><a href="{{ url_for('signup') }}" class="nav-btn">Join</a></li>
-        {% endif %}
-    </ul>
-</nav>
 
-<div class="social-fixed">
-    <a href="#"><i class="fab fa-facebook-f"></i></a>
-    <a href="#"><i class="fab fa-twitter"></i></a>
-    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-    <a href="#"><i class="fab fa-instagram"></i></a>
 </div>
 
-<div class="form-container">
-    <h2>Welcome Back</h2>
-
-    {% if error %}
-        <p style="color:red;">{{ error }}</p>
-    {% endif %}
-
-    <form method="POST">
-        <input type="email" name="email" placeholder="Email Address" required>
-
-        <div class="password-container">
-            <input type="password" name="password" placeholder="Password" id="password">
-            <i class="fas fa-eye toggle-pass"></i>
-            <span class="pass-tooltip">Enter your password</span>
-        </div>
-        
-    <p style="margin-top:10px;">
-        <a href="{{ url_for('forgot_password') }}">Forgot Password?</a>
-    </p>
-    
-        <button type="submit" class="btn-hero">Login</button>
-    </form>
-
-    <p>Don't have an account? <a href="{{ url_for('signup') }}">Sign Up</a></p>
-</div>
-
-<script>
-// Toggle password visibility
-document.querySelectorAll(".toggle-pass").forEach(icon => {
-    icon.addEventListener("click", () => {
-        const input = icon.previousElementSibling;
-        input.type = input.type === "password" ? "text" : "password";
-        icon.classList.toggle("fa-eye-slash");
-    });
-});
-</script>
-
-<footer class="footer">
-    <p>© 2026 ELOC - E-Learning One Creativity. All Rights Reserved</p>
-    <p>Built for future web designers 🚀</p>
-</footer>
-
-</body>
-</html>
+{% endblock %}

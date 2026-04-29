@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="dashboard-container">
+
+    <h2>📚 My Courses</h2>
+
+    {% if courses|length == 0 %}
+        <p>You have not enrolled in any course yet.</p>
+    {% endif %}
+
+    <div class="course-grid">
+
+        {% for course in courses %}
+        <div class="course-card">
+
+            <h4>{{ course.title }}</h4>
+            <p>{{ course.description }}</p>
+
+            <a class="view-btn" href="/course/{{ course.id }}">
+                Continue Learning
+            </a>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

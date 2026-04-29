@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="auth-container">
+
+    <div class="auth-box">
+
+        <h2>Manage Lessons</h2>
+        <p><b>{{ course.title }}</b></p>
+
+        <!-- ➕ ADD NEW LESSON -->
+        <form method="POST" action="/admin/quick-add-lesson/{{ course.id }}">
+            
+            <input type="text" name="title" placeholder="Lesson Title" required>
+            <input type="text" name="video_url" placeholder="YouTube URL" required>
+            <input type="number" name="position" placeholder="Position" required>
+
+            <button type="submit">➕ Add Lesson</button>
+
+        </form>
+
+        <hr style="margin:20px 0;">
+
+        <!-- 📚 LESSON LIST -->
+        {% for lesson in lessons %}
+
+        <div style="border:1px solid #ccc; padding:15px; margin-bottom:15px; border-radius:10px;">
+
+            <form method="POST" action="/admin/edit-lesson/{{ lesson.id }}">
+
+                <input type="text" name="title" value="{{ lesson.title }}" required>
+                <input type="text" name="video_url" value="{{ lesson.video_url }}" required>
+                <input type="number" name="position" value="{{ lesson.position }}" required>
+
+                <button type="submit">💾 Update</button>
+
+                <a href="/admin/delete-lesson/{{ lesson.id }}" 
+                   onclick="return confirm('Delete this lesson?')">
+                   🗑 Delete
+                </a>
+
+            </form>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}
