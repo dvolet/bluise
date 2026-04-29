@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div style="text-align:center; margin-top:50px;">
+
+    {% if cert %}
+
+        <h1>✅ Certificate Verified</h1>
+
+        <p><strong>Name:</strong> {{ cert.username }}</p>
+        <p><strong>Course:</strong> {{ cert.title }}</p>
+        <p><strong>Date:</strong> {{ cert.date_issued }}</p>
+        <p><strong>ID:</strong> {{ cert.certificate_id }}</p>
+
+    {% else %}
+
+        <h1 style="color:red;">❌ Invalid Certificate</h1>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
