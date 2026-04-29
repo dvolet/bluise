@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="dashboard-container">
+
+    <!-- 🔷 HEADER -->
+    <div class="dashboard-header">
+        <h2>Welcome back, {{ username }} 👋</h2>
+        <p>Continue learning and track your progress</p>
+    </div>
+    
+<div class="quick-nav">
+    <a href="/profile" class="btn">Go to Profile</a>
+</div>
+
+    <!-- 🔐 ADMIN BUTTON -->
+    {% if session.get('email') == 'elearningonecreativity@gmail.com' %}
+        <a class="admin-btn" href="/admin/add-course">➕ Add New Course</a>
+    {% endif %}
+
+    <!-- 📊 ANALYTICS -->
+    <div class="analytics">
+
+        <div class="card">
+            <h3>Total Courses</h3>
+            <p>{{ total_courses }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Total Users</h3>
+            <p>{{ total_users }}</p>
+        </div>
+
+        <div class="card glass">
+            <h3>Welcome</h3>
+            <p>{{ username }}</p>
+        </div>
+
+    </div>
+
+   <!-- 📚 ALL COURSES -->
+<h3 style="margin-top:30px;" id="all-courses">All Courses</h3>
+
+<div class="course-grid">
+
+    {% if all_courses %}
+
+        {% for course in all_courses %}
+        <div class="course-card">
+
+            <img src="{{ url_for('static', filename='images/' + course.image) }}" class="course-thumb">
+
+            <h4>{{ course.title }}</h4>
+            <p>{{ course.description }}</p>
+
+            <a href="/course/{{ course.id }}" class="view-btn">
+                View Course
+            </a>
+
+            <a href="/enroll/{{ course.id }}" class="admin-btn" style="margin-top:10px;">
+                Enroll
+            </a>
+
+        </div>
+        {% endfor %}
+
+    {% else %}
+
+        <div style="text-align:center; padding:30px;">
+            <p>No courses available</p>
+        </div>
+
+    {% endif %}
+
+</div>
+
+    <!-- 🎓 MY COURSES -->
+<h3 style="margin-top:40px;">My Learning Progress</h3>
+
+<div class="course-grid">
+
+    {% if courses %}
+
+      {% for course in courses %}
+<div class="course-card">
+
+    <!-- ✅ COURSE TITLE -->
+    <h4>{{ course.title }}</h4>
+    <p>{{ course.description }}</p>
+
+    <!-- 📊 PROGRESS TEXT -->
+    <span class="progress-text">
+        Progress: {{ course.progress or 0 }}%
+    </span>
+
+    <!-- 📊 PROGRESS BAR -->
+    <div class="progress-container">
+        <div class="progress-bar">
+            <div class="progress-fill"
+                 style="width: {{ course.progress or 0 }}%;">
+            </div>
+        </div>
+    </div>
+
+    <!-- 🎯 ACTION BUTTONS -->
+    <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
+
+        <!-- 👁 VIEW COURSE -->
+        <a href="/course/{{ course.id }}" class="enroll-btn">
+            👁 View Course
+        </a>
+
+        <!-- 🎬 ADMIN ONLY -->
+        {% if session.email == "elearningonecreativity@gmail.com" %}
+            <a href="/admin/manage-lessons/{{ course.id }}" class="enroll-btn">
+                🎬 Manage Lessons
+            </a>
+        {% endif %}
+
+    </div>
+
+    <!-- 🎯 STATUS LABEL -->
+    <div style="margin-top:10px;">
+        {% if course.progress == 100 %}
+            <span style="color:#22c55e; font-weight:bold;">
+                ✅ Completed
+            </span>
+        {% elif course.progress > 0 %}
+            <span style="color:#facc15;">
+                ⏳ In Progress
+            </span>
+        {% else %}
+            <span style="color:#ef4444;">
+                🚀 Not Started
+            </span>
+        {% endif %}
+    </div>
+
+    <!-- ▶ ACTION BUTTON -->
+    <a href="/course/{{ course.id }}" class="view-btn" style="margin-top:10px;">
+        {% if course.progress == 0 %}
+            Start Course
+        {% else %}
+            Continue Learning
+        {% endif %}
+    </a>
+
+</div>
+{% endfor %}
+
+    {% else %}
+
+        <!-- 🪄 EMPTY STATE -->
+        <div style="text-align:center; padding:30px;">
+            <p>You have not enrolled in any course yet.</p>
+            <a href="#all-courses" class="view-btn">
+                Browse Courses
+            </a>
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
