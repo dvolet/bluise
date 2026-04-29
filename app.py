@@ -33,11 +33,12 @@ from utils.course import (
     update_course,
     delete_course
 )
+app = Flask(__name__)
 
 # =========================
 # APP CONFIG
 # =========================
-app = Flask(__name__)
+
 app.secret_key = "secret123"
 
 UPLOAD_FOLDER = "static/images"
