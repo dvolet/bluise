@@ -811,27 +811,32 @@ def quick_add_lesson(course_id):
 @app.route('/admin/delete-course/<int:course_id>', methods=['POST'])
 def delete_course(course_id):
 
-    # 🔐 ADMIN PROTECTION
-    if session.get('email') != ADMIN_EMAIL:
-        return "Access Denied"
+    try:
+        # 🔐 ADMIN CHECK
+        if session.get('email') != ADMIN_EMAIL:
+            return "Access Denied"
 
-    conn = get_connection()
+        conn = get_connection()
 
-    # 🧹 DELETE RELATED DATA FIRST (VERY IMPORTANT)
-    conn.execute("DELETE FROM lessons WHERE course_id=?", (course_id,))
-    conn.execute("DELETE FROM enrollments WHERE course_id=?", (course_id,))
-    conn.execute("DELETE FROM progress WHERE course_id=?", (course_id,))
-    conn.execute("DELETE FROM certificates WHERE course_id=?", (course_id,))
+        # 🧹 DELETE RELATED DATA
+        conn.execute("DELETE FROM lessons WHERE course_id=?", (course_id,))
+        conn.execute("DELETE FROM enrollments WHERE course_id=?", (course_id,))
+        conn.execute("DELETE FROM progress WHERE course_id=?", (course_id,))
+        conn.execute("DELETE FROM certificates WHERE course_id=?", (course_id,))
 
-    # 🗑 DELETE COURSE
-    conn.execute("DELETE FROM courses WHERE id=?", (course_id,))
+        # 🗑 DELETE COURSE
+        conn.execute("DELETE FROM courses WHERE id=?", (course_id,))
 
-    conn.commit()
-    conn.close()
+        conn.commit()
+        conn.close()
 
-    flash("✅ Course deleted successfully!")
+        flash("✅ Course deleted successfully!")
 
-    return redirect(url_for('dashboard'))
+        return redirect(url_for('dashboard'))
+
+    except Exception as e:
+        print("DELETE ERROR:", e)
+        return "Error deleting course"
                                
 @app.route('/transcript')
 def transcript():
