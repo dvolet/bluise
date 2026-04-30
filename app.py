@@ -808,6 +808,30 @@ def quick_add_lesson(course_id):
 
     return redirect(request.referrer)
 
+@app.route('/admin/delete-course/<int:course_id>')
+def delete_course_route(course_id):  # ✅ renamed here
+
+    if session.get('email') != ADMIN_EMAIL:
+        return "Access Denied"
+
+    try:
+        conn = get_connection()
+
+        # delete lessons first
+        conn.execute("DELETE FROM lessons WHERE course_id=?", (course_id,))
+
+        # delete course
+        conn.execute("DELETE FROM courses WHERE id=?", (course_id,))
+
+        conn.commit()
+        conn.close()
+
+        flash("✅ Course deleted successfully")
+        return redirect('/dashboard')
+
+    except Exception as e:
+        print("DELETE ERROR:", e)
+        return "Error deleting course"
 
 @app.route('/transcript')
 def transcript():
