@@ -14,6 +14,14 @@
     <a href="/profile" class="btn">Go to Profile</a>
 </div>
 
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div style="margin:10px 0; padding:10px; background:#dcfce7; color:#166534; border-radius:8px;">
+            {{ messages[0] }}
+        </div>
+    {% endif %}
+{% endwith %}
+
     <!-- 🔐 ADMIN BUTTON -->
     {% if session.get('email') == 'elearningonecreativity@gmail.com' %}
         <a class="admin-btn" href="/admin/add-course">➕ Add New Course</a>
@@ -49,7 +57,11 @@
         {% for course in all_courses %}
         <div class="course-card">
 
-            <img src="{{ url_for('static', filename='images/' + course.image) }}" class="course-thumb">
+            {% if course.image %}
+    <img src="{{ url_for('static', filename='images/' + course.image) }}" class="course-thumb">
+{% else %}
+    <img src="{{ url_for('static', filename='images/default.png') }}" class="course-thumb">
+{% endif %}
 
             <h4>{{ course.title }}</h4>
             <p>{{ course.description }}</p>
@@ -106,19 +118,29 @@
     <!-- 🎯 ACTION BUTTONS -->
     <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
 
-        <!-- 👁 VIEW COURSE -->
-        <a href="/course/{{ course.id }}" class="enroll-btn">
-            👁 View Course
+    <!-- 👁 VIEW COURSE -->
+    <a href="/course/{{ course.id }}" class="enroll-btn">
+        👁 View Course
+    </a>
+
+    <!-- 🎬 ADMIN ONLY -->
+    {% if session.get('email') == "elearningonecreativity@gmail.com" %}
+
+        <a href="/admin/manage-lessons/{{ course.id }}" class="enroll-btn">
+            🎬 Manage Lessons
         </a>
 
-        <!-- 🎬 ADMIN ONLY -->
-        {% if session.email == "elearningonecreativity@gmail.com" %}
-            <a href="/admin/manage-lessons/{{ course.id }}" class="enroll-btn">
-                🎬 Manage Lessons
-            </a>
-        {% endif %}
+        <!-- ❌ DELETE COURSE -->
+        <a href="/admin/delete-course/{{ course.id }}"
+           class="enroll-btn"
+           style="background:#ef4444; color:white;"
+           onclick="return confirm('Are you sure you want to delete this course?');">
+            ❌ Delete Course
+        </a>
 
-    </div>
+    {% endif %}
+
+</div>
 
     <!-- 🎯 STATUS LABEL -->
     <div style="margin-top:10px;">
