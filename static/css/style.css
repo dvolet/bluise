@@ -1,38 +1,36 @@
 /* =========================================================
-   01 - THEME SYSTEM (LIGHT + DARK)
+   01 - DESIGN SYSTEM (CORE)
 ========================================================= */
 
 :root {
     --primary: #2563eb;
     --primary-hover: #1d4ed8;
+    --success: #10b981;
+    --danger: #ef4444;
 
-    --bg-main: #f8fafc;
-    --bg-card: #ffffff;
-    --bg-soft: #f1f5f9;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --soft: #f1f5f9;
 
-    --text-main: #0f172a;
-    --text-muted: #64748b;
+    --text: #0f172a;
+    --muted: #64748b;
 
     --border: rgba(15, 23, 42, 0.08);
 
-    --success: #10b981;
-    --warning: #facc15;
-    --danger: #ef4444;
-
     --radius: 12px;
-    --shadow: 0 4px 12px rgba(0,0,0,0.08);
+    --shadow: 0 10px 25px rgba(0,0,0,0.08);
 
     --transition: 0.3s ease;
 }
 
 /* DARK MODE */
 body.dark-mode {
-    --bg-main: #0f172a;
-    --bg-card: #1e293b;
-    --bg-soft: #111827;
+    --bg: #0f172a;
+    --card: #1e293b;
+    --soft: #111827;
 
-    --text-main: #e2e8f0;
-    --text-muted: #94a3b8;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
 
     --border: rgba(148,163,184,0.15);
 
@@ -53,11 +51,8 @@ body.dark-mode {
 html, body {
     height: 100%;
     font-family: Arial, sans-serif;
-}
-
-img {
-    max-width: 100%;
-    display: block;
+    background: var(--bg);
+    color: var(--text);
 }
 
 a {
@@ -65,58 +60,89 @@ a {
     color: inherit;
 }
 
-button {
-    border: none;
-    cursor: pointer;
+img {
+    display: block;
+    max-width: 100%;
 }
 
 
 /* =========================================================
-   03 - BASE STYLES
-========================================================= */
-
-body {
-    background: var(--bg-main);
-    color: var(--text-main);
-    transition: var(--transition);
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-h1, h2, h3, h4 {
-    color: var(--text-main);
-}
-
-p {
-    color: var(--text-muted);
-    line-height: 1.5;
-}
-
-
-/* =========================================================
-   04 - LAYOUT (NAV + HERO)
+   03 - NAVBAR (LOGO FIX INCLUDED)
 ========================================================= */
 
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 30px;
-    background: var(--bg-card);
+    padding: 12px 25px;
+    background: var(--card);
     border-bottom: 1px solid var(--border);
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 
-.main-content {
-    flex: 1;
+/* ✅ LOGO FIX */
+.logo img {
+    height: 38px;
+    width: auto;
+}
+
+
+/* =========================================================
+   04 - PROFILE DROPDOWN (FIXED SIZE ISSUE)
+========================================================= */
+
+.profile-menu {
+    position: relative;
+}
+
+.nav-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary);
+    cursor: pointer;
+}
+
+.dropdown {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    width: 180px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    display: none;
+}
+
+.profile-menu:hover .dropdown {
+    display: block;
+}
+
+
+/* =========================================================
+   05 - LAYOUT
+========================================================= */
+
+.container {
+    max-width: 1200px;
+    margin: auto;
     padding: 20px;
 }
 
+.main-content {
+    flex: 1;
+}
+
+
+/* =========================================================
+   06 - HERO
+========================================================= */
+
 .hero {
-    width: 100%;
     min-height: 90vh;
     display: flex;
     justify-content: center;
@@ -128,61 +154,37 @@ p {
 
 
 /* =========================================================
-   05 - COMPONENT SYSTEM (CORE UI)
+   07 - CARDS SYSTEM
 ========================================================= */
 
-/* CARDS */
 .card,
 .course-card,
 .feature-card,
 .stat-box,
 .auth-box,
 .form-box {
-    background: var(--bg-card);
+    background: var(--card);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     padding: 20px;
-    transition: var(--transition);
-}
-
-/* INPUTS */
-input, textarea {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: var(--bg-card);
-    color: var(--text-main);
-    transition: var(--transition);
-}
-
-input:focus, textarea:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 6px rgba(37,99,235,0.3);
-    outline: none;
 }
 
 
 /* =========================================================
-   06 - BUTTON SYSTEM (SAAS STANDARD)
+   08 - BUTTON SYSTEM
 ========================================================= */
 
 .btn {
     display: inline-block;
     padding: 12px 18px;
     border-radius: 10px;
-    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-    white-space: nowrap;
     transition: var(--transition);
-    border: none;
+    text-align: center;
 }
 
-/* PRIMARY */
 .btn-primary {
     background: var(--primary);
     color: white;
@@ -193,64 +195,48 @@ input:focus, textarea:focus {
     transform: scale(1.05);
 }
 
-/* SUCCESS */
 .btn-success {
     background: var(--success);
     color: white;
 }
 
-.btn-success:hover {
-    background: #059669;
-    transform: scale(1.05);
-}
-
-/* DISABLED */
-.btn-disabled {
-    background: #e5e7eb;
-    color: #6b7280;
-    cursor: not-allowed;
+.btn-danger {
+    background: var(--danger);
+    color: white;
 }
 
 
 /* =========================================================
-   07 - COURSE ACTIONS (CLEAN)
+   09 - PROGRESS BAR (FIXED - NOW WORKS PROPERLY)
 ========================================================= */
 
-.course-actions {
-    margin-top: 25px;
-    text-align: center;
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--soft);
+    border-radius: 20px;
+    overflow: hidden;
 }
 
-.btn-group {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-.completed-box {
-    background: var(--success);
-    color: white;
-    padding: 12px;
-    border-radius: 10px;
-    font-weight: 600;
-    text-align: center;
+.progress-fill {
+    height: 100%;
+    width: 0%; /* IMPORTANT: controlled by JS */
+    background: linear-gradient(90deg, var(--primary), var(--success));
+    transition: width 0.5s ease;
 }
 
 
 /* =========================================================
-   08 - NAVIGATION
+   10 - NAV LINKS
 ========================================================= */
 
 .nav-links {
-    list-style: none;
     display: flex;
-    gap: 18px;
-    align-items: center;
+    gap: 15px;
+    list-style: none;
 }
 
 .nav-links li a {
-    color: var(--text-main);
     padding: 6px 10px;
     border-radius: 6px;
     transition: var(--transition);
@@ -263,76 +249,61 @@ input:focus, textarea:focus {
 
 
 /* =========================================================
-   09 - LAYOUT SYSTEMS
+   11 - COURSE ACTIONS
 ========================================================= */
 
-.auth-container {
-    flex: 1;
+.course-actions {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.btn-group {
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 80vh;
-}
-
-.dashboard-container {
-    max-width: 1100px;
-    margin: auto;
-}
-
-.course-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
 
 /* =========================================================
-   10 - UTILITIES
+   12 - UTILITIES
 ========================================================= */
 
 .text-center { text-align: center; }
 .mt-1 { margin-top: 10px; }
 .mt-2 { margin-top: 20px; }
-.mt-3 { margin-top: 30px; }
 
 .flex { display: flex; }
-.center { justify-content: center; align-items: center; }
-
-.fade-in {
-    animation: fadeUp 0.6s ease-in-out;
-}
 
 
 /* =========================================================
-   11 - ANIMATION SYSTEM
+   13 - ANIMATION
 ========================================================= */
 
 @keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeUp 0.6s ease;
 }
 
 
 /* =========================================================
-   12 - RESPONSIVE DESIGN
+   14 - RESPONSIVE
 ========================================================= */
 
 @media (max-width: 768px) {
     .nav-links {
+        display: none;
         flex-direction: column;
-        background: var(--bg-card);
         position: absolute;
         top: 60px;
         right: 10px;
+        background: var(--card);
         padding: 15px;
         border-radius: var(--radius);
-        display: none;
     }
 
     .nav-links.show {
