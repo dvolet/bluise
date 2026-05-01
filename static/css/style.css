@@ -1,142 +1,208 @@
 /* =========================================================
-   01 - DESIGN SYSTEM (THEME CORE)
+   15 - GLOBAL SPACING SYSTEM (FIX ALL “NO SPACE” ISSUES)
 ========================================================= */
 
 :root {
-    --primary: #2563eb;
-    --primary-hover: #1d4ed8;
-    --success: #10b981;
-    --danger: #ef4444;
-
-    --bg: #f8fafc;
-    --card: #ffffff;
-    --soft: #f1f5f9;
-
-    --text: #0f172a;
-    --muted: #64748b;
-
-    --border: rgba(15, 23, 42, 0.08);
-
-    --radius: 14px;
-    --shadow: 0 10px 25px rgba(0,0,0,0.08);
-
-    --transition: 0.3s ease;
+    --space-1: 6px;
+    --space-2: 12px;
+    --space-3: 18px;
+    --space-4: 24px;
+    --space-5: 40px;
 }
 
-/* DARK MODE */
-body.dark-mode {
-    --bg: #0f172a;
-    --card: #1e293b;
-    --soft: #111827;
-
-    --text: #e2e8f0;
-    --muted: #94a3b8;
-
-    --border: rgba(148,163,184,0.15);
-
-    --shadow: 0 10px 25px rgba(0,0,0,0.4);
+/* FORCE CONSISTENT SPACING */
+h1, h2, h3 {
+    margin-bottom: var(--space-2);
 }
 
-
-/* =========================================================
-   02 - RESET
-========================================================= */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    height: 100%;
-    font-family: Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-}
-
-img {
-    max-width: 100%;
-    display: block;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-
-/* =========================================================
-   03 - LAYOUT SYSTEM (CENTERED SaaS FRAME)
-========================================================= */
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+p {
+    margin-bottom: var(--space-2);
+    line-height: 1.7;
 }
 
 section {
-    padding: 80px 0;
-}
-
-.main-content {
-    flex: 1;
-}
-
-/* GRID SYSTEM */
-.grid {
-    display: grid;
-    gap: 20px;
-}
-
-.grid-2 {
-    grid-template-columns: repeat(2, 1fr);
-    align-items: center;
-}
-
-.grid-3 {
-    grid-template-columns: repeat(3, 1fr);
-}
-
-@media (max-width: 768px) {
-    .grid-2,
-    .grid-3 {
-        grid-template-columns: 1fr;
-    }
+    padding: var(--space-5) var(--space-3);
 }
 
 
 /* =========================================================
-   04 - NAVBAR (LOGO FIX INCLUDED)
+   16 - COURSERA STYLE HERO (GLASS FIX)
 ========================================================= */
 
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 25px;
-    background: var(--card);
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-/* LOGO FIX */
-.logo img {
-    height: 38px;
-    width: auto;
-}
-
-
-/* =========================================================
-   05 - PROFILE DROPDOWN (FIXED SIZE ISSUE)
-========================================================= */
-
-.profile-menu {
+.hero-section,
+.hero {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
+
+/* GLASSMORPHISM FRAME */
+.hero-content,
+.hero-box {
+    max-width: 750px;
+    padding: 40px;
+    border-radius: 18px;
+
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+}
+
+
+/* =========================================================
+   17 - GRID SYSTEM FIX (REAL SAAS ALIGNMENT)
+========================================================= */
+
+.features-grid,
+.course-grid,
+.stats-container {
+    display: grid;
+    gap: var(--space-4);
+}
+
+.features-grid,
+.course-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.stats-container {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+
+/* =========================================================
+   18 - CARD SYSTEM (COURSERA CLEAN UI)
+========================================================= */
+
+.course-card,
+.feature-card,
+.stat-box,
+.card {
+    border-radius: 16px;
+    padding: 22px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+    transition: 0.3s ease;
+}
+
+.course-card:hover,
+.feature-card:hover,
+.stat-box:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.15);
+}
+
+
+/* =========================================================
+   19 - BUTTON SYSTEM (CLEAN COURSERA STYLE)
+========================================================= */
+
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+
+    padding: 12px 18px;
+    border-radius: 10px;
+
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.btn-primary {
+    background: #2563eb;
+    color: white;
+}
+
+.btn-success {
+    background: #10b981;
+    color: white;
+}
+
+.btn-primary:hover,
+.btn-success:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+
+/* =========================================================
+   20 - DASHBOARD FIX (NO SHABBY LOOK)
+========================================================= */
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: var(--space-4);
+}
+
+/* DASHBOARD GRID LAYOUT */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: var(--space-4);
+}
+
+/* SIDEBAR */
+.sidebar {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid var(--border);
+}
+
+/* MAIN AREA */
+.dashboard-main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+
+/* =========================================================
+   21 - PROFILE DROPDOWN FIX (STACKED MENU)
+========================================================= */
+
+.dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 50px;
+
+    background: var(--card);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+
+    width: 180px;
+    overflow: hidden;
+}
+
+/* STACK ITEMS VERTICALLY */
+.dropdown a {
+    display: block;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+}
+
+.dropdown a:last-child {
+    border-bottom: none;
+}
+
+.dropdown a:hover {
+    background: rgba(37,99,235,0.1);
+}
+
+
+/* =========================================================
+   22 - PROFILE ICON FIX
+========================================================= */
 
 .nav-avatar {
     width: 38px;
@@ -144,115 +210,11 @@ section {
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid var(--primary);
-    cursor: pointer;
-}
-
-.dropdown {
-    position: absolute;
-    top: 45px;
-    right: 0;
-    width: 180px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-    display: none;
-}
-
-.profile-menu:hover .dropdown {
-    display: block;
 }
 
 
 /* =========================================================
-   06 - HERO (CENTER FRAME STYLE)
-========================================================= */
-
-.hero {
-    min-height: 85vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 60px 20px;
-}
-
-.hero-box {
-    max-width: 700px;
-    padding: 40px;
-    border-radius: 18px;
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.15);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-}
-
-
-/* =========================================================
-   07 - CARDS (CUBE STYLE FRAME)
-========================================================= */
-
-.card,
-.course-card,
-.feature-card,
-.stat-box,
-.auth-box,
-.form-box {
-    background: var(--card);
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    box-shadow:
-        0 10px 15px rgba(0,0,0,0.06),
-        0 2px 6px rgba(0,0,0,0.04);
-    padding: 22px;
-    transition: var(--transition);
-}
-
-.card:hover,
-.course-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 18px 40px rgba(0,0,0,0.12);
-}
-
-
-/* =========================================================
-   08 - BUTTON SYSTEM
-========================================================= */
-
-.btn {
-    display: inline-block;
-    padding: 12px 18px;
-    border-radius: 10px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
-    text-align: center;
-    white-space: nowrap;
-}
-
-.btn-primary {
-    background: var(--primary);
-    color: white;
-}
-
-.btn-primary:hover {
-    background: var(--primary-hover);
-    transform: scale(1.05);
-}
-
-.btn-success {
-    background: var(--success);
-    color: white;
-}
-
-.btn-danger {
-    background: var(--danger);
-    color: white;
-}
-
-
-/* =========================================================
-   09 - PROGRESS BAR (FIXED - NOW VISIBLE)
+   23 - PROGRESS BAR FIX (MAKE IT ALWAYS VISIBLE)
 ========================================================= */
 
 .progress-bar {
@@ -265,94 +227,63 @@ section {
 
 .progress-fill {
     height: 100%;
-    width: 60%; /* JS controls this */
-    background: linear-gradient(90deg, var(--primary), var(--success));
+    background: linear-gradient(90deg, #2563eb, #10b981);
     transition: width 0.5s ease;
 }
 
 
 /* =========================================================
-   10 - NAV LINKS
+   24 - TYPOGRAPHY HIERARCHY (COURSERA FEEL)
 ========================================================= */
 
-.nav-links {
-    display: flex;
-    gap: 15px;
-    list-style: none;
+h1 {
+    font-size: 38px;
+    letter-spacing: -0.5px;
 }
 
-.nav-links li a {
-    padding: 6px 10px;
-    border-radius: 6px;
-    transition: var(--transition);
+h2 {
+    font-size: 28px;
 }
 
-.nav-links li a:hover {
-    background: rgba(37,99,235,0.1);
-    color: var(--primary);
+h3 {
+    font-size: 20px;
+}
+
+p {
+    color: var(--text-muted);
 }
 
 
 /* =========================================================
-   11 - COURSE ACTIONS
+   25 - PAGE BALANCE FIX (NO “CRAMPED TEXT”)
 ========================================================= */
 
-.course-actions {
-    margin-top: 20px;
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+}
+
+.text-center {
     text-align: center;
 }
 
-.btn-group {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
 
 /* =========================================================
-   12 - UTILITIES
+   26 - FINAL SMOOTH ANIMATION
 ========================================================= */
-
-.text-center { text-align: center; }
-.mt-1 { margin-top: 10px; }
-.mt-2 { margin-top: 20px; }
-.mt-3 { margin-top: 30px; }
-
-.flex { display: flex; }
-
-
-/* =========================================================
-   13 - ANIMATION
-========================================================= */
-
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
 
 .fade-in {
-    animation: fadeUp 0.6s ease;
+    animation: fadeUp 0.7s ease;
 }
 
-
-/* =========================================================
-   14 - RESPONSIVE NAV
-========================================================= */
-
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        right: 10px;
-        background: var(--card);
-        padding: 15px;
-        border-radius: var(--radius);
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
     }
-
-    .nav-links.show {
-        display: flex;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
