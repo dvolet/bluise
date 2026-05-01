@@ -1,26 +1,25 @@
+{% extends "base.html" %}
+
 {% block content %}
 
-<!-- =========================
-   HERO (CENTER FRAME UPGRADE)
-========================= -->
-<section class="hero">
+<div class="hero-section">
 
-    <div class="hero-box fade-in">
+    <div class="hero-content">
 
         <h1>Learn Skills That Build Your Future 🚀</h1>
 
         <p>
-            Join E-Learning One Creativity and access practical courses
+            Join E-Learning One Creativity and access practical courses 
             designed to help you grow step by step.
         </p>
 
-        <div class="btn-group mt-2">
+        <div class="hero-buttons">
 
-            <a href="/register" class="btn btn-primary">
+            <a href="/register" class="hero-btn primary">
                 Get Started
             </a>
 
-            <a href="/courses" class="btn btn-success">
+            <a href="/courses" class="hero-btn secondary">
                 Browse Courses
             </a>
 
@@ -28,14 +27,10 @@
 
     </div>
 
-</section>
+</div>
+<section class="stats-section">
 
-
-<!-- =========================
-   STATS (CLEAN GRID SYSTEM)
-========================= -->
-<section>
-    <div class="container grid grid-3 text-center">
+    <div class="stats-container">
 
         <div class="stat-box">
             <h2>50+</h2>
@@ -53,107 +48,73 @@
         </div>
 
     </div>
+
 </section>
+<!-- FEATURES SECTION -->
+<div class="features-section">
 
+    <h2>Why Learn With Us?</h2>
 
-<!-- =========================
-   FEATURES (SAAS GRID)
-========================= -->
-<section>
-    <div class="container text-center">
+    <div class="features-grid">
 
-        <h2>Why Learn With Us?</h2>
+        <div class="feature-card">
+            <h3>📚 Simple Learning</h3>
+            <p>Easy to understand structured lessons.</p>
+        </div>
 
-        <div class="grid grid-3 mt-2">
+        <div class="feature-card">
+            <h3>🎯 Practical Skills</h3>
+            <p>Real-world knowledge you can apply immediately.</p>
+        </div>
 
-            <div class="feature-card">
-                <h3>📚 Simple Learning</h3>
-                <p>Easy to understand structured lessons.</p>
-            </div>
-
-            <div class="feature-card">
-                <h3>🎯 Practical Skills</h3>
-                <p>Real-world knowledge you can apply immediately.</p>
-            </div>
-
-            <div class="feature-card">
-                <h3>📈 Track Progress</h3>
-                <p>Monitor your learning step by step.</p>
-            </div>
-
+        <div class="feature-card">
+            <h3>📈 Track Progress</h3>
+            <p>Monitor your learning step by step.</p>
         </div>
 
     </div>
-</section>
 
+</div>
 
-<!-- =========================
-   CTA (CENTERED BOX FRAME)
-========================= -->
-<section>
+<!-- CALL TO ACTION -->
+<div class="cta-section">
 
-    <div class="container text-center">
+    <h2>Start Learning Today</h2>
+    <p>Join thousands of learners improving their skills.</p>
 
-        <div class="card hero-box">
+    <a href="/register" class="cta-btn">
+        Create Free Account
+    </a>
 
-            <h2>Start Learning Today</h2>
-            <p>Join thousands of learners improving their skills.</p>
+</div>
+<!-- FEATURED COURSES -->
+<div class="featured-section">
 
-            <div class="btn-group mt-2">
+    <h2>Featured Courses</h2>
 
-                <a href="/register" class="btn btn-primary">
-                    Create Free Account
+    <div class="course-grid">
+
+        {% if featured_courses %}
+
+            {% for course in featured_courses %}
+            <div class="course-card">
+
+                <h4>{{ course.title }}</h4>
+                <p>{{ course.description }}</p>
+
+                <a href="/course/{{ course.id }}" class="view-btn">
+                    View Course
                 </a>
 
             </div>
+            {% endfor %}
 
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-   FEATURED COURSES (FIXED GRID)
-========================= -->
-<section>
-
-    <div class="container">
-
-        <h2 class="text-center">Featured Courses</h2>
-
-        <div class="grid grid-3 mt-2">
-
-            {% if featured_courses %}
-
-                {% for course in featured_courses %}
-
-                <div class="course-card">
-
-                    <h3>{{ course.title }}</h3>
-                    <p>{{ course.description }}</p>
-
-                    <div class="course-actions">
-                        <a href="/course/{{ course.id }}" class="btn btn-primary">
-                            View Course
-                        </a>
-                    </div>
-
-                </div>
-
-                {% endfor %}
-
-            {% else %}
-
-                <p class="text-center">No courses available yet.</p>
-
-            {% endif %}
-
-        </div>
+        {% else %}
+            <p>No courses available yet.</p>
+        {% endif %}
 
     </div>
 
-</section>
+</div>
 
 {% endblock %}
