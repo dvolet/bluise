@@ -45,17 +45,13 @@ html, body {
     padding: 20px;
 }
 
-button, .btn {
-    background: var(--btn-color);
-    color: white;
-    
 /* BODY FIX (THEME READY) */
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background: var(--bg-color);
-    color: var(--text-color);
+    background-color: var(--bg-main);
+    color: var(--text-main);
     transition: background 0.3s ease, color 0.3s ease;
 }
 
@@ -1182,22 +1178,3 @@ button:hover {
 .enroll-btn:hover {
     background: #059669;
 }
-:root {
-    --bg-color: #ffffff;
-    --text-color: #111827;
-    --card-color: #f9fafb;
-    --btn-color: #2563eb;
-}
-
-.dark-mode {
-    --bg-color: #0f172a;
-    --text-color: #ffffff;
-    --card-color: #1e293b;
-    --btn-color: #3b82f6;
-}
-.hamburger span {
-    background: var(--text-color);
-}
-function toggleDarkMode() {
-    document.body.classList.toggle("dark-mode");
-  }
