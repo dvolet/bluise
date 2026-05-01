@@ -27,8 +27,10 @@
 body.dark-mode {
     --bg-main: #0f172a;
     --bg-card: #1e293b;
+
     --text-main: #e2e8f0;
     --text-light: #94a3b8;
+
     --text-inverse: #0f172a;
     --border-color: #334155;
     --btn-text: #0f172a;
@@ -40,6 +42,7 @@ body.dark-mode {
 html, body {
     height: 100%;
     margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
 }
 
@@ -49,7 +52,7 @@ body {
     min-height: 100vh;
     background: var(--bg-main);
     color: var(--text-main);
-    transition: 0.3s;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 .main-content {
@@ -57,12 +60,9 @@ body {
     padding: 20px;
 }
 
+/* TEXT */
 h1, h2, h3 { color: var(--text-main); }
 p { color: var(--text-light); }
-
-.hamburger span {
-    background: var(--text-main);
-}
 
 /* =========================
    NAVBAR
@@ -73,43 +73,50 @@ p { color: var(--text-light); }
     align-items: center;
     padding: 12px 30px;
     background: var(--bg-card);
-    border-bottom: 1px solid rgba(148,163,184,0.15);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    border-bottom: 1px solid var(--border-color);
 }
 
-.logo img { height: 40px; }
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 18px;
-}
-
-.nav-links a {
-    text-decoration: none;
+.nav-links li a {
     color: var(--text-main);
-    padding: 6px 10px;
 }
 
-.nav-links a:hover {
-    color: #38bdf8;
+/* =========================
+   MOBILE MENU
+========================= */
+.menu-toggle {
+    display: none;
 }
 
-/* MOBILE */
-@media (max-width:768px){
-    .menu-toggle { display:block; }
+@media (max-width: 768px) {
+    .menu-toggle { display: block; }
+
     .nav-links {
-        position:absolute;
-        top:60px;
-        right:10px;
+        position: absolute;
+        top: 60px;
+        right: 10px;
         background: var(--bg-card);
-        flex-direction:column;
-        padding:15px;
-        display:none;
+        flex-direction: column;
+        width: 220px;
+        display: none;
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid var(--border-color);
     }
-    .nav-links.show { display:flex; }
+
+    .nav-links.show { display: flex; }
+}
+
+/* =========================
+   HERO
+========================= */
+.hero {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, #38bdf8, #6366f1);
+    color: white;
 }
 
 /* =========================
@@ -133,89 +140,94 @@ p { color: var(--text-light); }
 }
 
 /* =========================
-   COURSES
+   COURSE CARD
 ========================= */
-.course-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
-}
-
 .course-card {
     background: var(--bg-card);
     color: var(--text-main);
-    padding:20px;
-    border-radius:15px;
-    border:1px solid var(--border-color);
-}
-
-.course-thumb {
-    width:100%;
-    height:160px;
-    object-fit:cover;
-    border-radius:12px;
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 20px;
 }
 
 /* =========================
-   PROGRESS BAR
+   PROGRESS
 ========================= */
 .progress-bar {
-    height:10px;
-    background:#e5e7eb;
-    border-radius:10px;
-    overflow:hidden;
+    background: var(--border-color);
 }
 
 .progress-fill {
-    height:100%;
-    background:linear-gradient(to right,#6366f1,#10b981);
+    background: linear-gradient(to right, #6366f1, #10b981);
 }
 
 /* =========================
    BUTTONS
 ========================= */
-.btn, .enroll-btn, .complete-btn {
-    background:#10b981;
+.btn,
+.enroll-btn,
+.complete-btn,
+.completed-btn {
+    background: #10b981;
     color: var(--btn-text);
-    padding:12px;
-    border-radius:10px;
-    text-decoration:none;
-    display:inline-block;
+    padding: 12px 18px;
+    border-radius: 10px;
+    text-decoration: none;
 }
 
 .view-btn {
-    background: linear-gradient(135deg,#38bdf8,#6366f1);
-    color:white;
-    padding:10px;
-    border-radius:8px;
+    background: linear-gradient(135deg, #38bdf8, #6366f1);
+    color: var(--text-inverse);
 }
 
 /* =========================
    FORM
 ========================= */
-.form-box {
-    background: var(--bg-card);
-    color: var(--text-main);
-    padding:25px;
-    border-radius:12px;
-}
-
-input {
-    background: var(--bg-card);
-    color: var(--text-main);
-    border:1px solid var(--border-color);
-}
-
-/* =========================
-   AUTH FIX
-========================= */
+.form-box,
 .auth-box {
     background: var(--bg-card);
     color: var(--text-main);
 }
 
 /* =========================
-   PROFILE DROPDOWN
+   INPUTS
+========================= */
+input, textarea {
+    background: var(--bg-card);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+}
+
+/* =========================
+   PASSWORD / EYE ICON
+========================= */
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    padding-right: 40px;
+}
+
+/* 👁 EYE ICON (FIXED) */
+.eye {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--text-light);
+    user-select: none;
+    transition: 0.2s;
+}
+
+.eye:hover {
+    color: var(--text-main);
+}
+
+/* =========================
+   DROPDOWN
 ========================= */
 .dropdown {
     background: var(--bg-card);
@@ -226,17 +238,49 @@ input {
 }
 
 /* =========================
-   UTIL
+   COURSE VIEW
 ========================= */
-.completed-box {
-    background:#10b981;
-    color: var(--text-inverse);
-    padding:12px;
-    border-radius:10px;
+.course-view-card {
+    background: var(--bg-card);
+    color: var(--text-main);
 }
 
-.btn-group {
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
+/* =========================
+   COMPLETED BOX
+========================= */
+.completed-box {
+    background: #10b981;
+    color: var(--text-inverse);
+}
+
+/* =========================
+   IMAGE
+========================= */
+.course-thumb {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* =========================
+   ANIMATION (KEPT)
+========================= */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-section,
+.stats-section,
+.features-section,
+.cta-section,
+.featured-section {
+    animation: fadeUp 0.8s ease-in-out;
 }
