@@ -1,29 +1,20 @@
 /* =========================
-   THEME VARIABLES
+   ROOT (SAFE VARIABLES)
 ========================= */
 :root {
-    --primary: #2563eb;
-    --primary-hover: #1d4ed8;
-
     --bg-main: #f8fafc;
     --bg-card: #ffffff;
 
     --text-main: #1e293b;
     --text-light: #64748b;
 
-    --success: #22c55e;
-    --warning: #facc15;
-    --danger: #ef4444;
-
-    --radius: 12px;
-    --shadow: 0px 4px 12px rgba(0,0,0,0.08);
-
     --text-inverse: #ffffff;
     --border-color: #e5e7eb;
+
     --btn-text: #ffffff;
 }
 
-/* 🌙 DARK MODE */
+/* DARK MODE */
 body.dark-mode {
     --bg-main: #0f172a;
     --bg-card: #1e293b;
@@ -37,132 +28,134 @@ body.dark-mode {
 }
 
 /* =========================
-   BASE
+   BODY (DO NOT TOUCH AGAIN)
 ========================= */
-html, body {
-    height: 100%;
+body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-}
 
-body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+
     background: var(--bg-main);
     color: var(--text-main);
-    transition: background 0.3s ease, color 0.3s ease;
 }
-
-.main-content {
-    flex: 1;
-    padding: 20px;
-}
-
-/* TEXT */
-h1, h2, h3 { color: var(--text-main); }
-p { color: var(--text-light); }
 
 /* =========================
-   NAVBAR
+   NAVBAR FIX (CRITICAL)
 ========================= */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     padding: 12px 30px;
     background: var(--bg-card);
     border-bottom: 1px solid var(--border-color);
 }
 
-.nav-links li a {
-    color: var(--text-main);
+/* LOGO FIX (MAIN ISSUE) */
+.logo img {
+    height: 40px;
+    width: auto;
+    display: block;
 }
 
-/* =========================
-   MOBILE MENU
-========================= */
+/* NAV LINKS */
+.nav-links {
+    display: flex;
+    gap: 18px;
+    list-style: none;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-size: 14px;
+}
+
+/* MOBILE MENU */
 .menu-toggle {
     display: none;
 }
 
 @media (max-width: 768px) {
-    .menu-toggle { display: block; }
+    .menu-toggle {
+        display: block;
+        font-size: 24px;
+        cursor: pointer;
+    }
 
     .nav-links {
         position: absolute;
         top: 60px;
         right: 10px;
-        background: var(--bg-card);
+
         flex-direction: column;
         width: 220px;
-        display: none;
-        padding: 15px;
-        border-radius: 10px;
+
+        background: var(--bg-card);
         border: 1px solid var(--border-color);
+        border-radius: 10px;
+
+        padding: 15px;
+        display: none;
     }
 
-    .nav-links.show { display: flex; }
+    .nav-links.show {
+        display: flex;
+    }
 }
 
 /* =========================
-   HERO
+   MAIN LAYOUT
 ========================= */
-.hero {
-    min-height: calc(100vh - 70px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background: linear-gradient(135deg, #38bdf8, #6366f1);
-    color: white;
-}
-
-/* =========================
-   DASHBOARD
-========================= */
-.dashboard-container {
-    max-width: 1100px;
-    margin: auto;
-    padding: 25px;
-}
-
-/* =========================
-   CARDS
-========================= */
-.card {
-    background: var(--bg-card);
-    color: var(--text-main);
-    padding: 25px;
-    border-radius: 15px;
-    border: 1px solid var(--border-color);
-}
-
-/* =========================
-   COURSE CARD
-========================= */
-.course-card {
-    background: var(--bg-card);
-    color: var(--text-main);
-    border: 1px solid var(--border-color);
-    border-radius: 15px;
+.main-content {
+    flex: 1;
     padding: 20px;
 }
 
 /* =========================
-   PROGRESS
+   CARD / BOX (SAFE)
 ========================= */
-.progress-bar {
-    background: var(--border-color);
-}
-
-.progress-fill {
-    background: linear-gradient(to right, #6366f1, #10b981);
+.card,
+.course-card,
+.form-box,
+.auth-box,
+.course-view-card {
+    background: var(--bg-card);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
 }
 
 /* =========================
-   BUTTONS
+   COURSE GRID (RESTORED)
+========================= */
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.course-card {
+    padding: 20px;
+}
+
+/* =========================
+   COURSE IMAGE
+========================= */
+.course-thumb {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* =========================
+   BUTTONS (SAFE)
 ========================= */
 .btn,
 .enroll-btn,
@@ -173,6 +166,7 @@ p { color: var(--text-light); }
     padding: 12px 18px;
     border-radius: 10px;
     text-decoration: none;
+    display: inline-block;
 }
 
 .view-btn {
@@ -181,25 +175,19 @@ p { color: var(--text-light); }
 }
 
 /* =========================
-   FORM
-========================= */
-.form-box,
-.auth-box {
-    background: var(--bg-card);
-    color: var(--text-main);
-}
-
-/* =========================
-   INPUTS
+   FORM INPUTS
 ========================= */
 input, textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
     background: var(--bg-card);
     color: var(--text-main);
-    border: 1px solid var(--border-color);
 }
 
 /* =========================
-   PASSWORD / EYE ICON
+   PASSWORD FIELD (FIXED)
 ========================= */
 .password-wrapper {
     position: relative;
@@ -209,17 +197,15 @@ input, textarea {
     padding-right: 40px;
 }
 
-/* 👁 EYE ICON (FIXED) */
+/* 👁 PERFECTLY POSITIONED */
 .eye {
     position: absolute;
     right: 12px;
     top: 50%;
     transform: translateY(-50%);
-    cursor: pointer;
     font-size: 18px;
+    cursor: pointer;
     color: var(--text-light);
-    user-select: none;
-    transition: 0.2s;
 }
 
 .eye:hover {
@@ -227,22 +213,18 @@ input, textarea {
 }
 
 /* =========================
-   DROPDOWN
+   PROGRESS BAR
 ========================= */
-.dropdown {
-    background: var(--bg-card);
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background: var(--border-color);
+    border-radius: 10px;
 }
 
-.dropdown a {
-    color: var(--text-main);
-}
-
-/* =========================
-   COURSE VIEW
-========================= */
-.course-view-card {
-    background: var(--bg-card);
-    color: var(--text-main);
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, #6366f1, #10b981);
 }
 
 /* =========================
@@ -251,16 +233,8 @@ input, textarea {
 .completed-box {
     background: #10b981;
     color: var(--text-inverse);
-}
-
-/* =========================
-   IMAGE
-========================= */
-.course-thumb {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 12px;
+    padding: 12px;
+    border-radius: 10px;
 }
 
 /* =========================
@@ -275,12 +249,4 @@ input, textarea {
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-.hero-section,
-.stats-section,
-.features-section,
-.cta-section,
-.featured-section {
-    animation: fadeUp 0.8s ease-in-out;
 }
