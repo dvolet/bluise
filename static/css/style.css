@@ -388,3 +388,209 @@ p {
         top: 0;
     }
 }
+/* =========================================================
+   1. LOGO SIZE FIX (SAAS STANDARD)
+========================================================= */
+
+.logo img {
+    height: 34px;
+    width: auto;
+    max-height: 34px;
+}
+
+
+/* =========================================================
+   2. DARK MODE FIX (FORCE GLOBAL OVERRIDE)
+========================================================= */
+
+body.dark-mode {
+    background: var(--bg);
+    color: var(--text);
+}
+
+body.dark-mode .card,
+body.dark-mode .course-card,
+body.dark-mode .feature-card,
+body.dark-mode .stat-box,
+body.dark-mode .auth-box {
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+body.dark-mode p {
+    color: var(--muted);
+}
+
+
+/* =========================================================
+   3. HAMBURGER MENU FIX (MOBILE NAV)
+========================================================= */
+
+.menu-toggle {
+    display: none;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 65px;
+        right: 10px;
+
+        width: 220px;
+        flex-direction: column;
+
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+
+        padding: 15px;
+
+        display: none;
+        z-index: 9999;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .nav-links li {
+        width: 100%;
+        padding: 8px 0;
+    }
+}
+
+
+/* =========================================================
+   4. PROFILE DROPDOWN FIX (STACK + ALWAYS VISIBLE)
+========================================================= */
+
+.profile-menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* FORCE STACK STYLE MENU */
+.dropdown {
+    position: absolute;
+    top: 45px;
+    right: 0;
+
+    width: 180px;
+
+    display: none;
+    flex-direction: column;
+
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    overflow: hidden;
+    z-index: 9999;
+}
+
+.profile-menu:hover .dropdown {
+    display: flex;
+}
+
+.dropdown a {
+    padding: 12px;
+    font-size: 14px;
+    display: block;
+    border-bottom: 1px solid var(--border);
+}
+
+.dropdown a:last-child {
+    border-bottom: none;
+}
+
+.dropdown a:hover {
+    background: rgba(37,99,235,0.1);
+}
+
+
+/* =========================================================
+   5. FEATURES CENTER FIX (COURSERA STYLE ALIGNMENT)
+========================================================= */
+
+.features-section {
+    text-align: center;
+}
+
+.features-grid {
+    justify-items: center;
+    align-items: center;
+}
+
+
+/* FORCE FEATURE CARDS CENTER LOOK */
+.feature-card {
+    max-width: 320px;
+    text-align: center;
+    margin: auto;
+}
+
+
+/* =========================================================
+   6. HERO CENTER FIX (NO MORE OFF ALIGNMENT)
+========================================================= */
+
+.hero-section,
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-content,
+.hero-box {
+    text-align: center;
+}
+
+
+/* =========================================================
+   7. GRID ALIGNMENT FIX (NO MORE SHIFTING)
+========================================================= */
+
+.course-grid,
+.features-grid,
+.stats-container {
+    justify-content: center;
+}
+
+
+/* =========================================================
+   8. BUTTON ALIGNMENT FIX
+========================================================= */
+
+.btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+
+/* =========================================================
+   9. FINAL UI POLISH (COURSERA FEEL)
+========================================================= */
+
+.card,
+.course-card,
+.feature-card,
+.stat-box {
+    text-align: center;
+}
+
+section {
+    padding-left: 20px;
+    padding-right: 20px;
+}
