@@ -287,3 +287,104 @@ p {
         transform: translateY(0);
     }
 }
+/* =========================================================
+   COURSERA DASHBOARD SYSTEM
+========================================================= */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid var(--border);
+    height: fit-content;
+    position: sticky;
+    top: 80px;
+}
+
+/* PROFILE PANEL */
+.profile-panel {
+    text-align: center;
+}
+
+.profile-panel h3 {
+    margin-top: 10px;
+}
+
+.profile-panel p {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+/* SIDEBAR LINKS */
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.sidebar-nav a {
+    padding: 10px 12px;
+    border-radius: 10px;
+    transition: 0.3s;
+    font-weight: 500;
+}
+
+.sidebar-nav a:hover {
+    background: rgba(37,99,235,0.1);
+    color: var(--primary);
+}
+
+/* ================= MAIN DASHBOARD ================= */
+
+.dashboard-main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* HEADER */
+.dashboard-header h2 {
+    font-size: 28px;
+}
+
+.dashboard-header p {
+    color: var(--muted);
+}
+
+/* ================= ANALYTICS ================= */
+
+.stat-box {
+    text-align: center;
+}
+
+/* ================= COURSES ================= */
+
+.course-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: relative;
+        top: 0;
+    }
+}
