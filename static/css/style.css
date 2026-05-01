@@ -300,3 +300,183 @@ input, textarea {
 .course-card {
     animation: fadeUp 0.6s ease;
 }
+/* =========================
+   🔥 GLOBAL FIX (STOP PAGE SHIFT)
+========================= */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden; /* FIX: prevents right shift */
+}
+
+/* =========================
+   🔥 NAVBAR SHIFT FIX
+========================= */
+.navbar {
+    width: 100%;
+}
+
+.nav-links {
+    margin: 0;
+    padding: 0;
+}
+
+/* MOBILE MENU FIX */
+@media (max-width: 768px) {
+    .nav-links {
+        right: 10px;
+        max-width: 90vw; /* FIX overflow */
+    }
+}
+
+/* =========================
+   🔥 HERO FIX (HOME PAGE)
+========================= */
+.hero {
+    width: 100%;
+    min-height: calc(100vh - 70px);
+    padding: 40px 20px; /* FIX spacing */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-inner {
+    width: 100%;
+    max-width: 800px;
+}
+
+/* =========================
+   🔥 DASHBOARD CARD SPACING FIX
+========================= */
+.analytics {
+    margin-top: 20px;
+}
+
+.card {
+    width: 100%;
+}
+
+/* =========================
+   🔥 AUTH FORM FIX (CRITICAL)
+========================= */
+.auth-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.auth-box {
+    width: 100%;
+    max-width: 420px; /* FIX: prevents oversize */
+    margin: auto;
+}
+
+/* STOP RIGHT PUSH */
+.form-box {
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+}
+
+/* =========================
+   🔥 INPUT FIX (NO OVERFLOW)
+========================= */
+input, textarea {
+    max-width: 100%;
+}
+
+/* =========================
+   🔥 PASSWORD EYE FIX (PERFECT)
+========================= */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 45px;
+}
+
+.eye {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: auto;
+}
+
+/* =========================
+   🔥 PROFILE IMAGE FIX (CRITICAL)
+========================= */
+
+/* PROFILE PAGE IMAGE */
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* NAVBAR / DROPDOWN IMAGE */
+.nav-avatar {
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* PREVENT FULL WIDTH IMAGE BUG */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* =========================
+   🔥 HAMBURGER PROFILE DROPDOWN FIX
+========================= */
+.dropdown {
+    width: 180px;
+}
+
+.dropdown img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+}
+
+/* =========================
+   🔥 COURSE GRID FIX
+========================= */
+.course-grid {
+    width: 100%;
+}
+
+/* =========================
+   🔥 BUTTON FIX (ENSURE CLICKABLE)
+========================= */
+a, button {
+    cursor: pointer;
+}
+
+/* =========================
+   🔥 GLASS EFFECT FIX (RESTORE)
+========================= */
+.glass {
+    backdrop-filter: blur(12px);
+}
+
+/* =========================
+   🔥 FINAL SAFETY (NO RANDOM OVERFLOW)
+========================= */
+.container,
+.dashboard-container,
+.course-view-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: auto;
+}
