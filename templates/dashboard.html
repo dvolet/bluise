@@ -22,9 +22,21 @@
     {% endif %}
 {% endwith %}
 
-    <!-- 🔐 ADMIN BUTTON -->
+    <!-- 🔐 ADMIN BUTTONS (UPDATED) -->
     {% if session.get('email') == 'elearningonecreativity@gmail.com' %}
-        <a class="admin-btn" href="/admin/add-course">➕ Add New Course</a>
+
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin:15px 0;">
+
+        <a class="admin-btn" href="/admin/add-course">
+            ➕ Add New Course
+        </a>
+
+        <a class="admin-btn" href="/admin/users">
+            👥 Manage Users
+        </a>
+
+    </div>
+
     {% endif %}
 
     <!-- 📊 ANALYTICS -->
