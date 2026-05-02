@@ -1230,12 +1230,15 @@ def logout():
 
 @app.route('/admin/users')
 def admin_users():
-    if session.get('email') != 'elearningonecreativity@gmail.com':
-        return redirect('/login')
+    try:
+        if session.get('email') != 'elearningonecreativity@gmail.com':
+            return redirect('/login')
 
-    users = User.query.all()
-    return render_template('admin_users.html', users=users)
+        users = User.query.all()
+        return render_template('admin_users.html', users=users)
 
+    except Exception as e:
+        return f"Error: {str(e)}"
 
 @app.route('/admin/user/toggle/<int:user_id>')
 def toggle_user(user_id):
