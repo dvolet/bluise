@@ -1185,3 +1185,239 @@ textarea {
 .password-wrapper span {
     display: inline-block;
 }
+/* =========================================================
+   🎯 DASHBOARD PREMIUM UI (ELOC SaaS LEVEL)
+========================================================= */
+
+/* MAIN CONTAINER */
+.dashboard-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 30px 20px;
+}
+
+/* HEADER */
+.dashboard-header {
+    margin-bottom: 25px;
+}
+
+.dashboard-header h2 {
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.dashboard-header p {
+    color: var(--text-muted);
+    margin-top: 5px;
+}
+
+/* QUICK NAV */
+.quick-nav {
+    margin-bottom: 20px;
+}
+
+.quick-nav .btn {
+    background: var(--primary);
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+}
+
+.quick-nav .btn:hover {
+    background: var(--primary-hover);
+}
+
+/* ADMIN BUTTON */
+.admin-btn {
+    display: inline-block;
+    margin: 10px 0 20px;
+    padding: 10px 16px;
+    background: #111827;
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.admin-btn:hover {
+    background: #000;
+}
+
+/* =========================================================
+   📊 ANALYTICS CARDS
+========================================================= */
+
+.analytics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.analytics .card {
+    text-align: center;
+    padding: 20px;
+    border-radius: 14px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.analytics h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.analytics p {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* =========================================================
+   📚 COURSE GRID (FIX STRUCTURE)
+========================================================= */
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-top: 15px;
+}
+
+/* =========================================================
+   🎓 COURSE CARD (REAL LMS STYLE)
+========================================================= */
+
+.course-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: 0.3s ease;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+}
+
+/* IMAGE */
+.course-thumb {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+/* TEXT */
+.course-card h4 {
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+.course-card p {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+/* =========================================================
+   🔘 BUTTON SYSTEM (UNIFIED)
+========================================================= */
+
+.view-btn {
+    display: inline-block;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    background: var(--primary);
+    color: white;
+    font-size: 14px;
+}
+
+.view-btn:hover {
+    background: var(--primary-hover);
+}
+
+.enroll-btn {
+    display: inline-block;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    background: #10b981;
+    color: white;
+    font-size: 14px;
+}
+
+.enroll-btn:hover {
+    background: #059669;
+}
+
+/* =========================================================
+   📊 PROGRESS SYSTEM (FIXED + CLEAN)
+========================================================= */
+
+.progress-text {
+    font-size: 13px;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.progress-container {
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, #2563eb, #10b981);
+    transition: width 0.5s ease;
+}
+
+/* =========================================================
+   🎯 STATUS LABELS
+========================================================= */
+
+.course-status {
+    margin-top: 8px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* =========================================================
+   🪄 EMPTY STATE
+========================================================= */
+
+.empty-state {
+    text-align: center;
+    padding: 40px;
+}
+
+.empty-state a {
+    margin-top: 10px;
+    display: inline-block;
+}
+
+/* =========================================================
+   📱 RESPONSIVE FIX
+========================================================= */
+
+@media (max-width: 768px) {
+    .dashboard-header h2 {
+        font-size: 20px;
+    }
+
+    .course-thumb {
+        height: 130px;
+    }
+}
