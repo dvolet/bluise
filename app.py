@@ -1230,40 +1230,60 @@ def logout():
 
 @app.route('/admin/users')
 def admin_users():
-    try:
-        if session.get('email') != 'elearningonecreativity@gmail.com':
-            return redirect('/login')
 
-        users = User.query.all()
-        return render_template('admin_users.html', users=users)
-
-    except Exception as e:
-        return f"Error: {str(e)}"
-
-@app.route('/admin/user/toggle/<int:user_id>')
-def toggle_user(user_id):
-    if session.get('email') != 'elearningonecreativity@gmail.com':
+    if session.get('email') != ADMIN_EMAIL:
         return redirect('/login')
 
-    user = User.query.get(user_id)
+    conn = get_connection()
 
-    if user.status == "active":
-        user.status = "disabled"
-    else:
-        user.status = "active"
+    users = conn.execute("""
+        SELECT id, username, email, profile_pic
+        FROM users
+        ORDER BY id DESC
+    """).fetchall()
 
-    db.session.commit()
+    conn.close()
+
+    return render_template('admin_users.html', users=users)
+    
+@app.route('/admin/user/toggle/<int:user_id>')
+def toggle_user(user_id):
+
+    if session.get('email') != ADMIN_EMAIL:
+        return redirect('/login')
+
+    conn = get_connection()
+
+    user = conn.execute("""
+        SELECT status FROM users WHERE id=?
+    """, (user_id,)).fetchone()
+
+    new_status = "disabled" if user['status'] == "active" else "active"
+
+    conn.execute("""
+        UPDATE users SET status=? WHERE id=?
+    """, (new_status, user_id))
+
+    conn.commit()
+    conn.close()
+
     return redirect('/admin/users')
 
 
 @app.route('/admin/user/delete/<int:user_id>')
 def delete_user(user_id):
-    if session.get('email') != 'elearningonecreativity@gmail.com':
+
+    if session.get('email') != ADMIN_EMAIL:
         return redirect('/login')
 
-    user = User.query.get(user_id)
-    db.session.delete(user)
-    db.session.commit()
+    conn = get_connection()
+
+    conn.execute("""
+        DELETE FROM users WHERE id=?
+    """, (user_id,))
+
+    conn.commit()
+    conn.close()
 
     return redirect('/admin/users')
 # =========================
