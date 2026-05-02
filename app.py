@@ -1224,7 +1224,45 @@ def logout():
     session.clear()
     flash("Logged out successfully!")
     return redirect(url_for('home'))
+# =========================
+# ADMIN - USER MANAGEMENT
+# =========================
 
+@app.route('/admin/users')
+def admin_users():
+    if session.get('email') != 'elearningonecreativity@gmail.com':
+        return redirect('/login')
+
+    users = User.query.all()
+    return render_template('admin_users.html', users=users)
+
+
+@app.route('/admin/user/toggle/<int:user_id>')
+def toggle_user(user_id):
+    if session.get('email') != 'elearningonecreativity@gmail.com':
+        return redirect('/login')
+
+    user = User.query.get(user_id)
+
+    if user.status == "active":
+        user.status = "disabled"
+    else:
+        user.status = "active"
+
+    db.session.commit()
+    return redirect('/admin/users')
+
+
+@app.route('/admin/user/delete/<int:user_id>')
+def delete_user(user_id):
+    if session.get('email') != 'elearningonecreativity@gmail.com':
+        return redirect('/login')
+
+    user = User.query.get(user_id)
+    db.session.delete(user)
+    db.session.commit()
+
+    return redirect('/admin/users')
 # =========================
 # RUN APP
 # =========================
