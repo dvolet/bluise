@@ -401,3 +401,215 @@ section {
 .hero-content p {
     margin-bottom: 20px;
 }
+/* =========================================================
+   🔥 PREMIUM UI SYSTEM (SAAS LEVEL - COURSERA STYLE)
+========================================================= */
+
+/* ================= CONTAINER SYSTEM ================= */
+
+.container,
+.hero-content,
+.stats-container,
+.features-grid,
+.course-grid {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* SECTION CONSISTENCY */
+section,
+.hero-section,
+.features-section,
+.stats-section,
+.featured-section,
+.cta-section {
+    padding: 60px 20px;
+}
+
+
+/* ================= HERO PREMIUM ================= */
+
+.hero-section {
+    background: linear-gradient(135deg, #2563eb, #6366f1);
+}
+
+.hero-content {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 50px 40px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+}
+
+.hero-content h1 {
+    font-size: 42px;
+    line-height: 1.2;
+}
+
+.hero-content p {
+    font-size: 16px;
+    max-width: 550px;
+    margin: 0 auto 25px;
+}
+
+
+/* ================= GRID PERFECTION ================= */
+
+.features-grid,
+.course-grid,
+.stats-container {
+    justify-content: center;
+    align-items: stretch;
+}
+
+/* FORCE PERFECT CARD WIDTH */
+.feature-card,
+.course-card,
+.stat-box {
+    max-width: 300px;
+    width: 100%;
+}
+
+
+/* ================= CARD PREMIUM LOOK ================= */
+
+.card,
+.feature-card,
+.course-card,
+.stat-box {
+    border-radius: 18px;
+    padding: 24px;
+
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+
+    transition: all 0.3s ease;
+}
+
+/* PREMIUM HOVER EFFECT */
+.card:hover,
+.feature-card:hover,
+.course-card:hover,
+.stat-box:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+}
+
+
+/* ================= BUTTON PREMIUM ================= */
+
+.hero-btn,
+.btn,
+.cta-btn {
+    transition: all 0.25s ease;
+}
+
+.hero-btn.primary {
+    background: white;
+    color: #2563eb;
+}
+
+.hero-btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255,255,255,0.3);
+}
+
+.hero-btn.secondary {
+    border: 1px solid white;
+    color: white;
+}
+
+.hero-btn.secondary:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+
+/* ================= TYPOGRAPHY UPGRADE ================= */
+
+h1 {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+p {
+    font-size: 15px;
+}
+
+
+/* ================= CTA SECTION ================= */
+
+.cta-section {
+    text-align: center;
+}
+
+.cta-section h2 {
+    margin-bottom: 10px;
+}
+
+.cta-section p {
+    margin-bottom: 20px;
+}
+
+
+/* ================= NAVBAR PREMIUM ================= */
+
+.navbar {
+    backdrop-filter: blur(10px);
+}
+
+/* LOGO BALANCE */
+.logo img {
+    height: 32px;
+}
+
+
+/* ================= PROFILE DROPDOWN ================= */
+
+.dropdown {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+
+/* ================= FEATURE CENTER FIX ================= */
+
+.features-grid {
+    justify-items: center;
+}
+
+
+/* ================= COURSE GRID BALANCE ================= */
+
+.course-grid {
+    justify-items: center;
+}
+
+
+/* ================= RESPONSIVE PREMIUM ================= */
+
+@media (max-width: 768px) {
+
+    .hero-content {
+        padding: 30px 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 28px;
+    }
+
+    .feature-card,
+    .course-card {
+        max-width: 100%;
+    }
+}
