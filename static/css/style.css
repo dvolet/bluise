@@ -1024,3 +1024,120 @@ textarea {
         padding: 20px;
     }
       }
+/* =========================================================
+   60 - LMS MAIN LAYOUT (COURSERA STYLE)
+========================================================= */
+
+.lms-container {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 25px;
+
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+/* =========================================================
+   61 - MAIN CONTENT AREA
+========================================================= */
+
+.lms-main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* VIDEO / LESSON BOX */
+.lms-video {
+    background: var(--bg-card);
+    padding: 25px;
+    border-radius: 16px;
+
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* ACTION BUTTON AREA */
+.lms-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+/* =========================================================
+   62 - SIDEBAR (LESSONS)
+========================================================= */
+
+.lms-sidebar {
+    background: var(--bg-card);
+    border-radius: 16px;
+
+    padding: 20px;
+
+    border: 1px solid var(--border);
+
+    height: fit-content;
+    position: sticky;
+    top: 80px;
+}
+
+.lms-sidebar h3 {
+    margin-bottom: 15px;
+}
+
+/* LESSON LIST */
+.lesson-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* LESSON ITEM */
+.lesson-item {
+    padding: 10px 12px;
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+/* HOVER */
+.lesson-item:hover {
+    background: rgba(37,99,235,0.1);
+    color: var(--primary);
+}
+
+/* ACTIVE LESSON */
+.lesson-item.active {
+    background: var(--primary);
+    color: white;
+}
+
+
+/* =========================================================
+   63 - PROGRESS BAR (ENHANCED)
+========================================================= */
+
+.progress-bar {
+    margin-top: 10px;
+}
+
+
+/* =========================================================
+   64 - RESPONSIVE (MOBILE LMS)
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .lms-container {
+        grid-template-columns: 1fr;
+    }
+
+    .lms-sidebar {
+        position: relative;
+        top: 0;
+    }
+
+}
