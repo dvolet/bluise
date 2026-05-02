@@ -1144,3 +1144,44 @@ textarea {
 .input-wrapper span {
     display: inline-block;
 }
+/* =========================================================
+   PASSWORD FIELD FIX (MATCHES YOUR HTML)
+========================================================= */
+
+/* WRAPPER */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* INPUT */
+.password-wrapper input {
+    width: 100%;
+    height: 50px;
+
+    padding: 0 45px 0 14px; /* space for eye */
+
+    border-radius: 12px;
+    border: 1px solid var(--border);
+
+    box-sizing: border-box;
+}
+
+/* EYE ICON */
+.toggle-eye {
+    position: absolute;
+    top: 50%;
+    right: 14px;
+
+    transform: translateY(-50%);
+
+    font-size: 16px;
+    cursor: pointer;
+
+    z-index: 10;
+}
+
+/* PREVENT BREAK */
+.password-wrapper span {
+    display: inline-block;
+}
