@@ -1421,3 +1421,325 @@ textarea {
         height: 130px;
     }
 }
+/* =========================================================
+   🎓 ADD COURSE PAGE (PREMIUM SaaS FORM)
+========================================================= */
+
+.form-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.form-box {
+    width: 100%;
+    max-width: 600px;
+    background: var(--bg-card);
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+/* TITLE */
+.form-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+/* FORM LAYOUT */
+.form-box form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* INPUT + TEXTAREA (UNIFORM SIZE) */
+.form-box input,
+.form-box textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--bg-main);
+    font-size: 14px;
+    transition: 0.3s ease;
+}
+
+/* TEXTAREA HEIGHT CONTROL */
+.form-box textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* FOCUS EFFECT */
+.form-box input:focus,
+.form-box textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 6px rgba(37,99,235,0.25);
+    outline: none;
+}
+
+/* =========================================================
+   📁 FILE INPUT (MAKE IT LOOK CLEAN)
+========================================================= */
+
+.form-box input[type="file"] {
+    padding: 10px;
+    background: var(--bg-main);
+    border: 1px dashed var(--border);
+    cursor: pointer;
+}
+
+.form-box input[type="file"]::file-selector-button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* =========================================================
+   🚀 BUTTON (PREMIUM LOOK)
+========================================================= */
+
+.form-box button {
+    margin-top: 10px;
+    padding: 12px;
+    border-radius: 10px;
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    transition: 0.3s ease;
+}
+
+.form-box button:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+/* =========================================================
+   🔙 BACK LINK
+========================================================= */
+
+.form-box a {
+    text-align: center;
+    margin-top: 15px;
+    display: block;
+    font-size: 14px;
+}
+
+/* =========================================================
+   🌙 DARK MODE SUPPORT
+========================================================= */
+
+body.dark-mode .form-box {
+    background: var(--bg-card);
+}
+
+body.dark-mode .form-box input,
+body.dark-mode .form-box textarea {
+    background: var(--bg-soft);
+    color: var(--text-main);
+}
+/* =========================================================
+   🎓 COURSE VIEW PAGE (REAL LMS DESIGN)
+========================================================= */
+
+.course-view-container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 30px 20px;
+}
+
+/* BACK BUTTON */
+.back-btn {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: var(--primary);
+    font-weight: 500;
+}
+
+/* MAIN CARD */
+.course-view-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+}
+
+/* TITLE */
+.course-view-card h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+/* DESCRIPTION */
+.course-desc {
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+/* =========================================================
+   🎥 VIDEO PLAYER (CLEAN FRAME)
+========================================================= */
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-top: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* =========================================================
+   📘 PDF SECTION
+========================================================= */
+
+.course-view-card iframe {
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+/* LOCKED BOX */
+.course-view-card .locked-box {
+    text-align: center;
+    padding: 30px;
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    color: var(--text-muted);
+}
+
+/* =========================================================
+   📚 LESSON SYSTEM (REAL MODULE STYLE)
+========================================================= */
+
+.course-view-card h2 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+/* LESSON CARD */
+.course-view-card .course-card {
+    border-radius: 14px;
+    padding: 18px;
+    border: 1px solid var(--border);
+    background: var(--bg-main);
+    transition: 0.3s ease;
+}
+
+.course-view-card .course-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* LESSON VIDEO */
+.course-view-card iframe {
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+/* COMPLETE BUTTON */
+.complete-btn {
+    margin-top: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: #6366f1;
+    color: white;
+    font-size: 13px;
+}
+
+.complete-btn:hover {
+    background: #4f46e5;
+}
+
+/* =========================================================
+   📊 PROGRESS SYSTEM (PREMIUM LOOK)
+========================================================= */
+
+.progress-container {
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 14px;
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+}
+
+.progress-container p {
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.progress-bar {
+    height: 10px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #e5e7eb;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, #2563eb, #10b981);
+}
+
+/* =========================================================
+   🎯 ACTION BUTTONS
+========================================================= */
+
+.course-actions {
+    margin-top: 25px;
+}
+
+.course-actions .enroll-btn {
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.course-actions .enroll-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* =========================================================
+   🏆 COMPLETION BOX
+========================================================= */
+
+.course-actions div {
+    font-size: 15px;
+}
+
+/* =========================================================
+   📱 RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .course-view-card {
+        padding: 20px;
+    }
+
+    .course-view-card h1 {
+        font-size: 22px;
+    }
+
+    .video-wrapper {
+        border-radius: 10px;
+    }
+}
