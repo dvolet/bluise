@@ -361,3 +361,43 @@ section {
         grid-template-columns: 1fr;
     }
   }
+/* =========================================================
+   🔥 FINAL CENTER FIX (FEATURES + HOMEPAGE BALANCE)
+========================================================= */
+
+/* CENTER ALL GRID ITEMS */
+.features-grid,
+.course-grid,
+.stats-container {
+    justify-items: center;   /* centers each card */
+}
+
+/* LIMIT CARD WIDTH FOR PERFECT CENTER LOOK */
+.feature-card,
+.course-card,
+.stat-box {
+    width: 100%;
+    max-width: 320px;
+}
+
+/* CENTER SECTION HEADINGS + CONTENT */
+.features-section,
+.stats-section,
+.featured-section,
+.cta-section {
+    text-align: center;
+}
+
+/* FORCE GRID CONTAINER CENTERING */
+.features-grid {
+    margin: 0 auto;
+}
+
+/* FIX HERO TEXT SPACING */
+.hero-content h1 {
+    margin-bottom: 16px;
+}
+
+.hero-content p {
+    margin-bottom: 20px;
+}
