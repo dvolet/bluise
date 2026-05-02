@@ -1107,3 +1107,40 @@ textarea {
 .auth-box .form-group input {
     max-width: 100%;
 }
+/* =========================================================
+   EYE ICON HARD FIX (NEVER BREAK AGAIN)
+========================================================= */
+
+/* WRAPPER CONTROLS POSITION */
+.input-wrapper {
+    position: relative;
+    width: 100%;
+    display: block;
+}
+
+/* INPUT FULL WIDTH */
+.input-wrapper input {
+    width: 100%;
+    height: 50px;
+    padding: 0 45px 0 14px; /* space for eye */
+    box-sizing: border-box;
+}
+
+/* EYE ICON INSIDE INPUT */
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 14px;
+
+    transform: translateY(-50%);
+
+    font-size: 16px;
+    cursor: pointer;
+
+    z-index: 10;
+}
+
+/* 🚫 PREVENT IT FROM DROPPING */
+.input-wrapper span {
+    display: inline-block;
+}
