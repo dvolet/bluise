@@ -594,3 +594,359 @@ section {
     padding-left: 20px;
     padding-right: 20px;
 }
+/* =========================================================
+   15 - GLOBAL SPACING SYSTEM
+========================================================= */
+
+:root {
+    --space-1: 6px;
+    --space-2: 12px;
+    --space-3: 18px;
+    --space-4: 24px;
+    --space-5: 40px;
+}
+
+h1, h2, h3 {
+    margin-bottom: var(--space-2);
+}
+
+p {
+    margin-bottom: var(--space-2);
+    line-height: 1.7;
+}
+
+section {
+    padding: var(--space-5) var(--space-3);
+}
+
+
+/* =========================================================
+   16 - HERO (GLASS + CENTER FIX)
+========================================================= */
+
+.hero-section,
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 750px;
+    padding: 40px;
+    border-radius: 18px;
+
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(16px);
+
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+
+/* =========================================================
+   17 - GRID SYSTEM
+========================================================= */
+
+.features-grid,
+.course-grid,
+.stats-container {
+    display: grid;
+    gap: var(--space-4);
+}
+
+.features-grid,
+.course-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.stats-container {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+
+/* =========================================================
+   18 - CARD SYSTEM
+========================================================= */
+
+.course-card,
+.feature-card,
+.stat-box,
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    transition: 0.3s ease;
+}
+
+.course-card:hover,
+.feature-card:hover,
+.stat-box:hover {
+    transform: translateY(-5px);
+}
+
+
+/* =========================================================
+   19 - BUTTON SYSTEM
+========================================================= */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.btn-primary {
+    background: #2563eb;
+    color: white;
+}
+
+.btn-success {
+    background: #10b981;
+    color: white;
+}
+
+.btn-primary:hover,
+.btn-success:hover {
+    transform: scale(1.05);
+}
+
+/* FIX EXISTING BUTTONS */
+.enroll-btn {
+    background: #10b981;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 8px;
+}
+
+.complete-btn {
+    background: #6366f1;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+
+/* =========================================================
+   20 - DASHBOARD SYSTEM
+========================================================= */
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: var(--space-4);
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: var(--space-4);
+}
+
+.dashboard-main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+
+/* =========================================================
+   21 - SIDEBAR
+========================================================= */
+
+.sidebar {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar-nav a {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.sidebar-nav a:hover {
+    background: rgba(37,99,235,0.1);
+}
+
+
+/* =========================================================
+   22 - PROFILE & DROPDOWN FIX
+========================================================= */
+
+.nav-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-menu {
+    position: relative;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 45px;
+    right: 0;
+    width: 170px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.profile-menu:hover .dropdown {
+    display: block;
+}
+
+.dropdown a {
+    display: block;
+    padding: 10px;
+    border-bottom: 1px solid var(--border);
+}
+
+.dropdown a:last-child {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   23 - PROGRESS BAR (FIXED)
+========================================================= */
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, #2563eb, #10b981);
+    transition: width 0.5s ease;
+}
+
+
+/* =========================================================
+   24 - TYPOGRAPHY
+========================================================= */
+
+h1 { font-size: 36px; }
+h2 { font-size: 26px; }
+h3 { font-size: 20px; }
+
+p {
+    color: var(--text-light);
+}
+
+
+/* =========================================================
+   25 - CONTAINER SYSTEM
+========================================================= */
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 var(--space-3);
+}
+
+
+/* =========================================================
+   26 - HERO BUTTON FIX (CENTER + VISIBLE)
+========================================================= */
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.hero-btn {
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.hero-btn.primary {
+    background: #2563eb;
+    color: white;
+}
+
+.hero-btn.secondary {
+    border: 1px solid #2563eb;
+    color: #2563eb;
+}
+
+
+/* =========================================================
+   27 - CTA BUTTON FIX
+========================================================= */
+
+.cta-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    background: #10b981;
+    color: white;
+    border-radius: 8px;
+}
+
+
+/* =========================================================
+   28 - LOGO FIX
+========================================================= */
+
+.logo img {
+    height: 34px;
+}
+
+
+/* =========================================================
+   29 - DARK MODE SAFE FIX
+========================================================= */
+
+body.dark-mode {
+    background: var(--bg-main);
+    color: var(--text-main);
+}
+
+body.dark-mode .card,
+body.dark-mode .course-card,
+body.dark-mode .feature-card,
+body.dark-mode .stat-box {
+    background: var(--bg-card);
+    color: var(--text-main);
+}
+
+
+/* =========================================================
+   30 - RESPONSIVE FIX
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 0;
+    }
+}
