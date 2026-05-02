@@ -231,4 +231,133 @@ section {
 
 /* =========================================================
    08 - BUTTON SYSTEM
-=========================================================
+========================================================= */
+
+.btn {
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-success {
+    background: #10b981;
+    color: white;
+}
+
+
+/* =========================================================
+   09 - PROGRESS BAR (FIXED)
+========================================================= */
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--bg-soft);
+    border-radius: 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, #2563eb, #10b981);
+}
+
+
+/* =========================================================
+   10 - PROFILE + DROPDOWN FIX
+========================================================= */
+
+.nav-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+
+.profile-menu {
+    position: relative;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 45px;
+    right: 0;
+    width: 160px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.profile-menu:hover .dropdown {
+    display: block;
+}
+
+.dropdown a {
+    display: block;
+    padding: 10px;
+}
+
+
+/* =========================================================
+   11 - DASHBOARD (CLEAN SaaS LOOK)
+========================================================= */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 20px;
+}
+
+.sidebar {
+    background: var(--bg-card);
+    padding: 20px;
+    border-radius: 14px;
+}
+
+.dashboard-main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+/* =========================================================
+   12 - FEATURES CENTER FIX
+========================================================= */
+
+.features-section {
+    text-align: center;
+}
+
+.feature-card {
+    max-width: 300px;
+    margin: auto;
+}
+
+
+/* =========================================================
+   13 - CTA BUTTON
+========================================================= */
+
+.cta-btn {
+    padding: 12px 20px;
+    background: #10b981;
+    color: white;
+    border-radius: 8px;
+}
+
+
+/* =========================================================
+   14 - RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+  }
