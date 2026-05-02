@@ -1337,3 +1337,101 @@ body.dark-mode input {
         transform: translateY(0);
     }
 }
+/* =========================================================
+   53 - COURSE PAGE CENTER FIX (CRITICAL)
+========================================================= */
+
+/* Wrap your course content nicely */
+.course-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+/* Ensure inner content is centered */
+.course-container .card,
+.course-container .course-card {
+    width: 100%;
+}
+
+/* Fix random left alignment issues */
+.main-content {
+    display: flex;
+    justify-content: center;
+}
+
+
+/* =========================================================
+   54 - GLOBAL FORM ALIGNMENT FIX
+========================================================= */
+
+/* Ensure ALL form groups behave correctly */
+.form-group {
+    width: 100%;
+}
+
+/* CRITICAL: force wrapper to stay inline */
+.input-wrapper {
+    position: relative;
+    width: 100%;
+    display: block;
+}
+
+/* INPUT FULL WIDTH ALWAYS */
+.input-wrapper input {
+    width: 100%;
+    height: 50px;
+    padding: 0 45px 0 12px;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   55 - EYE ICON HARD FIX (NEVER DROP AGAIN)
+========================================================= */
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+
+    transform: translateY(-50%);
+
+    font-size: 16px;
+    cursor: pointer;
+
+    z-index: 5;
+}
+
+/* PREVENT ICON FROM BREAKING LINE */
+.input-wrapper span {
+    display: inline-block;
+}
+
+
+/* =========================================================
+   56 - FORM STRUCTURE ENFORCER (VERY IMPORTANT)
+========================================================= */
+
+/* Prevent stacking bug */
+.auth-box form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Fix weird spacing issues */
+.auth-box input {
+    display: block;
+}
+
+
+/* =========================================================
+   57 - MOBILE SAFETY FIX
+========================================================= */
+
+@media (max-width: 480px) {
+    .course-container {
+        padding: 15px;
+    }
+}
