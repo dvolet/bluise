@@ -2,33 +2,75 @@
 
 {% block content %}
 
-<div class="dashboard-container">
+<div class="admin-container">
 
     <h2>👥 User Management</h2>
+    <p class="sub">Monitor and control platform users</p>
 
-    <div style="display:flex; flex-direction:column; gap:15px;">
+    <div class="table-wrapper">
 
-        {% for user in users %}
+        <table class="admin-table">
 
-        <div style="padding:15px; border:1px solid #ddd; border-radius:10px;">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Email</th>
+                    <th>Courses</th>
+                    <th>Progress</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
 
-            <h3>{{ user.email }}</h3>
+            <tbody>
 
-            <p>User ID: {{ user.id }}</p>
+                {% for user in users %}
+                <tr>
 
-            <div style="margin-top:10px;">
+                    <td>
+                        <div class="user-info">
+                            <img src="{{ url_for('static', filename='images/' + (user.profile_pic or 'default.png')) }}">
+                            <span>{{ user.username }}</span>
+                        </div>
+                    </td>
 
-                <a href="/admin/user/delete/{{ user.id }}" 
-                   style="background:#ef4444; color:white; padding:8px 12px; border-radius:6px;"
-                   onclick="return confirm('Delete user?')">
-                    Delete
-                </a>
+                    <td>{{ user.email }}</td>
 
-            </div>
+                    <td>{{ user.total_courses }}</td>
 
-        </div>
+                    <td>
+                        <div class="mini-progress">
+                            <div class="mini-fill" style="width: {{ user.avg_progress }}%;"></div>
+                        </div>
+                        <small>{{ user.avg_progress|round(0) }}%</small>
+                    </td>
 
-        {% endfor %}
+                    <td>
+                        <span class="status {{ user.status }}">
+                            {{ user.status }}
+                        </span>
+                    </td>
+
+                    <td class="actions">
+
+                        <a href="/admin/user/toggle/{{ user.id }}" class="btn small">
+                            🔄 Toggle
+                        </a>
+
+                        <a href="/admin/user/delete/{{ user.id }}"
+                           class="btn danger small"
+                           onclick="return confirm('Delete this user?');">
+                            ❌ Delete
+                        </a>
+
+                    </td>
+
+                </tr>
+                {% endfor %}
+
+            </tbody>
+
+        </table>
 
     </div>
 
