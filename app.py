@@ -1229,6 +1229,7 @@ def logout():
 # =========================
 
 @app.route('/admin/users')
+@app.route('/admin/users')
 def admin_users():
 
     if session.get('email') != ADMIN_EMAIL:
@@ -1242,10 +1243,14 @@ def admin_users():
             u.username,
             u.email,
             u.profile_pic,
-            COALESCE(u.status, 'active') as status,
 
+            -- safe default status (no database dependency)
+            'active' as status,
+
+            -- number of courses enrolled
             COUNT(DISTINCT e.course_id) as total_courses,
 
+            -- average progress (0–100)
             COALESCE(AVG(p.progress), 0) as avg_progress
 
         FROM users u
