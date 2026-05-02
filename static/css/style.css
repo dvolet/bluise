@@ -613,3 +613,29 @@ p {
         max-width: 100%;
     }
 }
+/* =========================================================
+   🔥 FIX: HAMBURGER MENU SHOWING BEHIND HERO
+========================================================= */
+
+/* Ensure navbar stays above everything */
+.navbar {
+    position: relative;
+    z-index: 9999;
+}
+
+/* Force menu to appear above hero + glass effects */
+.nav-links {
+    z-index: 10000;
+}
+
+/* Hero should NOT block clicks or overlap menu */
+.hero-section,
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Fix for backdrop-filter creating stacking issue */
+.hero-content {
+    isolation: isolate;
+}
