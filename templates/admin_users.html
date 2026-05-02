@@ -6,23 +6,20 @@
 
     <h2>👥 User Management</h2>
 
-    <div class="course-grid">
+    <div style="display:flex; flex-direction:column; gap:15px;">
 
         {% for user in users %}
 
-        <div class="card">
+        <div style="padding:15px; border:1px solid #ddd; border-radius:10px;">
 
             <h3>{{ user.email }}</h3>
 
-            <p>🟢 Active</p>
+            <p>User ID: {{ user.id }}</p>
 
-            <div class="btn-group">
+            <div style="margin-top:10px;">
 
-                <a href="/admin/user/toggle/{{ user.id }}" class="btn btn-primary">
-                    Toggle
-                </a>
-
-                <a href="/admin/user/delete/{{ user.id }}" class="btn btn-danger"
+                <a href="/admin/user/delete/{{ user.id }}" 
+                   style="background:#ef4444; color:white; padding:8px 12px; border-radius:6px;"
                    onclick="return confirm('Delete user?')">
                     Delete
                 </a>
