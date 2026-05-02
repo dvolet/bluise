@@ -1,0 +1,1 @@
+status = db.Column(db.String(20), default="active")
