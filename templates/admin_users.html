@@ -30,24 +30,27 @@
                     <td>
                         <div class="user-info">
                             <img src="{{ url_for('static', filename='images/' + (user.profile_pic or 'default.png')) }}">
-                            <span>{{ user.username }}</span>
+                            <span>{{ user.username or '' }}</span>
                         </div>
                     </td>
 
-                    <td>{{ user.email }}</td>
+                    <td>{{ user.email or '' }}</td>
 
-                    <td>{{ user.total_courses }}</td>
+                    <td>{{ user.total_courses or 0 }}</td>
 
                     <td>
                         <div class="mini-progress">
-                            <div class="mini-fill" style="width: {{ user.avg_progress }}%;"></div>
+                            <div class="mini-fill" style="width: {{ user.avg_progress or 0 }}%;"></div>
                         </div>
-                        <small>{{ user.avg_progress|round(0) }}%</small>
+
+                        <small>
+                            {{ (user.avg_progress or 0) | float | round(0) }}%
+                        </small>
                     </td>
 
                     <td>
-                        <span class="status {{ user.status }}">
-                            {{ user.status }}
+                        <span class="status {{ user.status or 'active' }}">
+                            {{ user.status or 'active' }}
                         </span>
                     </td>
 
