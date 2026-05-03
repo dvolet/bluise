@@ -1264,29 +1264,17 @@ def admin_users():
     if session.get('email') != ADMIN_EMAIL:
         return redirect('/login')
 
-    try:
-        conn = get_connection()
+    conn = get_connection()
 
-        users = conn.execute("""
-            SELECT 
-                u.id,
-                u.username,
-                u.email,
-                u.profile_pic,
+    users = conn.execute("""
+        SELECT id, username, email, profile_pic, 'active' as status
+        FROM users
+        ORDER BY id DESC
+    """).fetchall()
 
-                COALESCE(u.status, 'active') as status
+    conn.close()
 
-            FROM users u
-            ORDER BY u.id DESC
-        """).fetchall()
-
-        conn.close()
-
-        return render_template('admin_users.html', users=users)
-
-    except Exception as e:
-        print("ADMIN USERS ERROR:", e)
-        return "Server error loading users"
+    return render_template('admin_users.html', users=users)
     
 @app.route('/admin/user/toggle/<int:user_id>')
 def toggle_user(user_id):
@@ -1300,19 +1288,24 @@ def toggle_user(user_id):
         SELECT status FROM users WHERE id=?
     """, (user_id,)).fetchone()
 
-    current_status = user['status'] if user and user['status'] else 'active'
+    if not user:
+        conn.close()
+        return "User not found"
 
-    new_status = "disabled" if current_status == "active" else "active"
+    new_status = "disabled" if user['status'] == "active" else "active"
 
     conn.execute("""
-        UPDATE users SET status=? WHERE id=?
+        UPDATE users
+        SET status=?
+        WHERE id=?
     """, (new_status, user_id))
 
     conn.commit()
     conn.close()
 
     return redirect('/admin/users')
-  
+
+
 @app.route('/admin/user/delete/<int:user_id>')
 def delete_user(user_id):
 
