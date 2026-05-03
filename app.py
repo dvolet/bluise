@@ -1281,7 +1281,10 @@ def toggle_user(user_id):
         SELECT status FROM users WHERE id=?
     """, (user_id,)).fetchone()
 
-    new_status = "disabled" if user['status'] == "active" else "active"
+    # if user has no status column, assume active
+    current_status = user['status'] if user and 'status' in user.keys() else 'active'
+
+    new_status = "disabled" if current_status == "active" else "active"
 
     conn.execute("""
         UPDATE users SET status=? WHERE id=?
