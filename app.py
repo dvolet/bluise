@@ -87,7 +87,6 @@ This link expires in 10 minutes.
 
     except Exception as e:
         print("❌ EMAIL ERROR:", e)   
-
 def fix_users_table():
     conn = get_connection()
 
@@ -861,7 +860,7 @@ def quick_add_lesson(course_id):
     return redirect(request.referrer)
 
 @app.route('/admin/delete-course/<int:course_id>')
-def delete_course_route(course_id):  # ✅ renamed here
+def delete_course_route(course_id):
 
     if session.get('email') != ADMIN_EMAIL:
         return "Access Denied"
@@ -869,20 +868,24 @@ def delete_course_route(course_id):  # ✅ renamed here
     try:
         conn = get_connection()
 
-        # delete lessons first
+        # 🧹 delete related data FIRST
         conn.execute("DELETE FROM lessons WHERE course_id=?", (course_id,))
+        conn.execute("DELETE FROM enrollments WHERE course_id=?", (course_id,))
+        conn.execute("DELETE FROM progress WHERE course_id=?", (course_id,))
+        conn.execute("DELETE FROM lesson_progress WHERE lesson_id IN (SELECT id FROM lessons WHERE course_id=?)", (course_id,))
+        conn.execute("DELETE FROM certificates WHERE course_id=?", (course_id,))
 
-        # delete course
+        # 🗑️ delete course itself
         conn.execute("DELETE FROM courses WHERE id=?", (course_id,))
 
         conn.commit()
         conn.close()
 
-        flash("✅ Course deleted successfully")
+        flash("Course deleted successfully")
         return redirect('/dashboard')
 
     except Exception as e:
-        print("DELETE ERROR:", e)
+        print("DELETE COURSE ERROR:", e)
         return "Error deleting course"
 
 @app.route('/transcript')
