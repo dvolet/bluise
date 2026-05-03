@@ -189,7 +189,7 @@ def login():
         try:
             conn = get_connection()
 
-            # 🔍 get full user row safely
+            # 🔍 get full user row
             db_user = conn.execute("""
                 SELECT * FROM users WHERE id=?
             """, (user['id'],)).fetchone()
@@ -200,11 +200,8 @@ def login():
                 flash("User not found")
                 return redirect('/login')
 
-            # 🔐 SAFE STATUS CHECK
-            try:
-                status = db_user['status']
-            except:
-                status = 'active'
+            # ✅ CLEAN & SAFE STATUS CHECK
+            status = db_user['status'] if 'status' in db_user.keys() else 'active'
 
             if status == 'disabled':
                 flash("Your account has been disabled by admin.")
