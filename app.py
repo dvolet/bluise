@@ -1237,32 +1237,29 @@ def admin_users():
     conn = get_connection()
 
     users = conn.execute("""
-        SELECT 
-            u.id,
-            u.username,
-            u.email,
-            u.profile_pic,
+    SELECT 
+        u.id,
+        u.username,
+        u.email,
+        u.profile_pic,
 
-            -- safe default status (no database dependency)
-            'active' as status,
+        COALESCE(u.status, 'active') as status,
 
-            -- number of courses enrolled
-            COUNT(DISTINCT e.course_id) as total_courses,
+        COUNT(DISTINCT e.course_id) as total_courses,
 
-            -- average progress (0–100)
-            COALESCE(AVG(p.progress), 0) as avg_progress
+        COALESCE(AVG(p.progress), 0) as avg_progress
 
-        FROM users u
+    FROM users u
 
-        LEFT JOIN enrollments e 
-            ON u.id = e.user_id
+    LEFT JOIN enrollments e 
+        ON u.id = e.user_id
 
-        LEFT JOIN progress p 
-            ON u.id = p.user_id
+    LEFT JOIN progress p 
+        ON u.id = p.user_id
 
-        GROUP BY u.id
-        ORDER BY u.id DESC
-    """).fetchall()
+    GROUP BY u.id
+    ORDER BY u.id DESC
+""").fetchall()
 
     conn.close()
 
