@@ -1,18 +1,18 @@
-import sqlite3
-
 # =========================
 # DATABASE CONNECTION
 # =========================
-import os
-
 def get_connection():
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    db_path = os.path.join(BASE_DIR, "..", "database.db")
+    import os
+    import sqlite3
 
-    conn = sqlite3.connect(db_path)
+    # Render persistent disk path
+    db_path = os.getenv("DB_PATH", "/var/data/database.db")
+
+    os.makedirs(os.path.dirname(db_path), exist_ok=True)
+
+    conn = sqlite3.connect(db_path, check_same_thread=False)
     conn.row_factory = sqlite3.Row
     return conn
-
 
 # =========================
 # CREATE TABLES (SAFE MIGRATION VERSION)
