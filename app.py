@@ -1264,7 +1264,8 @@ def admin_users():
     conn = get_connection()
 
     users = conn.execute("""
-        SELECT id, username, email, profile_pic, 'active' as status
+        SELECT id, username, email, profile_pic,
+        COALESCE(status, 'active') AS status
         FROM users
         ORDER BY id DESC
     """).fetchall()
@@ -1282,14 +1283,17 @@ def toggle_user(user_id):
     conn = get_connection()
 
     user = conn.execute("""
-        SELECT status FROM users WHERE id=?
+        SELECT COALESCE(status, 'active') as status
+        FROM users
+        WHERE id=?
     """, (user_id,)).fetchone()
 
     if not user:
         conn.close()
         return "User not found"
 
-    new_status = "disabled" if user['status'] == "active" else "active"
+    current_status = user['status']
+    new_status = 'disabled' if current_status == 'active' else 'active'
 
     conn.execute("""
         UPDATE users
@@ -1301,6 +1305,7 @@ def toggle_user(user_id):
     conn.close()
 
     return redirect('/admin/users')
+
 
 
 @app.route('/admin/user/delete/<int:user_id>')
