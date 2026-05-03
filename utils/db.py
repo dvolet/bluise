@@ -5,10 +5,9 @@ def get_connection():
     import os
     import sqlite3
 
-    # Render persistent disk path
-    db_path = os.getenv("DB_PATH", "/var/data/database.db")
-
-    os.makedirs(os.path.dirname(db_path), exist_ok=True)
+    # Use Render default writable directory
+    base_dir = os.path.abspath(os.path.dirname(__file__))
+    db_path = os.path.join(base_dir, "database.db")
 
     conn = sqlite3.connect(db_path, check_same_thread=False)
     conn.row_factory = sqlite3.Row
