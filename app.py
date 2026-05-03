@@ -1292,30 +1292,33 @@ def admin_users():
 
         users = conn.execute("""
             SELECT 
-                id,
-                username,
-                email,
-                profile_pic,
-                status
-            FROM users
-            ORDER BY id DESC
+                u.id,
+                u.username,
+                u.email,
+                u.profile_pic,
+                COALESCE(u.status, 'active') AS status,
+
+                -- total enrolled courses
+                COALESCE((
+                    SELECT COUNT(*)
+                    FROM enrollments e
+                    WHERE e.user_id = u.id
+                ), 0) AS total_courses,
+
+                -- average progress across courses
+                COALESCE((
+                    SELECT AVG(p.progress)
+                    FROM progress p
+                    WHERE p.user_id = u.id
+                ), 0) AS avg_progress
+
+            FROM users u
+            ORDER BY u.id DESC
         """).fetchall()
 
         conn.close()
 
-        # ✅ SAFE CLEANING (FIX NULL + UNDEFINED ERRORS)
-        safe_users = []
-
-        for u in users:
-            safe_users.append({
-                "id": u["id"],
-                "username": u["username"] or "",
-                "email": u["email"] or "",
-                "profile_pic": u["profile_pic"] if u["profile_pic"] else "default.png",
-                "status": u["status"] if u["status"] else "active"
-            })
-
-        return render_template('admin_users.html', users=safe_users)
+        return render_template('admin_users.html', users=users)
 
     except Exception as e:
         print("ADMIN USERS ERROR:", e)
