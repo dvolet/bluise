@@ -1264,36 +1264,29 @@ def admin_users():
     if session.get('email') != ADMIN_EMAIL:
         return redirect('/login')
 
-    conn = get_connection()
+    try:
+        conn = get_connection()
 
-    users = conn.execute("""
-    SELECT 
-        u.id,
-        u.username,
-        u.email,
-        u.profile_pic,
+        users = conn.execute("""
+            SELECT 
+                u.id,
+                u.username,
+                u.email,
+                u.profile_pic,
 
-        COALESCE(u.status, 'active') as status,
+                COALESCE(u.status, 'active') as status
 
-        COUNT(DISTINCT e.course_id) as total_courses,
+            FROM users u
+            ORDER BY u.id DESC
+        """).fetchall()
 
-        COALESCE(AVG(p.progress), 0) as avg_progress
+        conn.close()
 
-    FROM users u
+        return render_template('admin_users.html', users=users)
 
-    LEFT JOIN enrollments e 
-        ON u.id = e.user_id
-
-    LEFT JOIN progress p 
-        ON u.id = p.user_id
-
-    GROUP BY u.id
-    ORDER BY u.id DESC
-""").fetchall()
-
-    conn.close()
-
-    return render_template('admin_users.html', users=users)
+    except Exception as e:
+        print("ADMIN USERS ERROR:", e)
+        return "Server error loading users"
     
 @app.route('/admin/user/toggle/<int:user_id>')
 def toggle_user(user_id):
