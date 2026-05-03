@@ -182,43 +182,15 @@ def login():
 
         user = login_user(email, password)
 
-        if not user:
-            flash("Invalid login details")
-            return redirect('/login')
-
-        try:
-            conn = get_connection()
-
-            # 🔍 get full user row
-            db_user = conn.execute("""
-                SELECT * FROM users WHERE id=?
-            """, (user['id'],)).fetchone()
-
-            conn.close()
-
-            if not db_user:
-                flash("User not found")
-                return redirect('/login')
-
-            # ✅ CLEAN & SAFE STATUS CHECK
-            status = db_user['status'] if 'status' in db_user.keys() else 'active'
-
-            if status == 'disabled':
-                flash("Your account has been disabled by admin.")
-                return redirect('/login')
-
-            # ✅ LOGIN SUCCESS
-            session['user_id'] = db_user['id']
-            session['username'] = db_user['username']
-            session['email'] = db_user['email']
-            session['profile_pic'] = db_user['profile_pic'] or 'default.png'
+        if user:
+            session['user_id'] = user['id']
+            session['username'] = user['username']
+            session['email'] = user['email']
+            session['profile_pic'] = user['profile_pic'] or 'default.png'
 
             return redirect(url_for('dashboard'))
 
-        except Exception as e:
-            print("LOGIN ERROR:", e)
-            flash("Server error. Please try again.")
-            return redirect('/login')
+        flash("Invalid login details")
 
     return render_template("login.html")
 # =========================
