@@ -1271,42 +1271,25 @@ def toggle_user(user_id):
     if session.get('email') != ADMIN_EMAIL:
         return redirect('/login')
 
-    try:
-        conn = get_connection()
+    conn = get_connection()
 
-        user = conn.execute("""
-            SELECT * FROM users WHERE id=?
-        """, (user_id,)).fetchone()
+    user = conn.execute("""
+        SELECT status FROM users WHERE id=?
+    """, (user_id,)).fetchone()
 
-        # 🚨 If user not found → prevent crash
-        if not user:
-            conn.close()
-            return "User not found"
+    current_status = user['status'] if user and user['status'] else 'active'
 
-        # 🚨 If status column doesn't exist → don't crash
-        try:
-            current_status = user['status']
-        except:
-            current_status = 'active'
+    new_status = "disabled" if current_status == "active" else "active"
 
-        new_status = "disabled" if current_status == "active" else "active"
+    conn.execute("""
+        UPDATE users SET status=? WHERE id=?
+    """, (new_status, user_id))
 
-        # 🚨 Try update safely
-        try:
-            conn.execute("""
-                UPDATE users SET status=? WHERE id=?
-            """, (new_status, user_id))
-            conn.commit()
-        except Exception as e:
-            print("STATUS COLUMN ERROR:", e)
+    conn.commit()
+    conn.close()
 
-        conn.close()
-
-        return redirect('/admin/users')
-
-    except Exception as e:
-        return f"TOGGLE ERROR: {str(e)}"
-
+    return redirect('/admin/users')
+  
 @app.route('/admin/user/delete/<int:user_id>')
 def delete_user(user_id):
 
