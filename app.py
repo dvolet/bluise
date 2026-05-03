@@ -1236,7 +1236,8 @@ def admin_users():
     conn = get_connection()
 
     users = conn.execute("""
-        SELECT id, username, email, profile_pic
+        SELECT id, username, email, profile_pic,
+               COALESCE(status, 'active') as status
         FROM users
         ORDER BY id DESC
     """).fetchall()
@@ -1253,8 +1254,6 @@ def toggle_user(user_id):
 
     # does nothing yet
     return redirect('/admin/users')
-
-
 
 @app.route('/admin/user/delete/<int:user_id>')
 def delete_user(user_id):
