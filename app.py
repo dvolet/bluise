@@ -182,36 +182,48 @@ def login():
 
         user = login_user(email, password)
 
-        if user:
+        if not user:
+            flash("Invalid login details")
+            return redirect('/login')
 
-            # 🔴 CHECK IF USER IS DISABLED (NEW SAAS FEATURE)
+        try:
             conn = get_connection()
 
+            # 🔍 get full user row safely
             db_user = conn.execute("""
-                SELECT status FROM users WHERE id=?
+                SELECT * FROM users WHERE id=?
             """, (user['id'],)).fetchone()
 
             conn.close()
 
-            # default to active if column missing
-            status = db_user['status'] if db_user and db_user['status'] else 'active'
+            if not db_user:
+                flash("User not found")
+                return redirect('/login')
+
+            # 🔐 SAFE STATUS CHECK
+            try:
+                status = db_user['status']
+            except:
+                status = 'active'
 
             if status == 'disabled':
                 flash("Your account has been disabled by admin.")
                 return redirect('/login')
 
             # ✅ LOGIN SUCCESS
-            session['user_id'] = user['id']
-            session['username'] = user['username']
-            session['email'] = user['email']
-            session['profile_pic'] = user['profile_pic'] or 'default.png'
+            session['user_id'] = db_user['id']
+            session['username'] = db_user['username']
+            session['email'] = db_user['email']
+            session['profile_pic'] = db_user['profile_pic'] or 'default.png'
 
             return redirect(url_for('dashboard'))
 
-        flash("Invalid login details")
+        except Exception as e:
+            print("LOGIN ERROR:", e)
+            flash("Server error. Please try again.")
+            return redirect('/login')
 
     return render_template("login.html")
-
 # =========================
 # FORGOT PASSWORD
 # =========================
