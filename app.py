@@ -1291,16 +1291,31 @@ def admin_users():
         conn = get_connection()
 
         users = conn.execute("""
-            SELECT id, username, email,
-                   COALESCE(profile_pic, 'default.png') as profile_pic,
-                   COALESCE(status, 'active') as status
+            SELECT 
+                id,
+                username,
+                email,
+                profile_pic,
+                status
             FROM users
             ORDER BY id DESC
         """).fetchall()
 
         conn.close()
 
-        return render_template('admin_users.html', users=users)
+        # ✅ SAFE CLEANING (FIX NULL + UNDEFINED ERRORS)
+        safe_users = []
+
+        for u in users:
+            safe_users.append({
+                "id": u["id"],
+                "username": u["username"] or "",
+                "email": u["email"] or "",
+                "profile_pic": u["profile_pic"] if u["profile_pic"] else "default.png",
+                "status": u["status"] if u["status"] else "active"
+            })
+
+        return render_template('admin_users.html', users=safe_users)
 
     except Exception as e:
         print("ADMIN USERS ERROR:", e)
