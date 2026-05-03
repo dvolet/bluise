@@ -1291,8 +1291,9 @@ def admin_users():
         conn = get_connection()
 
         users = conn.execute("""
-            SELECT id, username, email, profile_pic,
-            COALESCE(status, 'active') AS status
+            SELECT id, username, email,
+                   COALESCE(profile_pic, 'default.png') as profile_pic,
+                   COALESCE(status, 'active') as status
             FROM users
             ORDER BY id DESC
         """).fetchall()
@@ -1303,7 +1304,7 @@ def admin_users():
 
     except Exception as e:
         print("ADMIN USERS ERROR:", e)
-        return "Error loading users"
+        return f"Error loading users: {e}"
     
 @app.route('/admin/user/toggle/<int:user_id>')
 def toggle_user(user_id):
