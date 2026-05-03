@@ -189,9 +189,9 @@ def login():
         try:
             conn = get_connection()
 
+            # 🔍 get full user row
             db_user = conn.execute("""
-                SELECT *, COALESCE(status, 'active') as status
-                FROM users WHERE id=?
+                SELECT * FROM users WHERE id=?
             """, (user['id'],)).fetchone()
 
             conn.close()
@@ -200,10 +200,14 @@ def login():
                 flash("User not found")
                 return redirect('/login')
 
-            if db_user['status'] == 'disabled':
+            # ✅ CLEAN & SAFE STATUS CHECK
+            status = db_user['status'] if 'status' in db_user.keys() else 'active'
+
+            if status == 'disabled':
                 flash("Your account has been disabled by admin.")
                 return redirect('/login')
 
+            # ✅ LOGIN SUCCESS
             session['user_id'] = db_user['id']
             session['username'] = db_user['username']
             session['email'] = db_user['email']
@@ -217,6 +221,7 @@ def login():
             return redirect('/login')
 
     return render_template("login.html")
+
 # =========================
 # FORGOT PASSWORD
 # =========================
@@ -1247,6 +1252,7 @@ def logout():
     session.clear()
     flash("Logged out successfully!")
     return redirect(url_for('home'))
+
 # =========================
 # ADMIN - USER MANAGEMENT
 # =========================
@@ -1257,18 +1263,23 @@ def admin_users():
     if session.get('email') != ADMIN_EMAIL:
         return redirect('/login')
 
-    conn = get_connection()
+    try:
+        conn = get_connection()
 
-    users = conn.execute("""
-        SELECT id, username, email, profile_pic,
-               COALESCE(status, 'active') as status
-        FROM users
-        ORDER BY id DESC
-    """).fetchall()
+        users = conn.execute("""
+            SELECT id, username, email, profile_pic,
+            COALESCE(status, 'active') AS status
+            FROM users
+            ORDER BY id DESC
+        """).fetchall()
 
-    conn.close()
+        conn.close()
 
-    return render_template('admin_users.html', users=users)
+        return render_template('admin_users.html', users=users)
+
+    except Exception as e:
+        print("ADMIN USERS ERROR:", e)
+        return "Error loading users"
     
 @app.route('/admin/user/toggle/<int:user_id>')
 def toggle_user(user_id):
@@ -1276,32 +1287,32 @@ def toggle_user(user_id):
     if session.get('email') != ADMIN_EMAIL:
         return redirect('/login')
 
-    try:
-        conn = get_connection()
+    conn = get_connection()
 
-        user = conn.execute("""
-            SELECT COALESCE(status, 'active') as status
-            FROM users WHERE id=?
-        """, (user_id,)).fetchone()
+    user = conn.execute("""
+        SELECT COALESCE(status, 'active') as status
+        FROM users
+        WHERE id=?
+    """, (user_id,)).fetchone()
 
-        if not user:
-            conn.close()
-            return "User not found"
-
-        new_status = "disabled" if user['status'] == "active" else "active"
-
-        conn.execute("""
-            UPDATE users SET status=? WHERE id=?
-        """, (new_status, user_id))
-
-        conn.commit()
+    if not user:
         conn.close()
+        return "User not found"
 
-        return redirect('/admin/users')
+    current_status = user['status']
+    new_status = 'disabled' if current_status == 'active' else 'active'
 
-    except Exception as e:
-        print("TOGGLE ERROR:", e)
-        return "Error toggling user"
+    conn.execute("""
+        UPDATE users
+        SET status=?
+        WHERE id=?
+    """, (new_status, user_id))
+
+    conn.commit()
+    conn.close()
+
+    return redirect('/admin/users')
+
 
 @app.route('/admin/user/delete/<int:user_id>')
 def delete_user(user_id):
@@ -1319,6 +1330,7 @@ def delete_user(user_id):
     conn.close()
 
     return redirect('/admin/users')
+    
 # =========================
 # RUN APP
 # =========================
