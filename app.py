@@ -87,6 +87,30 @@ This link expires in 10 minutes.
 
     except Exception as e:
         print("❌ EMAIL ERROR:", e)   
+
+def fix_users_table():
+    conn = get_connection()
+
+    columns = conn.execute("PRAGMA table_info(users)").fetchall()
+    column_names = [col['name'] for col in columns]
+
+    # ✅ Add status column if missing
+    if 'status' not in column_names:
+        conn.execute("ALTER TABLE users ADD COLUMN status TEXT DEFAULT 'active'")
+        print("✅ Added missing 'status' column")
+
+    # ✅ Add profile_pic if missing
+    if 'profile_pic' not in column_names:
+        conn.execute("ALTER TABLE users ADD COLUMN profile_pic TEXT DEFAULT 'default.png'")
+        print("✅ Added missing 'profile_pic' column")
+
+    conn.commit()
+    conn.close()
+
+
+# 👉 RUN FIX AUTOMATICALLY
+fix_users_table()
+
 # =========================
 # HOME
 # =========================
