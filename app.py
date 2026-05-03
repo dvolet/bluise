@@ -1251,30 +1251,7 @@ def toggle_user(user_id):
     if session.get('email') != ADMIN_EMAIL:
         return redirect('/login')
 
-    conn = get_connection()
-
-    user = conn.execute("""
-        SELECT COALESCE(status, 'active') as status
-        FROM users
-        WHERE id=?
-    """, (user_id,)).fetchone()
-
-    if not user:
-        conn.close()
-        return "User not found"
-
-    current_status = user['status']
-    new_status = 'disabled' if current_status == 'active' else 'active'
-
-    conn.execute("""
-        UPDATE users
-        SET status=?
-        WHERE id=?
-    """, (new_status, user_id))
-
-    conn.commit()
-    conn.close()
-
+    # does nothing yet
     return redirect('/admin/users')
 
 
