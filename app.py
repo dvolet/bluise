@@ -183,6 +183,24 @@ def login():
         user = login_user(email, password)
 
         if user:
+
+            # 🔴 CHECK IF USER IS DISABLED (NEW SAAS FEATURE)
+            conn = get_connection()
+
+            db_user = conn.execute("""
+                SELECT status FROM users WHERE id=?
+            """, (user['id'],)).fetchone()
+
+            conn.close()
+
+            # default to active if column missing
+            status = db_user['status'] if db_user and db_user['status'] else 'active'
+
+            if status == 'disabled':
+                flash("Your account has been disabled by admin.")
+                return redirect('/login')
+
+            # ✅ LOGIN SUCCESS
             session['user_id'] = user['id']
             session['username'] = user['username']
             session['email'] = user['email']
