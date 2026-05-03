@@ -1233,23 +1233,17 @@ def admin_users():
     if session.get('email') != ADMIN_EMAIL:
         return redirect('/login')
 
-    try:
-        conn = get_connection()
+    conn = get_connection()
 
-        users = conn.execute("""
-            SELECT id, username, email, profile_pic,
-            COALESCE(status, 'active') AS status
-            FROM users
-            ORDER BY id DESC
-        """).fetchall()
+    users = conn.execute("""
+        SELECT id, username, email, profile_pic
+        FROM users
+        ORDER BY id DESC
+    """).fetchall()
 
-        conn.close()
+    conn.close()
 
-        return render_template('admin_users.html', users=users)
-
-    except Exception as e:
-        print("ADMIN USERS ERROR:", e)
-        return "Error loading users"
+    return render_template('admin_users.html', users=users)
     
 @app.route('/admin/user/toggle/<int:user_id>')
 def toggle_user(user_id):
