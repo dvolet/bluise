@@ -1,0 +1,279 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ project.title }} | ELOC Technology Lab
+{% endblock %}
+
+
+{% block content %}
+
+<section class="project-detail-section">
+
+    <div class="project-detail-container">
+
+
+        <!-- BACK -->
+
+        <a
+            href="{{ url_for('projects') }}"
+            class="project-back"
+        >
+            ← BACK TO PROJECTS
+        </a>
+
+
+        <!-- HEADER -->
+
+        <div class="project-detail-header">
+
+            <span class="project-detail-category">
+                {{ project.category }}
+            </span>
+
+            <h1>
+                {{ project.title }}
+            </h1>
+
+            <p>
+                {{ project.long_description }}
+            </p>
+
+        </div>
+
+
+        <!-- HERO -->
+
+        <div class="project-detail-visual glass">
+
+            {% if project.image %}
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename=project.image
+                    ) }}"
+                    alt="{{ project.title }}"
+                    class="project-detail-image"
+                >
+
+            {% else %}
+
+                <div class="detail-core">
+                    <span>E</span>
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="project-actions">
+
+            {% if project.github != "#" %}
+
+                <a
+                    href="{{ project.github }}"
+                    target="_blank"
+                    class="project-action-button"
+                >
+                    VIEW CODE →
+                </a>
+
+            {% endif %}
+
+
+            {% if project.demo != "#" %}
+
+                <a
+                    href="{{ project.demo }}"
+                    target="_blank"
+                    class="project-action-button primary"
+                >
+                    LIVE PROJECT →
+                </a>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- PROJECT INFORMATION -->
+
+        <div class="project-detail-info">
+
+
+            <div class="detail-panel glass">
+
+                <span class="detail-label">
+                    TECHNOLOGIES
+                </span>
+
+                <div class="detail-technologies">
+
+                    {% for technology in project.technologies %}
+
+                        <span>
+                            {{ technology }}
+                        </span>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+
+            <div class="detail-panel glass">
+
+                <span class="detail-label">
+                    STATUS
+                </span>
+
+                <strong>
+                    {{ project.status }}
+                </strong>
+
+            </div>
+
+
+            <div class="detail-panel glass">
+
+                <span class="detail-label">
+                    CATEGORY
+                </span>
+
+                <strong>
+                    {{ project.category }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- OVERVIEW -->
+
+        <div class="project-story">
+
+            <div class="story-heading">
+
+                <span>
+                    01
+                </span>
+
+                <h2>
+                    PROJECT
+                    <span>OVERVIEW.</span>
+                </h2>
+
+            </div>
+
+
+            <div class="story-content">
+
+                <p>
+                    {{ project.long_description }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- CHALLENGE / SOLUTION -->
+
+        <div class="project-story-grid">
+
+
+            <div class="story-card glass">
+
+                <span class="story-card-number">
+                    02
+                </span>
+
+                <span class="story-card-label">
+                    THE CHALLENGE
+                </span>
+
+                <h3>
+                    What needed to be solved?
+                </h3>
+
+                <p>
+                    {{ project.challenge }}
+                </p>
+
+            </div>
+
+
+            <div class="story-card glass">
+
+                <span class="story-card-number">
+                    03
+                </span>
+
+                <span class="story-card-label">
+                    THE SOLUTION
+                </span>
+
+                <h3>
+                    How I approached it.
+                </h3>
+
+                <p>
+                    {{ project.solution }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- GALLERY -->
+
+        <div class="project-gallery-section">
+
+            <div class="story-heading">
+
+                <span>
+                    04
+                </span>
+
+                <h2>
+                    PROJECT
+                    <span>GALLERY.</span>
+                </h2>
+
+            </div>
+
+
+            <div class="project-gallery">
+
+                {% for image in project.gallery %}
+
+                    <div class="gallery-item glass">
+
+                        <img
+                            src="{{ url_for(
+                                'static',
+                                filename=image
+                            ) }}"
+                            alt="{{ project.title }} screenshot"
+                        >
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+{% endblock %}
