@@ -108,8 +108,10 @@ ELOC Technology Lab | Digital Products & Software
             style="--delay: 0.6s;"
         >
 
+            <!-- Explore Work -->
+
             <a
-                href="#projects"
+                href="{{ url_for('projects') }}"
                 class="hero-primary-button"
             >
 
@@ -124,8 +126,10 @@ ELOC Technology Lab | Digital Products & Software
             </a>
 
 
+            <!-- Discover ELOC -->
+
             <a
-                href="#about"
+                href="{{ url_for('index') }}#about"
                 class="hero-secondary-button"
             >
 
@@ -318,9 +322,9 @@ ELOC Technology Lab | Digital Products & Software
     ================================================== -->
 
     <a
-        href="#projects"
+        href="{{ url_for('projects') }}"
         class="hero-scroll"
-        aria-label="Scroll to projects"
+        aria-label="Explore projects"
     >
 
         <span class="scroll-text">
@@ -376,6 +380,8 @@ ELOC Technology Lab | Digital Products & Software
                 </h2>
 
 
+                <!-- View All Projects -->
+
                 <a
                     href="{{ url_for('projects') }}"
                     class="view-all-projects"
@@ -394,6 +400,10 @@ ELOC Technology Lab | Digital Products & Software
         </div>
 
 
+        <!-- =============================================
+             FEATURED PROJECT GRID
+        ============================================== -->
+
         <div class="featured-project-grid">
 
             {% for project in PROJECTS if project.featured %}
@@ -408,44 +418,46 @@ ELOC Technology Lab | Digital Products & Software
 
                     <div class="featured-project-visual">
 
-    {% if project.image %}
+                        {% if project.image %}
 
-        <img
-            src="{{ url_for(
-                'static',
-                filename=project.image
-            ) }}"
-            alt="{{ project.title }}"
-            class="featured-project-image"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-        >
+                            <img
+                                src="{{ url_for(
+                                    'static',
+                                    filename=project.image
+                                ) }}"
+                                alt="{{ project.title }}"
+                                class="featured-project-image"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                            >
 
-        <div
-            class="featured-project-fallback"
-            style="display: none;"
-        >
-            <div class="featured-project-glow"></div>
+                            <div
+                                class="featured-project-fallback"
+                                style="display: none;"
+                            >
 
-            <div class="featured-project-core">
-                E
-            </div>
-        </div>
+                                <div class="featured-project-glow"></div>
 
-    {% else %}
+                                <div class="featured-project-core">
+                                    E
+                                </div>
 
-        <div class="featured-project-fallback">
+                            </div>
 
-            <div class="featured-project-glow"></div>
+                        {% else %}
 
-            <div class="featured-project-core">
-                E
-            </div>
+                            <div class="featured-project-fallback">
 
-        </div>
+                                <div class="featured-project-glow"></div>
 
-    {% endif %}
+                                <div class="featured-project-core">
+                                    E
+                                </div>
 
-</div>
+                            </div>
+
+                        {% endif %}
+
+                    </div>
 
 
                     <div class="featured-project-info">
@@ -890,6 +902,7 @@ ELOC Technology Lab | Digital Products & Software
 
 </section>
 
+
 <!-- =====================================================
      TECHNOLOGIES SECTION
 ====================================================== -->
@@ -900,15 +913,16 @@ ELOC Technology Lab | Digital Products & Software
 >
 
     <div class="technologies-glow technologies-glow-one"></div>
+
     <div class="technologies-glow technologies-glow-two"></div>
 
 
     <div class="technologies-container">
 
 
-        <!-- =================================================
+        <!-- =============================================
              SECTION HEADER
-        ================================================== -->
+        ============================================== -->
 
         <div class="technologies-heading">
 
@@ -946,14 +960,17 @@ ELOC Technology Lab | Digital Products & Software
         </div>
 
 
-        <!-- =================================================
+        <!-- =============================================
              TECHNOLOGY GRID
-        ================================================== -->
+        ============================================== -->
 
         <div class="technology-grid">
 
 
-            <!-- WEB -->
+            <!-- =========================================
+                 WEB
+            ========================================== -->
+
             <article class="technology-card glass">
 
                 <div class="technology-card-number">
@@ -993,7 +1010,10 @@ ELOC Technology Lab | Digital Products & Software
             </article>
 
 
-            <!-- MOBILE -->
+            <!-- =========================================
+                 MOBILE
+            ========================================== -->
+
             <article class="technology-card glass">
 
                 <div class="technology-card-number">
@@ -1032,7 +1052,10 @@ ELOC Technology Lab | Digital Products & Software
             </article>
 
 
-            <!-- BACKEND -->
+            <!-- =========================================
+                 BACKEND
+            ========================================== -->
+
             <article class="technology-card glass">
 
                 <div class="technology-card-number">
@@ -1071,7 +1094,10 @@ ELOC Technology Lab | Digital Products & Software
             </article>
 
 
-            <!-- DATABASE -->
+            <!-- =========================================
+                 DATABASE
+            ========================================== -->
+
             <article class="technology-card glass">
 
                 <div class="technology-card-number">
@@ -1110,7 +1136,10 @@ ELOC Technology Lab | Digital Products & Software
             </article>
 
 
-            <!-- E-LEARNING -->
+            <!-- =========================================
+                 E-LEARNING
+            ========================================== -->
+
             <article class="technology-card glass">
 
                 <div class="technology-card-number">
@@ -1149,7 +1178,10 @@ ELOC Technology Lab | Digital Products & Software
             </article>
 
 
-            <!-- DIGITAL PRODUCTS -->
+            <!-- =========================================
+                 DIGITAL PRODUCTS
+            ========================================== -->
+
             <article class="technology-card glass">
 
                 <div class="technology-card-number">
@@ -1190,9 +1222,9 @@ ELOC Technology Lab | Digital Products & Software
         </div>
 
 
-        <!-- =================================================
+        <!-- =============================================
              TECHNOLOGY FOOTER
-        ================================================== -->
+        ============================================== -->
 
         <div class="technology-bottom">
 
@@ -1225,9 +1257,9 @@ ELOC Technology Lab | Digital Products & Software
     <div class="contact-container">
 
 
-        <!-- =================================================
+        <!-- =============================================
              TOP LABEL
-        ================================================== -->
+        ============================================== -->
 
         <div class="contact-eyebrow">
 
@@ -1244,9 +1276,9 @@ ELOC Technology Lab | Digital Products & Software
         </div>
 
 
-        <!-- =================================================
+        <!-- =============================================
              MAIN MESSAGE
-        ================================================== -->
+        ============================================== -->
 
         <div class="contact-hero">
 
@@ -1293,12 +1325,14 @@ ELOC Technology Lab | Digital Products & Software
         </div>
 
 
-        <!-- =================================================
+        <!-- =============================================
              CONTACT INFORMATION
-        ================================================== -->
+        ============================================== -->
 
         <div class="contact-info-grid">
 
+
+            <!-- EMAIL -->
 
             <a
                 href="mailto:your-email@example.com"
@@ -1328,6 +1362,8 @@ ELOC Technology Lab | Digital Products & Software
             </a>
 
 
+            <!-- LINKEDIN -->
+
             <a
                 href="#"
                 class="contact-info-item"
@@ -1355,6 +1391,8 @@ ELOC Technology Lab | Digital Products & Software
 
             </a>
 
+
+            <!-- GITHUB -->
 
             <a
                 href="#"
@@ -1386,9 +1424,9 @@ ELOC Technology Lab | Digital Products & Software
         </div>
 
 
-        <!-- =================================================
+        <!-- =============================================
              FINAL BRAND AREA
-        ================================================== -->
+        ============================================== -->
 
         <div class="contact-final-brand">
 
@@ -1425,9 +1463,9 @@ ELOC Technology Lab | Digital Products & Software
         </div>
 
 
-        <!-- =================================================
+        <!-- =============================================
              FOOTER
-        ================================================== -->
+        ============================================== -->
 
         <div class="contact-footer">
 

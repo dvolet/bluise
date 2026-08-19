@@ -19,12 +19,24 @@
         name="theme-color"
         content="#03050c"
     >
-    
+
+    <!-- =====================================================
+         FAVICON
+    ====================================================== -->
+
     <link
-    rel="icon"
-    type="image/png"
-    href="{{ url_for('static', filename='images/eloc-logo.png') }}"
->
+        rel="icon"
+        type="image/png"
+        href="{{ url_for(
+            'static',
+            filename='images/eloc-logo.png'
+        ) }}"
+    >
+
+
+    <!-- =====================================================
+         PAGE TITLE
+    ====================================================== -->
 
     <title>
         {% block title %}
@@ -39,22 +51,34 @@
 
     <link
         rel="stylesheet"
-        href="{{ url_for('static', filename='css/style.css') }}"
+        href="{{ url_for(
+            'static',
+            filename='css/style.css'
+        ) }}"
     >
 
     <link
         rel="stylesheet"
-        href="{{ url_for('static', filename='css/glass.css') }}"
+        href="{{ url_for(
+            'static',
+            filename='css/glass.css'
+        ) }}"
     >
 
     <link
         rel="stylesheet"
-        href="{{ url_for('static', filename='css/animations.css') }}"
+        href="{{ url_for(
+            'static',
+            filename='css/animations.css'
+        ) }}"
     >
 
     <link
         rel="stylesheet"
-        href="{{ url_for('static', filename='css/responsive.css') }}"
+        href="{{ url_for(
+            'static',
+            filename='css/responsive.css'
+        ) }}"
     >
 
 </head>
@@ -105,15 +129,18 @@
 
                 <div class="brand-mark">
 
-    <span class="brand-orbit"></span>
+                    <span class="brand-orbit"></span>
 
-    <img
-        src="{{ url_for('static', filename='images/eloc-logo.png') }}"
-        alt="ELOC"
-        class="brand-logo"
-    >
+                    <img
+                        src="{{ url_for(
+                            'static',
+                            filename='images/eloc-logo.png'
+                        ) }}"
+                        alt="ELOC"
+                        class="brand-logo"
+                    >
 
-</div>
+                </div>
 
 
                 <div class="brand-text">
@@ -140,43 +167,63 @@
                 aria-label="Main navigation"
             >
 
+                <!-- HOME -->
+
                 <a
                     href="{{ url_for('home') }}"
-                    class="nav-link active"
+                    class="nav-link"
                 >
-                    <span>Home</span>
+                    <span>
+                        Home
+                    </span>
                 </a>
 
 
+                <!-- PROJECTS -->
+
                 <a
-                    href="#projects"
+                    href="{{ url_for('projects') }}"
                     class="nav-link"
                 >
-                    <span>Projects</span>
+                    <span>
+                        Projects
+                    </span>
                 </a>
 
 
+                <!-- ABOUT -->
+
                 <a
-                    href="#about"
+                    href="{{ url_for('about') }}"
                     class="nav-link"
                 >
-                    <span>About</span>
+                    <span>
+                        About
+                    </span>
                 </a>
 
 
+                <!-- TECHNOLOGIES -->
+
                 <a
-                    href="#technologies"
+                    href="{{ url_for('technology') }}"
                     class="nav-link"
                 >
-                    <span>Technologies</span>
+                    <span>
+                        Technologies
+                    </span>
                 </a>
 
 
+                <!-- CONTACT -->
+
                 <a
-                    href="#contact"
+                    href="{{ url_for('contact') }}"
                     class="nav-link"
                 >
-                    <span>Contact</span>
+                    <span>
+                        Contact
+                    </span>
                 </a>
 
             </nav>
@@ -187,7 +234,7 @@
             ================================================== -->
 
             <a
-                href="#contact"
+                href="{{ url_for('contact') }}"
                 class="nav-action"
             >
 
@@ -232,48 +279,60 @@
             id="mobile-navigation"
         >
 
+            <!-- HOME -->
+
             <a
                 href="{{ url_for('home') }}"
-                class="mobile-nav-link active"
+                class="mobile-nav-link"
             >
                 Home
             </a>
 
 
+            <!-- PROJECTS -->
+
             <a
-                href="#projects"
+                href="{{ url_for('projects') }}"
                 class="mobile-nav-link"
             >
                 Projects
             </a>
 
 
+            <!-- ABOUT -->
+
             <a
-                href="#about"
+                href="{{ url_for('about') }}"
                 class="mobile-nav-link"
             >
                 About
             </a>
 
 
+            <!-- TECHNOLOGIES -->
+
             <a
-                href="#technologies"
+                href="{{ url_for('technology') }}"
                 class="mobile-nav-link"
             >
                 Technologies
             </a>
 
 
+            <!-- CONTACT -->
+
             <a
-                href="#contact"
+                href="{{ url_for('contact') }}"
                 class="mobile-nav-link"
             >
                 Contact
             </a>
 
 
+            <!-- LET'S BUILD -->
+
             <a
-                href="#contact"
+                href="{{ url_for('contact') }}"
                 class="mobile-build-button"
             >
                 Let's Build →
@@ -304,7 +363,10 @@
     ====================================================== -->
 
     <script
-        src="{{ url_for('static', filename='js/main.js') }}"
+        src="{{ url_for(
+            'static',
+            filename='js/main.js'
+        ) }}"
     ></script>
 
 </body>
