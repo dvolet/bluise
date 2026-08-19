@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="ELOC Technology Lab — Digital Products, Software and Technology Experiences."
+    >
+
+    <meta
+        name="theme-color"
+        content="#03050c"
+    >
+
+    <title>
+        {% block title %}
+        ELOC Technology Lab
+        {% endblock %}
+    </title>
+
+
+    <!-- =====================================================
+         STYLES
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/glass.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/animations.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/responsive.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         CINEMATIC BACKGROUND
+    ====================================================== -->
+
+    <div class="cinematic-background">
+
+        <div class="ambient-light ambient-light-one"></div>
+
+        <div class="ambient-light ambient-light-two"></div>
+
+        <div class="ambient-light ambient-light-three"></div>
+
+        <div class="background-grid"></div>
+
+        <div class="background-noise"></div>
+
+    </div>
+
+
+    <!-- =====================================================
+         SITE HEADER
+    ====================================================== -->
+
+    <header
+        class="site-header"
+        id="site-header"
+    >
+
+        <div class="nav-container">
+
+
+            <!-- =================================================
+                 BRAND
+            ================================================== -->
+
+            <a
+                href="{{ url_for('home') }}"
+                class="brand"
+                aria-label="ELOC Technology Lab Home"
+            >
+
+                <div class="brand-mark">
+
+                    <span class="brand-orbit"></span>
+
+                    <span class="brand-core">
+                        E
+                    </span>
+
+                </div>
+
+
+                <div class="brand-text">
+
+                    <span class="brand-name">
+                        ELOC
+                    </span>
+
+                    <span class="brand-subtitle">
+                        TECHNOLOGY LAB
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- =================================================
+                 DESKTOP NAVIGATION
+            ================================================== -->
+
+            <nav
+                class="desktop-navigation"
+                aria-label="Main navigation"
+            >
+
+                <a
+                    href="{{ url_for('home') }}"
+                    class="nav-link active"
+                >
+                    <span>Home</span>
+                </a>
+
+
+                <a
+                    href="#projects"
+                    class="nav-link"
+                >
+                    <span>Projects</span>
+                </a>
+
+
+                <a
+                    href="#about"
+                    class="nav-link"
+                >
+                    <span>About</span>
+                </a>
+
+
+                <a
+                    href="#technologies"
+                    class="nav-link"
+                >
+                    <span>Technologies</span>
+                </a>
+
+
+                <a
+                    href="#contact"
+                    class="nav-link"
+                >
+                    <span>Contact</span>
+                </a>
+
+            </nav>
+
+
+            <!-- =================================================
+                 NAVIGATION ACTION
+            ================================================== -->
+
+            <a
+                href="#contact"
+                class="nav-action"
+            >
+
+                <span>
+                    Let's Build
+                </span>
+
+                <span class="nav-action-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+            <!-- =================================================
+                 MOBILE MENU BUTTON
+            ================================================== -->
+
+            <button
+                class="mobile-menu-button"
+                id="mobile-menu-button"
+                type="button"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+            >
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
+
+        </div>
+
+
+        <!-- =====================================================
+             MOBILE NAVIGATION
+        ====================================================== -->
+
+        <div
+            class="mobile-navigation"
+            id="mobile-navigation"
+        >
+
+            <a
+                href="{{ url_for('home') }}"
+                class="mobile-nav-link active"
+            >
+                Home
+            </a>
+
+
+            <a
+                href="#projects"
+                class="mobile-nav-link"
+            >
+                Projects
+            </a>
+
+
+            <a
+                href="#about"
+                class="mobile-nav-link"
+            >
+                About
+            </a>
+
+
+            <a
+                href="#technologies"
+                class="mobile-nav-link"
+            >
+                Technologies
+            </a>
+
+
+            <a
+                href="#contact"
+                class="mobile-nav-link"
+            >
+                Contact
+            </a>
+
+
+            <a
+                href="#contact"
+                class="mobile-build-button"
+            >
+                Let's Build →
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN APPLICATION
+    ====================================================== -->
+
+    <main
+        class="site-wrapper"
+        id="main-content"
+    >
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script
+        src="{{ url_for('static', filename='js/main.js') }}"
+    ></script>
+
+</body>
+
+</html>

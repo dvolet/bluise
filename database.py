@@ -1,24 +1,54 @@
-# database.py
 import sqlite3
+from flask import current_app
 
-def init_db():
-    conn = sqlite3.connect('eloc.db')  # SQLite database
-    c = conn.cursor()
-    
-    # Create users table
-    c.execute('''
-    CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
-        email TEXT NOT NULL UNIQUE,
-        password TEXT NOT NULL,
-        activities TEXT
+
+def get_connection():
+    """
+    Create and return a connection to the portfolio database.
+    """
+
+    connection = sqlite3.connect(
+        current_app.config["DATABASE_PATH"]
     )
-    ''')
-    
-    conn.commit()
-    conn.close()
-    print("Database initialized successfully!")
 
-if __name__ == "__main__":
-    init_db()
+    connection.row_factory = sqlite3.Row
+
+    return connection
+
+
+def create_tables():
+    """
+    Create the initial portfolio database tables.
+    """
+
+    connection = get_connection()
+
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS projects (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            slug TEXT UNIQUE NOT NULL,
+            category TEXT NOT NULL,
+            description TEXT,
+            image TEXT,
+            technologies TEXT,
+            status TEXT DEFAULT 'In Development',
+            live_url TEXT,
+            github_url TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS categories (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT UNIQUE NOT NULL,
+            description TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+
+    connection.commit()
+    connection.close()

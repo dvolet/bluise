@@ -1,125 +1,1421 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELOC - Learn Web Design</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
+{% extends "base.html" %}
 
-<!-- NAVBAR -->
-<nav class="navbar">
-    <div class="nav-logo">
-        <a href="{{ url_for('home') }}">
-            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="ELOC Logo">
-        </a>
+{% block title %}
+ELOC Technology Lab | Digital Products & Software
+{% endblock %}
+
+
+{% block content %}
+
+<!-- =====================================================
+     HERO SECTION
+====================================================== -->
+
+<section
+    class="hero-section"
+    id="home"
+>
+
+    <!-- =================================================
+         HERO ATMOSPHERE
+    ================================================== -->
+
+    <div class="hero-atmosphere">
+
+        <div class="hero-orb hero-orb-one"></div>
+
+        <div class="hero-orb hero-orb-two"></div>
+
+        <div class="hero-orb hero-orb-three"></div>
+
     </div>
-    <ul class="nav-links">
-        <li><a href="{{ url_for('home') }}">Home</a></li>
-        <li><a href="{{ url_for('home') }}#kits">Kits</a></li>
 
-        {% if session.get('user_id') %}
-            <li><a href="{{ url_for('profile') }}">Profile</a></li>
-            <li><a href="{{ url_for('logout') }}">Logout</a></li>
-        {% else %}
-            <li><a href="{{ url_for('login') }}">Login</a></li>
-            <li><a href="{{ url_for('signup') }}" class="nav-btn">Join</a></li>
-        {% endif %}
-    </ul>
-</nav>
 
-<!-- SOCIAL ICONS -->
-<div class="social-fixed">
-    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-    <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-    <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-</div>
+    <!-- =================================================
+         HERO CONTENT
+    ================================================== -->
 
-<!-- HERO SECTION -->
-<section class="hero">
-    <div class="hero-content">
-        <h1>Become a Professional Web Designer</h1>
-        <p>Learn step-by-step with practical kits designed to take you from beginner to expert.</p>
-        <a href="#kits" class="btn-hero">Start Learning Now</a>
+    <div class="hero-container">
+
+        <!-- =============================================
+             EYEBROW
+        ============================================== -->
+
+        <div
+            class="hero-eyebrow fade-in"
+            style="--delay: 0.1s;"
+        >
+
+            <span class="eyebrow-line"></span>
+
+            <span class="eyebrow-dot"></span>
+
+            <span>
+                ELOC TECHNOLOGY LAB
+            </span>
+
+            <span class="eyebrow-line"></span>
+
+        </div>
+
+
+        <!-- =============================================
+             MAIN HEADING
+        ============================================== -->
+
+        <h1
+            class="hero-title"
+            data-text="WE BUILD DIGITAL EXPERIENCES."
+        >
+
+            <span class="hero-title-line">
+                WE BUILD
+            </span>
+
+            <span class="hero-title-line hero-title-highlight">
+                DIGITAL
+            </span>
+
+            <span class="hero-title-line">
+                EXPERIENCES.
+            </span>
+
+        </h1>
+
+
+        <!-- =============================================
+             DESCRIPTION
+        ============================================== -->
+
+        <p
+            class="hero-description fade-in"
+            style="--delay: 0.45s;"
+        >
+
+            Software, web applications, mobile experiences
+            and digital platforms designed to turn ideas
+            into meaningful technology.
+
+        </p>
+
+
+        <!-- =============================================
+             HERO ACTIONS
+        ============================================== -->
+
+        <div
+            class="hero-actions fade-in"
+            style="--delay: 0.6s;"
+        >
+
+            <a
+                href="#projects"
+                class="hero-primary-button"
+            >
+
+                <span>
+                    Explore My Work
+                </span>
+
+                <span class="button-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+            <a
+                href="#about"
+                class="hero-secondary-button"
+            >
+
+                <span class="play-icon">
+                    ▶
+                </span>
+
+                <span>
+                    Discover ELOC
+                </span>
+
+            </a>
+
+        </div>
+
+
+        <!-- =============================================
+             HERO CAPABILITY INDICATORS
+        ============================================== -->
+
+        <div
+            class="hero-capabilities fade-in"
+            style="--delay: 0.8s;"
+        >
+
+            <div class="capability-item">
+
+                <span class="capability-number">
+                    01
+                </span>
+
+                <span class="capability-label">
+                    WEB
+                </span>
+
+            </div>
+
+
+            <div class="capability-divider"></div>
+
+
+            <div class="capability-item">
+
+                <span class="capability-number">
+                    02
+                </span>
+
+                <span class="capability-label">
+                    MOBILE
+                </span>
+
+            </div>
+
+
+            <div class="capability-divider"></div>
+
+
+            <div class="capability-item">
+
+                <span class="capability-number">
+                    03
+                </span>
+
+                <span class="capability-label">
+                    SOFTWARE
+                </span>
+
+            </div>
+
+
+            <div class="capability-divider"></div>
+
+
+            <div class="capability-item">
+
+                <span class="capability-number">
+                    04
+                </span>
+
+                <span class="capability-label">
+                    DIGITAL
+                </span>
+
+            </div>
+
+        </div>
+
     </div>
+
+
+    <!-- =================================================
+         HERO VISUAL PANEL
+    ================================================== -->
+
+    <div class="hero-visual">
+
+        <div class="hero-visual-ring hero-ring-one"></div>
+
+        <div class="hero-visual-ring hero-ring-two"></div>
+
+        <div class="hero-visual-ring hero-ring-three"></div>
+
+
+        <div class="hero-core">
+
+            <div class="hero-core-inner">
+
+                <span class="hero-core-letter">
+                    E
+                </span>
+
+                <span class="hero-core-label">
+                    ELOC
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Floating data cards -->
+
+        <div class="hero-floating-card hero-card-one glass">
+
+            <span class="floating-card-icon">
+                ◇
+            </span>
+
+            <div>
+
+                <strong>
+                    BUILD
+                </strong>
+
+                <small>
+                    Digital Systems
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-floating-card hero-card-two glass">
+
+            <span class="floating-card-icon">
+                ◈
+            </span>
+
+            <div>
+
+                <strong>
+                    CREATE
+                </strong>
+
+                <small>
+                    User Experiences
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-floating-card hero-card-three glass">
+
+            <span class="floating-card-icon">
+                ✦
+            </span>
+
+            <div>
+
+                <strong>
+                    INNOVATE
+                </strong>
+
+                <small>
+                    Technology
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         SCROLL INDICATOR
+    ================================================== -->
+
+    <a
+        href="#projects"
+        class="hero-scroll"
+        aria-label="Scroll to projects"
+    >
+
+        <span class="scroll-text">
+            SCROLL TO EXPLORE
+        </span>
+
+        <span class="scroll-line">
+
+            <span class="scroll-line-progress"></span>
+
+        </span>
+
+    </a>
+
 </section>
 
-<!-- TRUST SECTION -->
-<section class="trust">
-    <div class="trust-box">
-        <i class="fa fa-users"></i>
-        <p>100+ Students Learning</p>
+
+<!-- =====================================================
+     FEATURED PROJECTS
+====================================================== -->
+
+<section
+    id="projects"
+    class="featured-projects-section"
+>
+
+    <div class="featured-projects-container">
+
+        <div class="featured-heading">
+
+            <div class="section-eyebrow">
+
+                <span>
+                    02
+                </span>
+
+                <span class="section-eyebrow-line"></span>
+
+                <span>
+                    SELECTED WORK
+                </span>
+
+            </div>
+
+
+            <div class="featured-heading-row">
+
+                <h2>
+
+                    PROJECTS
+                    <span>IN MOTION.</span>
+
+                </h2>
+
+
+                <a
+                    href="{{ url_for('projects') }}"
+                    class="view-all-projects"
+                >
+
+                    VIEW ALL
+
+                    <span>
+                        →
+                    </span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="featured-project-grid">
+
+            {% for project in PROJECTS if project.featured %}
+
+                <a
+                    href="{{ url_for(
+                        'project_detail',
+                        project_id=project.id
+                    ) }}"
+                    class="featured-project-card glass"
+                >
+
+                    <div class="featured-project-visual">
+
+                        <div class="featured-project-glow"></div>
+
+                        <div class="featured-project-core">
+                            E
+                        </div>
+
+                    </div>
+
+
+                    <div class="featured-project-info">
+
+                        <span>
+                            {{ project.category }}
+                        </span>
+
+
+                        <h3>
+                            {{ project.title }}
+                        </h3>
+
+
+                        <p>
+                            {{ project.description }}
+                        </p>
+
+
+                        <div class="featured-project-arrow">
+                            ↗
+                        </div>
+
+                    </div>
+
+                </a>
+
+            {% endfor %}
+
+        </div>
+
     </div>
-    <div class="trust-box">
-        <i class="fa fa-download"></i>
-        <p>Instant Access After Payment</p>
-    </div>
-    <div class="trust-box">
-        <i class="fa fa-lock"></i>
-        <p>Secure Payment System</p>
-    </div>
+
 </section>
 
-<!-- KITS SECTION -->
-<section id="kits" class="kits">
 
-    <div class="kit-card">
-        <img src="{{ url_for('static', filename='images/beginner.jpg') }}">
-        <h3>Beginner Kit</h3>
-        <p>Start your journey into web design</p>
-        <ul>
-            <li>HTML Ebook</li>
-            <li>Video Tutorials</li>
-            <li>Simple Projects</li>
-        </ul>
-        <h2>FREE</h2>
-        <a href="{{ url_for('kit', level='beginner') }}" class="btn-hero">Get Started</a>
-    </div>
+<!-- =====================================================
+     ABOUT / DEVELOPER IDENTITY
+====================================================== -->
 
-    <div class="kit-card popular">
-        <span class="badge">Most Popular</span>
-        <img src="{{ url_for('static', filename='images/intermediate.jpg') }}">
-        <h3>Intermediate Kit</h3>
-        <p>Level up your design skills</p>
-        <ul>
-            <li>Responsive Design</li>
-            <li>Templates</li>
-            <li>Real Projects</li>
-        </ul>
-        <h2>30 NGN</h2>
-        <a href="{{ url_for('kit', level='intermediate') }}" class="btn-hero">Get Access</a>
-    </div>
+<section
+    class="about-section"
+    id="about"
+>
 
-    <div class="kit-card">
-        <img src="{{ url_for('static', filename='images/professional.jpg') }}">
-        <h3>Professional Kit</h3>
-        <p>Start earning as a web designer</p>
-        <ul>
-            <li>Client Projects</li>
-            <li>Freelancing Guide</li>
-            <li>Advanced Techniques</li>
-        </ul>
-        <h2>50 NGN</h2>
-        <a href="{{ url_for('kit', level='professional') }}" class="btn-hero">Go Pro</a>
+    <div class="section-glow section-glow-left"></div>
+
+    <div class="section-glow section-glow-right"></div>
+
+
+    <div class="about-container">
+
+
+        <!-- =============================================
+             SECTION HEADER
+        ============================================== -->
+
+        <div class="section-heading">
+
+            <div class="section-eyebrow">
+
+                <span class="section-eyebrow-number">
+                    01
+                </span>
+
+                <span class="section-eyebrow-line"></span>
+
+                <span>
+                    DEVELOPER IDENTITY
+                </span>
+
+            </div>
+
+
+            <h2 class="section-title">
+
+                TECHNOLOGY
+                <span>WITH PURPOSE.</span>
+
+            </h2>
+
+
+            <p class="section-introduction">
+
+                ELOC Technology Lab is where ideas become
+                functional digital experiences — from web
+                applications and mobile solutions to
+                complete technology platforms.
+
+            </p>
+
+        </div>
+
+
+        <!-- =============================================
+             IDENTITY GRID
+        ============================================== -->
+
+        <div class="identity-grid">
+
+
+            <!-- =========================================
+                 MAIN IDENTITY CARD
+            ========================================== -->
+
+            <article
+                class="
+                    identity-card
+                    glass
+                    glass-glow
+                "
+            >
+
+                <div class="identity-card-top">
+
+                    <span class="identity-status">
+
+                        <span class="status-dot"></span>
+
+                        BUILDING DIGITAL SOLUTIONS
+
+                    </span>
+
+
+                    <span class="identity-code">
+                        ELOC / DEV
+                    </span>
+
+                </div>
+
+
+                <div class="identity-main">
+
+                    <div class="identity-avatar">
+
+                        <div class="avatar-ring"></div>
+
+                        <div class="avatar-core">
+
+                            <span>
+                                E
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="identity-content">
+
+                        <span class="identity-label">
+                            SOFTWARE & DIGITAL PRODUCT DEVELOPER
+                        </span>
+
+
+                        <h3>
+                            ELOC Technology Lab
+                        </h3>
+
+
+                        <p>
+
+                            I design and develop practical
+                            digital solutions that combine
+                            technology, usability and
+                            purposeful experiences.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =====================================
+                     EXPERTISE TAGS
+                ====================================== -->
+
+                <div class="expertise-tags">
+
+                    <span>
+                        WEB DEVELOPMENT
+                    </span>
+
+                    <span>
+                        MOBILE DEVELOPMENT
+                    </span>
+
+                    <span>
+                        BACKEND SYSTEMS
+                    </span>
+
+                    <span>
+                        DATABASES
+                    </span>
+
+                    <span>
+                        E-LEARNING
+                    </span>
+
+                    <span>
+                        DIGITAL PRODUCTS
+                    </span>
+
+                </div>
+
+
+                <div class="identity-card-footer">
+
+                    <span>
+                        STATUS
+                    </span>
+
+                    <strong>
+                        ALWAYS BUILDING
+                    </strong>
+
+                    <span class="footer-arrow">
+                        ↗
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <!-- =========================================
+                 ENGINEERING PANEL
+            ========================================== -->
+
+            <article
+                class="
+                    engineering-card
+                    glass
+                "
+            >
+
+                <div class="engineering-header">
+
+                    <span class="engineering-label">
+                        ENGINEERING PROFILE
+                    </span>
+
+                    <span class="engineering-symbol">
+                        ◈
+                    </span>
+
+                </div>
+
+
+                <div class="engineering-visual">
+
+                    <div class="engineering-orbit orbit-a"></div>
+
+                    <div class="engineering-orbit orbit-b"></div>
+
+                    <div class="engineering-orbit orbit-c"></div>
+
+
+                    <div class="engineering-center">
+
+                        <span class="engineering-center-letter">
+                            E
+                        </span>
+
+                        <span>
+                            ELOC
+                        </span>
+
+                    </div>
+
+
+                    <span class="orbit-node node-a">
+                        WEB
+                    </span>
+
+                    <span class="orbit-node node-b">
+                        APP
+                    </span>
+
+                    <span class="orbit-node node-c">
+                        DATA
+                    </span>
+
+                    <span class="orbit-node node-d">
+                        UX
+                    </span>
+
+                </div>
+
+
+                <div class="engineering-footer">
+
+                    <div>
+
+                        <span>
+                            APPROACH
+                        </span>
+
+                        <strong>
+                            BUILD • TEST • IMPROVE
+                        </strong>
+
+                    </div>
+
+                    <span class="engineering-pulse"></span>
+
+                </div>
+
+            </article>
+
+        </div>
+
+
+        <!-- =============================================
+             DEVELOPMENT PHILOSOPHY
+        ============================================== -->
+
+        <div class="philosophy-grid">
+
+            <div class="philosophy-intro">
+
+                <span class="mini-label">
+                    DEVELOPMENT PHILOSOPHY
+                </span>
+
+
+                <h3>
+                    DON'T JUST
+                    <span>WRITE CODE.</span>
+                    <br>
+                    SOLVE PROBLEMS.
+                </h3>
+
+            </div>
+
+
+            <div class="philosophy-text">
+
+                <p>
+
+                    Every application starts with a problem.
+                    My approach is to understand the problem,
+                    design the right experience, build the
+                    technology behind it and continuously
+                    improve the result.
+
+                </p>
+
+
+                <p>
+
+                    The objective isn't simply to make
+                    software work. It is to create systems
+                    that are useful, maintainable,
+                    scalable and meaningful to the people
+                    who use them.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =============================================
+             DEVELOPMENT METRICS
+        ============================================== -->
+
+        <div class="developer-metrics">
+
+            <div class="metric-card">
+
+                <span class="metric-number">
+                    01
+                </span>
+
+                <strong>
+                    IDEAS
+                </strong>
+
+                <span>
+                    Starting point
+                </span>
+
+            </div>
+
+
+            <div class="metric-card">
+
+                <span class="metric-number">
+                    02
+                </span>
+
+                <strong>
+                    DESIGN
+                </strong>
+
+                <span>
+                    Shape the experience
+                </span>
+
+            </div>
+
+
+            <div class="metric-card">
+
+                <span class="metric-number">
+                    03
+                </span>
+
+                <strong>
+                    BUILD
+                </strong>
+
+                <span>
+                    Engineer the solution
+                </span>
+
+            </div>
+
+
+            <div class="metric-card">
+
+                <span class="metric-number">
+                    04
+                </span>
+
+                <strong>
+                    IMPROVE
+                </strong>
+
+                <span>
+                    Refine the result
+                </span>
+
+            </div>
+
+        </div>
+
     </div>
 
 </section>
 
-<!-- CTA SECTION -->
-<section class="cta">
-    <h2>Start Your Web Design Journey Today</h2>
-    <p>No experience needed. Just start and grow.</p>
-    <a href="#kits" class="btn-hero">Explore Kits</a>
+<!-- =====================================================
+     TECHNOLOGIES SECTION
+====================================================== -->
+
+<section
+    id="technologies"
+    class="technologies-section"
+>
+
+    <div class="technologies-glow technologies-glow-one"></div>
+    <div class="technologies-glow technologies-glow-two"></div>
+
+
+    <div class="technologies-container">
+
+
+        <!-- =================================================
+             SECTION HEADER
+        ================================================== -->
+
+        <div class="technologies-heading">
+
+            <div class="section-eyebrow">
+
+                <span class="section-eyebrow-number">
+                    04
+                </span>
+
+                <span class="section-eyebrow-line"></span>
+
+                <span>
+                    TECHNOLOGY STACK
+                </span>
+
+            </div>
+
+
+            <h2 class="section-title">
+
+                TOOLS THAT
+                <span>POWER THE BUILD.</span>
+
+            </h2>
+
+
+            <p class="section-introduction">
+
+                A growing technology stack used to design,
+                develop and deliver practical digital
+                products and experiences.
+
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             TECHNOLOGY GRID
+        ================================================== -->
+
+        <div class="technology-grid">
+
+
+            <!-- WEB -->
+            <article class="technology-card glass">
+
+                <div class="technology-card-number">
+                    01
+                </div>
+
+                <div class="technology-card-icon">
+                    &lt;/&gt;
+                </div>
+
+                <div class="technology-card-content">
+
+                    <span>
+                        DEVELOPMENT
+                    </span>
+
+                    <h3>
+                        WEB
+                    </h3>
+
+                    <p>
+                        Modern websites and web applications
+                        built for real-world use.
+                    </p>
+
+                </div>
+
+                <div class="technology-tags">
+
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>JavaScript</span>
+                    <span>Flask</span>
+
+                </div>
+
+            </article>
+
+
+            <!-- MOBILE -->
+            <article class="technology-card glass">
+
+                <div class="technology-card-number">
+                    02
+                </div>
+
+                <div class="technology-card-icon">
+                    ◉
+                </div>
+
+                <div class="technology-card-content">
+
+                    <span>
+                        APPLICATIONS
+                    </span>
+
+                    <h3>
+                        MOBILE
+                    </h3>
+
+                    <p>
+                        Mobile applications designed around
+                        usability and practical functionality.
+                    </p>
+
+                </div>
+
+                <div class="technology-tags">
+
+                    <span>Java</span>
+                    <span>Android</span>
+                    <span>XML</span>
+
+                </div>
+
+            </article>
+
+
+            <!-- BACKEND -->
+            <article class="technology-card glass">
+
+                <div class="technology-card-number">
+                    03
+                </div>
+
+                <div class="technology-card-icon">
+                    ◈
+                </div>
+
+                <div class="technology-card-content">
+
+                    <span>
+                        SYSTEMS
+                    </span>
+
+                    <h3>
+                        BACKEND
+                    </h3>
+
+                    <p>
+                        Application logic, APIs, authentication
+                        and backend systems.
+                    </p>
+
+                </div>
+
+                <div class="technology-tags">
+
+                    <span>Python</span>
+                    <span>Flask</span>
+                    <span>REST APIs</span>
+
+                </div>
+
+            </article>
+
+
+            <!-- DATABASE -->
+            <article class="technology-card glass">
+
+                <div class="technology-card-number">
+                    04
+                </div>
+
+                <div class="technology-card-icon">
+                    ◇
+                </div>
+
+                <div class="technology-card-content">
+
+                    <span>
+                        DATA
+                    </span>
+
+                    <h3>
+                        DATABASES
+                    </h3>
+
+                    <p>
+                        Structured data systems designed to
+                        support reliable digital applications.
+                    </p>
+
+                </div>
+
+                <div class="technology-tags">
+
+                    <span>SQLite</span>
+                    <span>SQL</span>
+                    <span>Database Design</span>
+
+                </div>
+
+            </article>
+
+
+            <!-- E-LEARNING -->
+            <article class="technology-card glass">
+
+                <div class="technology-card-number">
+                    05
+                </div>
+
+                <div class="technology-card-icon">
+                    ✦
+                </div>
+
+                <div class="technology-card-content">
+
+                    <span>
+                        DIGITAL EDUCATION
+                    </span>
+
+                    <h3>
+                        E-LEARNING
+                    </h3>
+
+                    <p>
+                        Learning platforms, courses, certificates
+                        and educational technology.
+                    </p>
+
+                </div>
+
+                <div class="technology-tags">
+
+                    <span>LMS</span>
+                    <span>Courses</span>
+                    <span>Certificates</span>
+
+                </div>
+
+            </article>
+
+
+            <!-- DIGITAL PRODUCTS -->
+            <article class="technology-card glass">
+
+                <div class="technology-card-number">
+                    06
+                </div>
+
+                <div class="technology-card-icon">
+                    ⬡
+                </div>
+
+                <div class="technology-card-content">
+
+                    <span>
+                        PRODUCT ENGINEERING
+                    </span>
+
+                    <h3>
+                        DIGITAL PRODUCTS
+                    </h3>
+
+                    <p>
+                        Complete digital solutions developed
+                        from concept to functional product.
+                    </p>
+
+                </div>
+
+                <div class="technology-tags">
+
+                    <span>UI</span>
+                    <span>UX</span>
+                    <span>Automation</span>
+
+                </div>
+
+            </article>
+
+        </div>
+
+
+        <!-- =================================================
+             TECHNOLOGY FOOTER
+        ================================================== -->
+
+        <div class="technology-bottom">
+
+            <span>
+                ELOC / TECHNOLOGY STACK
+            </span>
+
+            <span class="technology-bottom-line"></span>
+
+            <span>
+                ALWAYS LEARNING • ALWAYS BUILDING
+            </span>
+
+        </div>
+
+    </div>
+
 </section>
 
-<!-- FOOTER -->
-<footer class="footer">
-    <p>© 2026 ELOC - E-Learning One Creativity. All Rights Reserved</p>
-    <p>Built for future web designers 🚀</p>
-</footer>
 
-</body>
-</html>
+<!-- =====================================================
+     CONTACT / FINAL CTA
+====================================================== -->
+
+<section
+    id="contact"
+    class="contact-section"
+>
+
+    <div class="contact-container">
+
+
+        <!-- =================================================
+             TOP LABEL
+        ================================================== -->
+
+        <div class="contact-eyebrow">
+
+            <span class="contact-eyebrow-number">
+                05
+            </span>
+
+            <span class="contact-eyebrow-line"></span>
+
+            <span>
+                LET'S BUILD SOMETHING
+            </span>
+
+        </div>
+
+
+        <!-- =================================================
+             MAIN MESSAGE
+        ================================================== -->
+
+        <div class="contact-hero">
+
+            <h2>
+
+                HAVE AN IDEA?
+
+                <span>
+                    LET'S TURN IT
+                </span>
+
+                <span>
+                    INTO REALITY.
+                </span>
+
+            </h2>
+
+
+            <p>
+
+                Have a website, application, software
+                or digital platform in mind? Let's
+                discuss the idea and explore what we
+                can build together.
+
+            </p>
+
+
+            <a
+                href="mailto:your-email@example.com"
+                class="contact-main-button"
+            >
+
+                <span>
+                    START A CONVERSATION
+                </span>
+
+                <span>
+                    ↗
+                </span>
+
+            </a>
+
+        </div>
+
+
+        <!-- =================================================
+             CONTACT INFORMATION
+        ================================================== -->
+
+        <div class="contact-info-grid">
+
+
+            <a
+                href="mailto:your-email@example.com"
+                class="contact-info-item"
+            >
+
+                <span class="contact-info-icon">
+                    @
+                </span>
+
+                <span class="contact-info-content">
+
+                    <small>
+                        EMAIL
+                    </small>
+
+                    <strong>
+                        your-email@example.com
+                    </strong>
+
+                </span>
+
+                <span class="contact-info-arrow">
+                    ↗
+                </span>
+
+            </a>
+
+
+            <a
+                href="#"
+                class="contact-info-item"
+            >
+
+                <span class="contact-info-icon">
+                    in
+                </span>
+
+                <span class="contact-info-content">
+
+                    <small>
+                        LINKEDIN
+                    </small>
+
+                    <strong>
+                        ELOC Technology Lab
+                    </strong>
+
+                </span>
+
+                <span class="contact-info-arrow">
+                    ↗
+                </span>
+
+            </a>
+
+
+            <a
+                href="#"
+                class="contact-info-item"
+            >
+
+                <span class="contact-info-icon">
+                    GH
+                </span>
+
+                <span class="contact-info-content">
+
+                    <small>
+                        GITHUB
+                    </small>
+
+                    <strong>
+                        ELOC Technology Lab
+                    </strong>
+
+                </span>
+
+                <span class="contact-info-arrow">
+                    ↗
+                </span>
+
+            </a>
+
+        </div>
+
+
+        <!-- =================================================
+             FINAL BRAND AREA
+        ================================================== -->
+
+        <div class="contact-final-brand">
+
+            <div class="contact-brand-mark">
+
+                <span>
+                    E
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    ELOC
+                </strong>
+
+                <span>
+                    TECHNOLOGY LAB
+                </span>
+
+            </div>
+
+
+            <div class="contact-final-status">
+
+                <span></span>
+
+                ALWAYS BUILDING
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <div class="contact-footer">
+
+            <span>
+                ELOC TECHNOLOGY LAB
+            </span>
+
+            <span>
+                BUILD • CREATE • INNOVATE
+            </span>
+
+            <span>
+                © 2026
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

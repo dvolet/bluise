@@ -1,0 +1,224 @@
+{% extends "base.html" %}
+
+{% block title %}
+Projects | ELOC Technology Lab
+{% endblock %}
+
+
+{% block content %}
+
+<section class="projects-page">
+
+    <div class="projects-page-container">
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <div class="projects-page-header">
+
+            <div class="section-eyebrow">
+
+                <span>
+                    02
+                </span>
+
+                <span class="section-eyebrow-line"></span>
+
+                <span>
+                    ELOC TECHNOLOGY LAB
+                </span>
+
+            </div>
+
+
+            <h1>
+                PROJECTS
+                <span>IN MOTION.</span>
+            </h1>
+
+
+            <p>
+                A growing collection of software,
+                applications, digital platforms and
+                technology experiments built by ELOC.
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             CATEGORY FILTER
+        ================================================== -->
+
+        <div class="project-filters">
+
+            <a
+                href="{{ url_for('projects') }}"
+                class="
+                    project-filter
+                    {% if active_category == 'all' %}
+                        active
+                    {% endif %}
+                "
+            >
+                ALL
+            </a>
+
+
+            {% for category in categories %}
+
+                <a
+                    href="{{ url_for(
+                        'projects',
+                        category=category.slug
+                    ) }}"
+                    class="
+                        project-filter
+                        {% if active_category == category.slug %}
+                            active
+                        {% endif %}
+                    "
+                >
+                    {{ category.name }}
+                </a>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- =================================================
+             PROJECT GRID
+        ================================================== -->
+
+        <div class="projects-grid">
+
+            {% for project in projects %}
+
+                <a
+                    href="{{ url_for(
+                        'project_detail',
+                        project_id=project.id
+                    ) }}"
+                    class="project-card glass"
+                >
+
+                    <!-- PROJECT VISUAL -->
+
+                    <div class="project-card-visual">
+
+                        {% if project.image %}
+
+                            <img
+                                src="{{ url_for(
+                                    'static',
+                                    filename=project.image
+                                ) }}"
+                                alt="{{ project.title }}"
+                            >
+
+                        {% else %}
+
+                            <div class="project-card-core">
+                                E
+                            </div>
+
+                        {% endif %}
+
+
+                        <div class="project-card-overlay"></div>
+
+
+                        <span class="project-card-number">
+                            {{ "%02d"|format(loop.index) }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- PROJECT INFORMATION -->
+
+                    <div class="project-card-content">
+
+                        <div class="project-card-meta">
+
+                            <span>
+                                {{ project.category }}
+                            </span>
+
+                            <span>
+                                {{ project.status }}
+                            </span>
+
+                        </div>
+
+
+                        <h2>
+                            {{ project.title }}
+                        </h2>
+
+
+                        <p>
+                            {{ project.description }}
+                        </p>
+
+
+                        <!-- TECHNOLOGIES -->
+
+                        <div class="project-card-technologies">
+
+                            {% for technology in project.technologies[:4] %}
+
+                                <span>
+                                    {{ technology }}
+                                </span>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <div class="project-card-footer">
+
+                            <span>
+                                VIEW PROJECT
+                            </span>
+
+                            <span class="project-card-arrow">
+                                ↗
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            {% else %}
+
+                <!-- EMPTY STATE -->
+
+                <div class="projects-empty glass">
+
+                    <span>
+                        NO PROJECTS FOUND
+                    </span>
+
+                    <p>
+                        There are currently no projects
+                        in this category.
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
