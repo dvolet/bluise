@@ -38,7 +38,11 @@ PROJECTS = [
         "image": "images/projects/eloc-notes/cover.jpg",
 
         "gallery": [
-            "images/projects/eloc-notes/cover.jpg"
+            "images/projects/eloc-notes/cover.jpg",
+            "images/projects/eloc-notes/screenshot-01.jpg",
+            "images/projects/eloc-notes/screenshot-02.jpg",
+            "images/projects/eloc-notes/screenshot-03.jpg",
+            "images/projects/eloc-notes/screenshot-04.jpg"
         ],
 
         "github": "#",
@@ -94,7 +98,11 @@ PROJECTS = [
         "image": "images/projects/eloc-learning-platform/cover.jpg",
 
         "gallery": [
-            "images/projects/eloc-learning-platform/cover.jpg"
+            "images/projects/eloc-learning-platform/cover.jpg",
+            "images/projects/eloc-learning-platform/screenshot-01.jpg",
+            "images/projects/eloc-learning-platform/screenshot-02.jpg",
+            "images/projects/eloc-learning-platform/screenshot-03.jpg",
+            "images/projects/eloc-learning-platform/screenshot-04.jpg"
         ],
 
         "github": "#",
@@ -148,7 +156,11 @@ PROJECTS = [
         "image": "images/projects/eloc-dashboard/cover.jpg",
 
         "gallery": [
-            "images/projects/eloc-dashboard/cover.jpg"
+            "images/projects/eloc-dashboard/cover.jpg",
+            "images/projects/eloc-dashboard/screenshot-01.jpg",
+            "images/projects/eloc-dashboard/screenshot-02.jpg",
+            "images/projects/eloc-dashboard/screenshot-03.jpg",
+            "images/projects/eloc-dashboard/screenshot-04.jpg"
         ],
 
         "github": "#",
@@ -200,7 +212,11 @@ PROJECTS = [
         "image": "images/projects/digital-experiments/cover.jpg",
 
         "gallery": [
-            "images/projects/digital-experiments/cover.jpg"
+            "images/projects/digital-experiments/cover.jpg",
+            "images/projects/digital-experiments/screenshot-01.jpg",
+            "images/projects/digital-experiments/screenshot-02.jpg",
+            "images/projects/digital-experiments/screenshot-03.jpg",
+            "images/projects/digital-experiments/screenshot-04.jpg"
         ],
 
         "github": "#",
