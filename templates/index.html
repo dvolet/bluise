@@ -408,13 +408,28 @@ ELOC Technology Lab | Digital Products & Software
 
                     <div class="featured-project-visual">
 
-                        <div class="featured-project-glow"></div>
+    {% if project.image %}
 
-                        <div class="featured-project-core">
-                            E
-                        </div>
+        <img
+            src="{{ url_for(
+                'static',
+                filename=project.image
+            ) }}"
+            alt="{{ project.title }}"
+            class="featured-project-image"
+        >
 
-                    </div>
+    {% else %}
+
+        <div class="featured-project-glow"></div>
+
+        <div class="featured-project-core">
+            E
+        </div>
+
+    {% endif %}
+
+</div>
 
 
                     <div class="featured-project-info">
