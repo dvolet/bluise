@@ -1,0 +1,1804 @@
+/* =========================================================
+   ELOC TECHNOLOGY LAB
+   RESPONSIVE CSS
+   =========================================================
+   Responsive foundation for:
+   - Global layout
+   - Navigation
+   - Hero
+   - About
+   - Projects
+   - Project details
+   - Featured projects
+   - Contact
+   - Technologies
+   - Mobile navigation
+
+   IMPORTANT:
+   Mobile navigation uses:
+   .mobile-navigation-open
+   .mobile-menu-active
+   ========================================================= */
+
+
+/* =========================================================
+   GLOBAL RESPONSIVE FOUNDATION
+========================================================= */
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TABLET FOUNDATION
+========================================================= */
+
+@media screen and (max-width: 900px) {
+
+    .background-grid {
+        background-size: 55px 55px;
+    }
+
+    .ambient-light {
+        width: 320px;
+        height: 320px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE FOUNDATION
+========================================================= */
+
+@media screen and (max-width: 600px) {
+
+    .welcome {
+        padding: 30px 18px;
+    }
+
+    .welcome h1 {
+        font-size: clamp(38px, 12vw, 60px);
+    }
+
+    .welcome p {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    .ambient-light {
+        width: 250px;
+        height: 250px;
+        filter: blur(75px);
+    }
+
+    .background-grid {
+        background-size: 45px 45px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE HEADER WIDTH PROTECTION
+========================================================= */
+
+.site-header {
+    width: 100%;
+    max-width: 100vw;
+}
+
+.nav-container {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.mobile-navigation {
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+}
+
+.mobile-nav-link,
+.mobile-build-button {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   RESPONSIVE NAVIGATION — TABLET
+========================================================= */
+
+@media screen and (max-width: 1000px) {
+
+    .desktop-navigation {
+        gap: 0;
+    }
+
+    .nav-link {
+        padding: 12px 9px;
+        font-size: 12px;
+    }
+
+    .nav-action {
+        padding: 10px 12px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE NAVIGATION — MOBILE
+========================================================= */
+
+@media screen and (max-width: 900px) {
+
+    .site-header {
+        position: fixed !important;
+
+        top: 12px;
+
+        width: calc(100% - 24px);
+        max-width: calc(100vw - 24px);
+
+        overflow: visible !important;
+
+        z-index: 10000 !important;
+    }
+
+    .nav-container {
+        position: relative !important;
+
+        min-height: 64px;
+
+        padding: 8px 10px 8px 14px;
+
+        overflow: visible !important;
+
+        z-index: 10001 !important;
+    }
+
+    .desktop-navigation,
+    .nav-action {
+        display: none !important;
+    }
+
+    .mobile-menu-button {
+        position: relative !important;
+
+        display: flex !important;
+
+        flex-shrink: 0;
+
+        z-index: 100000 !important;
+
+        cursor: pointer;
+
+        pointer-events: auto;
+    }
+
+    .mobile-navigation {
+        position: absolute !important;
+
+        top: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+
+        width: 100% !important;
+        max-width: 100vw !important;
+
+        height: auto !important;
+
+        max-height: 0 !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        display: flex !important;
+
+        flex-direction: column !important;
+
+        box-sizing: border-box !important;
+
+        visibility: hidden !important;
+
+        opacity: 0 !important;
+
+        overflow: hidden !important;
+
+        pointer-events: none !important;
+
+        transform: translateY(-10px) !important;
+
+        z-index: 99999 !important;
+
+        background: rgba(3, 5, 12, 0.98) !important;
+
+        backdrop-filter: blur(25px) !important;
+        -webkit-backdrop-filter: blur(25px) !important;
+
+        border-top:
+            1px solid
+            rgba(255, 255, 255, 0.08) !important;
+
+        transition:
+            max-height 0.4s ease,
+            opacity 0.3s ease,
+            transform 0.3s ease,
+            padding 0.3s ease !important;
+    }
+
+    /*
+       Current JavaScript state:
+       .mobile-navigation-open
+    */
+
+    .mobile-navigation.mobile-navigation-open {
+        display: flex !important;
+
+        visibility: visible !important;
+
+        opacity: 1 !important;
+
+        max-height: calc(100vh - 80px) !important;
+
+        padding: 20px !important;
+
+        pointer-events: auto !important;
+
+        transform: translateY(0) !important;
+
+        overflow-x: hidden !important;
+
+        overflow-y: auto !important;
+    }
+
+    .mobile-navigation .mobile-nav-link {
+        display: flex !important;
+
+        width: 100% !important;
+        min-width: 0 !important;
+        min-height: 52px !important;
+
+        align-items: center !important;
+        justify-content: flex-start !important;
+
+        padding: 15px 10px !important;
+
+        margin: 0 !important;
+
+        box-sizing: border-box !important;
+
+        color:
+            rgba(255, 255, 255, 0.75) !important;
+
+        text-decoration: none !important;
+
+        font-size: 12px;
+
+        font-weight: 700;
+
+        letter-spacing: 0.12em;
+
+        visibility: visible !important;
+
+        opacity: 1 !important;
+
+        white-space: normal !important;
+
+        border-bottom:
+            1px solid
+            rgba(255, 255, 255, 0.06);
+    }
+
+    .mobile-navigation .mobile-nav-link:hover,
+    .mobile-navigation .mobile-nav-link.active {
+        color: #ffffff !important;
+    }
+
+    .mobile-navigation .mobile-build-button {
+        display: flex !important;
+
+        width: 100% !important;
+        min-width: 0 !important;
+        min-height: 52px !important;
+
+        align-items: center !important;
+        justify-content: center !important;
+
+        margin: 12px 0 0 !important;
+        padding: 14px !important;
+
+        box-sizing: border-box !important;
+
+        color: #ffffff;
+
+        text-align: center;
+
+        text-decoration: none;
+
+        font-size: 11px;
+
+        font-weight: 700;
+
+        letter-spacing: 0.1em;
+
+        border:
+            1px solid
+            rgba(100, 215, 255, 0.25);
+
+        border-radius: 10px;
+
+        background:
+            rgba(80, 200, 255, 0.08);
+
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    /*
+       Mobile menu icon animation.
+       Current JavaScript state:
+       .mobile-menu-active
+    */
+
+    .mobile-menu-button span {
+        display: block;
+
+        transition:
+            transform 0.3s ease,
+            opacity 0.3s ease;
+    }
+
+    .mobile-menu-button.mobile-menu-active span:nth-child(1) {
+        transform:
+            translateY(7px)
+            rotate(45deg) !important;
+    }
+
+    .mobile-menu-button.mobile-menu-active span:nth-child(2) {
+        opacity: 0 !important;
+    }
+
+    .mobile-menu-button.mobile-menu-active span:nth-child(3) {
+        transform:
+            translateY(-7px)
+            rotate(-45deg) !important;
+    }
+
+    body.mobile-menu-open {
+        overflow-x: hidden !important;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE HEADER
+========================================================= */
+
+@media screen and (max-width: 480px) {
+
+    .site-header {
+        top: 9px;
+
+        width: calc(100% - 18px);
+        max-width: calc(100vw - 18px);
+    }
+
+    .brand-name {
+        font-size: 16px;
+    }
+
+    .brand-subtitle {
+        font-size: 6px;
+        letter-spacing: 0.22em;
+    }
+
+    .brand-mark {
+        width: 40px;
+        height: 40px;
+    }
+
+    .brand-core {
+        width: 28px;
+        height: 28px;
+    }
+
+    .mobile-navigation.mobile-navigation-open {
+        max-height: calc(100vh - 70px) !important;
+        padding: 16px !important;
+    }
+
+    .mobile-navigation .mobile-nav-link {
+        min-height: 50px !important;
+        padding: 14px 8px !important;
+        font-size: 11px !important;
+    }
+
+    .mobile-navigation .mobile-build-button {
+        min-height: 50px !important;
+        padding: 13px !important;
+    }
+}
+
+
+/* =========================================================
+   DESKTOP — MOBILE MENU DISABLED
+========================================================= */
+
+@media screen and (min-width: 901px) {
+
+    .mobile-navigation {
+        display: none !important;
+
+        visibility: hidden !important;
+
+        pointer-events: none !important;
+    }
+
+    .mobile-menu-button {
+        display: none !important;
+    }
+}
+
+
+/* =========================================================
+   MOBILE MENU ANIMATION
+========================================================= */
+
+@keyframes mobile-menu-enter {
+
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   HERO — TABLET
+========================================================= */
+
+@media screen and (max-width: 1100px) {
+
+    .hero-section {
+        padding-left: 5vw;
+        padding-right: 5vw;
+    }
+
+    .hero-container {
+        width: 62%;
+    }
+
+    .hero-visual {
+        width: 47vw;
+        right: -4vw;
+    }
+
+    .hero-floating-card {
+        transform: scale(0.85);
+    }
+}
+
+
+/* =========================================================
+   HERO — MOBILE
+========================================================= */
+
+@media screen and (max-width: 820px) {
+
+    .hero-section {
+        min-height: auto;
+
+        padding:
+            150px
+            25px
+            90px;
+
+        display: block;
+    }
+
+    .hero-container {
+        width: 100%;
+        max-width: 760px;
+
+        margin: 0 auto;
+
+        text-align: center;
+    }
+
+    .hero-eyebrow {
+        justify-content: center;
+    }
+
+    .hero-title {
+        font-size:
+            clamp(
+                48px,
+                11vw,
+                78px
+            );
+    }
+
+    .hero-title-highlight {
+        margin: 0 auto;
+    }
+
+    .hero-description {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-actions {
+        justify-content: center;
+    }
+
+    .hero-capabilities {
+        justify-content: center;
+
+        flex-wrap: wrap;
+
+        gap: 14px;
+    }
+
+    .hero-visual {
+        position: relative;
+
+        top: auto;
+        right: auto;
+
+        width:
+            min(
+                90vw,
+                580px
+            );
+
+        margin:
+            50px
+            auto
+            0;
+
+        transform: none;
+    }
+
+    .hero-scroll {
+        display: none;
+    }
+}
+
+
+/* =========================================================
+   HERO — SMALL MOBILE
+========================================================= */
+
+@media screen and (max-width: 560px) {
+
+    .hero-section {
+        padding:
+            125px
+            18px
+            60px;
+    }
+
+    .hero-eyebrow {
+        gap: 7px;
+
+        font-size: 8px;
+
+        letter-spacing: 0.20em;
+    }
+
+    .eyebrow-line {
+        width: 16px;
+    }
+
+    .hero-title {
+        font-size:
+            clamp(
+                42px,
+                14vw,
+                65px
+            );
+
+        line-height: 0.94;
+    }
+
+    .hero-description {
+        margin-top: 25px;
+
+        font-size: 14px;
+
+        line-height: 1.75;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+
+        width: 100%;
+
+        margin-top: 30px;
+    }
+
+    .hero-primary-button,
+    .hero-secondary-button {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .hero-capabilities {
+        margin-top: 40px;
+        gap: 10px;
+    }
+
+    .capability-divider {
+        display: none;
+    }
+
+    .capability-item {
+        padding: 7px 9px;
+
+        border:
+            1px solid
+            rgba(255, 255, 255, 0.07);
+
+        border-radius: 9px;
+
+        background:
+            rgba(255, 255, 255, 0.025);
+    }
+
+    .hero-visual {
+        width: 95vw;
+        margin-top: 40px;
+    }
+
+    .hero-floating-card {
+        min-width: 120px;
+
+        padding: 8px;
+
+        transform: scale(0.72);
+    }
+
+    .hero-card-one {
+        left: -4%;
+    }
+
+    .hero-card-two {
+        right: -5%;
+    }
+
+    .hero-card-three {
+        left: 5%;
+    }
+
+    .hero-core {
+        width: 31%;
+    }
+}
+
+
+/* =========================================================
+   ABOUT — TABLET
+========================================================= */
+
+@media screen and (max-width: 1000px) {
+
+    .about-section {
+        padding:
+            110px
+            5vw
+            100px;
+    }
+
+    .identity-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .engineering-card {
+        min-height: 430px;
+    }
+
+    .philosophy-grid {
+        gap: 40px;
+    }
+}
+
+
+/* =========================================================
+   ABOUT — MOBILE
+========================================================= */
+
+@media screen and (max-width: 700px) {
+
+    .about-section {
+        padding:
+            90px
+            20px
+            80px;
+    }
+
+    .section-heading {
+        margin-bottom: 50px;
+    }
+
+    .section-eyebrow {
+        font-size: 8px;
+    }
+
+    .section-title {
+        font-size:
+            clamp(
+                40px,
+                11vw,
+                62px
+            );
+    }
+
+    .section-introduction {
+        font-size: 14px;
+    }
+
+    .identity-card,
+    .engineering-card {
+        min-height: auto;
+    }
+
+    .identity-card {
+        padding: 20px;
+    }
+
+    .identity-main {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        padding:
+            40px
+            5px
+            35px;
+    }
+
+    .identity-content {
+        max-width: none;
+    }
+
+    .identity-content h3 {
+        font-size: 30px;
+    }
+
+    .expertise-tags {
+        padding:
+            0
+            5px
+            55px;
+    }
+
+    .identity-card-footer {
+        left: 20px;
+        right: 20px;
+    }
+
+    .engineering-card {
+        min-height: 430px;
+        padding: 20px;
+    }
+
+    .engineering-visual {
+        width: 290px;
+        height: 290px;
+    }
+
+    .philosophy-grid {
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+
+        margin-top: 80px;
+
+        padding-top: 40px;
+    }
+
+    .philosophy-intro h3 {
+        font-size: 34px;
+    }
+
+    .developer-metrics {
+        grid-template-columns:
+            repeat(
+                2,
+                1fr
+            );
+    }
+}
+
+
+/* =========================================================
+   ABOUT — VERY SMALL PHONES
+========================================================= */
+
+@media screen and (max-width: 420px) {
+
+    .developer-metrics {
+        grid-template-columns: 1fr;
+    }
+
+    .identity-status {
+        font-size: 7px;
+    }
+
+    .identity-code {
+        display: none;
+    }
+
+    .engineering-visual {
+        width: 260px;
+        height: 260px;
+    }
+}
+
+
+/* =========================================================
+   PROJECTS — TABLET
+========================================================= */
+
+@media screen and (max-width: 850px) {
+
+    .projects-section {
+        padding:
+            110px
+            5vw
+            90px;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-visual {
+        height: 320px;
+    }
+}
+
+
+/* =========================================================
+   PROJECTS — MOBILE
+========================================================= */
+
+@media screen and (max-width: 560px) {
+
+    .projects-section {
+        padding:
+            90px
+            20px
+            70px;
+    }
+
+    .projects-title {
+        font-size:
+            clamp(
+                43px,
+                12vw,
+                65px
+            );
+    }
+
+    .projects-introduction {
+        font-size: 14px;
+    }
+
+    .project-filters {
+        gap: 6px;
+    }
+
+    .project-filter {
+        padding: 8px 10px;
+        font-size: 7px;
+    }
+
+    .project-visual {
+        height: 250px;
+    }
+
+    .project-orbit {
+        width: 180px;
+        height: 180px;
+    }
+
+    .project-core {
+        width: 85px;
+        height: 85px;
+    }
+
+    .project-core span {
+        font-size: 38px;
+    }
+
+    .project-content {
+        padding: 20px;
+    }
+
+    .project-footer {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+
+/* =========================================================
+   PROJECT DETAIL — MOBILE
+========================================================= */
+
+@media screen and (max-width: 700px) {
+
+    .project-detail-section {
+        padding:
+            120px
+            20px
+            80px;
+    }
+
+    .project-detail-header {
+        margin-top: 40px;
+    }
+
+    .project-detail-header h1 {
+        font-size:
+            clamp(
+                42px,
+                12vw,
+                65px
+            );
+    }
+
+    .project-detail-visual {
+        height: 300px;
+        margin-top: 40px;
+    }
+
+    .detail-orbit {
+        width: 220px;
+        height: 220px;
+    }
+
+    .detail-core {
+        width: 105px;
+        height: 105px;
+    }
+
+    .detail-core span {
+        font-size: 48px;
+    }
+
+    .project-detail-info {
+        grid-template-columns: 1fr;
+    }
+
+    .project-story {
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+
+        margin-top: 80px;
+    }
+
+    .project-story-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-item,
+    .gallery-item img {
+        min-height: 220px;
+    }
+
+    .project-actions {
+        flex-direction: column;
+    }
+
+    .project-action-button {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   FEATURED PROJECTS — TABLET
+========================================================= */
+
+@media screen and (max-width: 950px) {
+
+    .featured-project-grid {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+    }
+}
+
+
+/* =========================================================
+   FEATURED PROJECTS — MOBILE
+========================================================= */
+
+@media screen and (max-width: 650px) {
+
+    .featured-projects-section {
+        padding:
+            90px
+            20px
+            80px;
+    }
+
+    .featured-heading-row {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .featured-project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .featured-project-visual {
+        height: 260px;
+    }
+}
+
+
+/* =========================================================
+   PROJECTS PAGE — TABLET
+========================================================= */
+
+@media screen and (max-width: 800px) {
+
+    .projects-page {
+        padding:
+            120px
+            18px
+            80px;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-card-visual {
+        height: 280px;
+    }
+
+    .project-card-content h2 {
+        font-size: 24px;
+    }
+}
+
+
+/* =========================================================
+   PROJECTS PAGE — SMALL MOBILE
+========================================================= */
+
+@media screen and (max-width: 500px) {
+
+    .projects-page-header h1 {
+        font-size: 52px;
+    }
+
+    .project-filters {
+        gap: 7px;
+    }
+
+    .project-filter {
+        padding: 0 13px;
+    }
+
+    .project-card-visual {
+        height: 240px;
+    }
+}
+
+
+/* =========================================================
+   CONTACT — TABLET
+========================================================= */
+
+@media screen and (max-width: 900px) {
+
+    .contact-section {
+        padding:
+            100px
+            0
+            50px;
+    }
+
+    .contact-container {
+        width: 90%;
+    }
+
+    .contact-info-grid {
+        display: flex;
+
+        flex-direction: row;
+
+        flex-wrap: nowrap;
+
+        gap: 16px;
+
+        width: 100%;
+        max-width: 100%;
+
+        margin-top: 45px;
+
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        padding:
+            5px
+            2px
+            15px;
+
+        scrollbar-width: none;
+
+        scroll-snap-type: x proximity;
+
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .contact-info-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .contact-info-item {
+        flex:
+            0 0
+            calc(
+                (100% - 32px) / 3
+            );
+
+        width:
+            calc(
+                (100% - 32px) / 3
+            );
+
+        min-width:
+            calc(
+                (100% - 32px) / 3
+            );
+
+        max-width:
+            calc(
+                (100% - 32px) / 3
+            );
+
+        min-height: 85px;
+
+        scroll-snap-align: start;
+    }
+
+    .contact-final-brand {
+        margin-top: 55px;
+
+        flex-wrap: wrap;
+    }
+
+    .contact-footer {
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+        text-align: center;
+    }
+}
+
+
+/* =========================================================
+   CONTACT — MOBILE
+========================================================= */
+
+@media screen and (max-width: 800px) {
+
+    .contact-section {
+        width: 100%;
+        max-width: 100vw;
+
+        padding:
+            80px
+            0
+            40px;
+
+        overflow: hidden;
+    }
+
+    .contact-container {
+        width:
+            calc(
+                100% - 30px
+            );
+
+        max-width:
+            calc(
+                100% - 30px
+            );
+
+        margin: 0 auto;
+
+        padding-bottom: 20px;
+
+        box-sizing: border-box;
+    }
+
+    .contact-heading,
+    .contact-hero {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .contact-hero {
+        margin-top: 35px;
+    }
+
+    .contact-hero h2 {
+        font-size:
+            clamp(
+                45px,
+                10vw,
+                54px
+            );
+
+        line-height: 0.9;
+    }
+
+    .contact-hero p {
+        width: 100%;
+        max-width: 100%;
+
+        font-size: 13px;
+    }
+
+    .contact-main-button {
+        width: 100%;
+        max-width: 100%;
+
+        box-sizing: border-box;
+
+        justify-content: space-between;
+    }
+
+    /*
+       Keep contact cards horizontally scrollable.
+       This prevents narrow cards and keeps the
+       side-by-side design.
+    */
+
+    .contact-info-grid {
+        display: flex;
+
+        flex-direction: row;
+
+        flex-wrap: nowrap;
+
+        gap: 12px;
+
+        width: 100%;
+        max-width: 100%;
+
+        margin-top: 40px;
+
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        padding:
+            5px
+            2px
+            15px;
+
+        scrollbar-width: none;
+
+        scroll-snap-type: x mandatory;
+
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .contact-info-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .contact-info-item {
+        display: flex;
+
+        align-items: center;
+
+        flex:
+            0 0
+            82%;
+
+        width: 82%;
+
+        min-width: 82%;
+        max-width: 82%;
+
+        min-height: 82px;
+
+        padding: 16px;
+
+        gap: 12px;
+
+        box-sizing: border-box;
+
+        overflow: hidden;
+
+        scroll-snap-align: start;
+    }
+
+    .contact-info-icon {
+        flex-shrink: 0;
+    }
+
+    .contact-info-content {
+        min-width: 0;
+        flex: 1;
+    }
+
+    .contact-info-content small {
+        display: block;
+        font-size: 0.65rem;
+    }
+
+    .contact-info-content strong {
+        display: block;
+
+        max-width: 100%;
+
+        font-size: 0.82rem;
+
+        line-height: 1.3;
+
+        white-space: normal;
+
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .contact-info-arrow {
+        flex-shrink: 0;
+    }
+
+    .contact-final-brand {
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+
+        width: 100%;
+
+        margin-top: 45px;
+
+        padding-top: 25px;
+    }
+
+    .contact-final-status {
+        width: 100%;
+    }
+
+    .contact-footer {
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 10px;
+
+        width: 100%;
+
+        margin-top: 25px;
+
+        padding-top: 20px;
+        padding-bottom: 15px;
+
+        text-align: center;
+    }
+}
+
+
+/* =========================================================
+   CONTACT — VERY SMALL PHONES
+========================================================= */
+
+@media screen and (max-width: 380px) {
+
+    .contact-container {
+        width:
+            calc(
+                100% - 24px
+            );
+
+        max-width:
+            calc(
+                100% - 24px
+            );
+    }
+
+    .contact-info-grid {
+        gap: 10px;
+    }
+
+    .contact-info-item {
+        flex: 0 0 88%;
+
+        width: 88%;
+
+        min-width: 88%;
+        max-width: 88%;
+
+        padding: 14px;
+
+        gap: 10px;
+    }
+
+    .contact-info-content strong {
+        font-size: 0.78rem;
+    }
+
+    .contact-final-status {
+        display: none;
+    }
+}
+
+
+/* =========================================================
+   CONTACT — LANDSCAPE PHONES
+========================================================= */
+
+@media screen and (max-width: 900px)
+and (orientation: landscape) {
+
+    .contact-info-grid {
+        display: flex;
+
+        flex-direction: row;
+
+        flex-wrap: nowrap;
+
+        width: 100%;
+        max-width: 100%;
+
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        gap: 14px;
+
+        padding:
+            5px
+            2px
+            15px;
+
+        scrollbar-width: none;
+
+        scroll-snap-type: x mandatory;
+    }
+
+    .contact-info-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .contact-info-item {
+        flex: 0 0 55%;
+
+        width: 55%;
+
+        min-width: 55%;
+        max-width: 55%;
+
+        min-height: 82px;
+    }
+
+    .contact-footer {
+        flex-direction: row;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        text-align: left;
+    }
+}
+
+
+/* =========================================================
+   TECHNOLOGIES — BASE RESPONSIVE PROTECTION
+========================================================= */
+
+.technologies-section {
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
+}
+
+.technologies-container {
+    width: min(1200px, 92%);
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   TECHNOLOGIES — TABLET
+========================================================= */
+
+@media screen and (max-width: 1000px) {
+
+    .technologies-section {
+        padding:
+            110px
+            0
+            80px;
+    }
+
+    .technologies-container {
+        width: 90%;
+    }
+
+    .technology-grid {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+    }
+}
+
+
+/* =========================================================
+   TECHNOLOGIES — MOBILE
+========================================================= */
+
+@media screen and (max-width: 600px) {
+
+    .technologies-section {
+        min-height: auto;
+
+        padding:
+            90px
+            0
+            65px;
+
+        overflow: hidden;
+    }
+
+    .technologies-container {
+        width:
+            calc(
+                100% - 30px
+            );
+    }
+
+    .technologies-heading {
+        margin-bottom: 45px;
+    }
+
+    .technology-grid {
+        display: grid;
+
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+    }
+
+    .technology-card {
+        min-height: 350px;
+
+        padding: 25px;
+    }
+
+    .technology-card-icon {
+        width: 58px;
+        height: 58px;
+
+        margin-bottom: 25px;
+    }
+
+    .technology-card-content h3 {
+        font-size: 1.45rem;
+    }
+
+    .technology-bottom {
+        flex-wrap: wrap;
+
+        gap: 12px;
+
+        line-height: 1.5;
+    }
+
+    .technology-bottom-line {
+        flex-basis: 100%;
+        order: 3;
+    }
+}
+
+
+/* =========================================================
+   TECHNOLOGIES — SMALL PHONES
+========================================================= */
+
+@media screen and (max-width: 380px) {
+
+    .technologies-container {
+        width:
+            calc(
+                100% - 24px
+            );
+    }
+
+    .technology-card {
+        padding: 22px;
+
+        min-height: 330px;
+    }
+}
+
+
+/* =========================================================
+   TECHNOLOGY CARD REVEAL
+========================================================= */
+
+.technology-card {
+    opacity: 0;
+
+    transform:
+        translateY(35px);
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease,
+        box-shadow 0.4s ease;
+
+    transition-delay:
+        var(--card-delay, 0s);
+}
+
+.technology-card-visible {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* =========================================================
+   TECHNOLOGY MOUSE LIGHT
+========================================================= */
+
+.technology-card::after {
+    content: "";
+
+    position: absolute;
+
+    left:
+        var(
+            --mouse-x,
+            50%
+        );
+
+    top:
+        var(
+            --mouse-y,
+            50%
+        );
+
+    width: 180px;
+    height: 180px;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
+
+    border-radius: 50%;
+
+    background:
+        rgba(
+            60,
+            140,
+            255,
+            0.08
+        );
+
+    filter: blur(45px);
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    transition:
+        opacity 0.3s ease;
+}
+
+.technology-card:hover::after {
+    opacity: 1;
+}
+
+
+/* =========================================================
+   HEADER SCROLL STATE
+========================================================= */
+
+.site-header {
+    transition:
+        background 0.35s ease,
+        backdrop-filter 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.site-header.header-scrolled {
+    background:
+        rgba(
+            3,
+            5,
+            12,
+            0.72
+        );
+
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
+
+    box-shadow:
+        0 10px 40px
+        rgba(
+            0,
+            0,
+            0,
+            0.2
+        );
+}
+
+
+/* =========================================================
+   REDUCE MOTION ACCESSIBILITY
+========================================================= */
+
+@media screen and (prefers-reduced-motion: reduce) {
+
+    .technology-card {
+        opacity: 1;
+
+        transform: none;
+
+        transition: none;
+    }
+
+    .site-header {
+        transition: none;
+    }
+
+    .mobile-navigation {
+        transition: none !important;
+    }
+
+    .mobile-menu-button span {
+        transition: none !important;
+    }
+}

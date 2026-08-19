@@ -1,1 +1,600 @@
+/* =========================================================
+   ELOC CINEMATIC ANIMATIONS
+   CLEAN + RESPONSIVE + PERFORMANCE SAFE
+========================================================= */
 
+
+/* =========================================================
+   AMBIENT LIGHT MOVEMENT
+========================================================= */
+
+@keyframes floating-light-one {
+
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    50% {
+        transform: translate3d(120px, 80px, 0);
+    }
+}
+
+
+@keyframes floating-light-two {
+
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    50% {
+        transform: translate3d(-100px, 100px, 0);
+    }
+}
+
+
+@keyframes floating-light-three {
+
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    50% {
+        transform: translate3d(-80px, -70px, 0);
+    }
+}
+
+
+/* =========================================================
+   CINEMATIC FADE IN
+========================================================= */
+
+.fade-in {
+    opacity: 0;
+
+    animation:
+        eloc-fade-in
+        1s
+        ease
+        forwards;
+
+    animation-delay:
+        var(--delay, 0s);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+@keyframes eloc-fade-in {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translate3d(
+                0,
+                24px,
+                0
+            );
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translate3d(
+                0,
+                0,
+                0
+            );
+    }
+}
+
+
+/* =========================================================
+   CINEMATIC GLOW
+========================================================= */
+
+.pulse-glow {
+
+    animation:
+        pulse-glow
+        4s
+        ease-in-out
+        infinite;
+
+    will-change:
+        filter;
+}
+
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        filter:
+            drop-shadow(
+                0 0 8px
+                rgba(
+                    0,
+                    180,
+                    255,
+                    0.15
+                )
+            );
+    }
+
+    50% {
+        filter:
+            drop-shadow(
+                0 0 28px
+                rgba(
+                    0,
+                    180,
+                    255,
+                    0.35
+                )
+            );
+    }
+}
+
+
+/* =========================================================
+   CINEMATIC SCROLL REVEAL
+========================================================= */
+
+.reveal-hidden {
+
+    opacity: 0;
+
+    transform:
+        translate3d(
+            0,
+            35px,
+            0
+        )
+        scale(0.98);
+
+    filter:
+        blur(4px);
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease,
+        filter 0.8s ease;
+
+    transition-delay:
+        var(--reveal-delay, 0ms);
+
+    will-change:
+        opacity,
+        transform,
+        filter;
+}
+
+
+.reveal-visible {
+
+    opacity: 1;
+
+    transform:
+        translate3d(
+            0,
+            0,
+            0
+        )
+        scale(1);
+
+    filter:
+        blur(0);
+}
+
+
+/* =========================================================
+   CINEMATIC CARD FOUNDATION
+========================================================= */
+
+.project-card,
+.featured-project-card,
+.identity-card,
+.engineering-card {
+
+    position: relative;
+
+    transform-style:
+        preserve-3d;
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+
+    will-change:
+        transform;
+}
+
+
+/* =========================================================
+   CARD HOVER GLOW
+========================================================= */
+
+.project-card:hover,
+.featured-project-card:hover,
+.identity-card:hover,
+.engineering-card:hover {
+
+    box-shadow:
+        0 20px 70px
+        rgba(
+            0,
+            0,
+            0,
+            0.30
+        );
+}
+
+
+/* =========================================================
+   POINTER LIGHT
+========================================================= */
+
+.project-card::after,
+.featured-project-card::after,
+.identity-card::after,
+.engineering-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    pointer-events: none;
+
+    width: 220px;
+    height: 220px;
+
+    left:
+        var(
+            --mouse-x,
+            50%
+        );
+
+    top:
+        var(
+            --mouse-y,
+            50%
+        );
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(
+                100,
+                215,
+                255,
+                0.08
+            ),
+            transparent 70%
+        );
+
+    opacity: 0;
+
+    transition:
+        opacity 0.3s ease;
+
+    z-index: 1;
+}
+
+
+.project-card:hover::after,
+.featured-project-card:hover::after,
+.identity-card:hover::after,
+.engineering-card:hover::after {
+
+    opacity: 1;
+}
+
+
+/* =========================================================
+   CARD CONTENT ABOVE POINTER LIGHT
+========================================================= */
+
+.project-card > *,
+.featured-project-card > *,
+.identity-card > *,
+.engineering-card > * {
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   TECHNOLOGY CARD ANIMATION
+========================================================= */
+
+.technology-card {
+
+    position: relative;
+
+    opacity: 0;
+
+    transform:
+        translate3d(
+            0,
+            35px,
+            0
+        );
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease,
+        box-shadow 0.4s ease;
+
+    transition-delay:
+        var(
+            --card-delay,
+            0s
+        );
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+.technology-card-visible {
+
+    opacity: 1;
+
+    transform:
+        translate3d(
+            0,
+            0,
+            0
+        );
+}
+
+
+/* =========================================================
+   TECHNOLOGY CARD MOUSE LIGHT
+========================================================= */
+
+.technology-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    left:
+        var(
+            --mouse-x,
+            50%
+        );
+
+    top:
+        var(
+            --mouse-y,
+            50%
+        );
+
+    width: 180px;
+    height: 180px;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
+
+    border-radius: 50%;
+
+    background:
+        rgba(
+            60,
+            140,
+            255,
+            0.08
+        );
+
+    filter:
+        blur(45px);
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    transition:
+        opacity 0.3s ease;
+
+    z-index: 1;
+}
+
+
+.technology-card:hover::after {
+
+    opacity: 1;
+}
+
+
+/* =========================================================
+   TECHNOLOGY CARD CONTENT PROTECTION
+========================================================= */
+
+.technology-card > * {
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   HEADER SCROLL ANIMATION
+========================================================= */
+
+.site-header {
+
+    transition:
+        background 0.35s ease,
+        backdrop-filter 0.35s ease,
+        -webkit-backdrop-filter 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+
+.site-header.header-scrolled {
+
+    background:
+        rgba(
+            3,
+            5,
+            12,
+            0.72
+        );
+
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
+
+    box-shadow:
+        0 10px 40px
+        rgba(
+            0,
+            0,
+            0,
+            0.20
+        );
+}
+
+
+/* =========================================================
+   MOBILE PERFORMANCE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .pulse-glow {
+
+        animation-duration:
+            5s;
+    }
+
+
+    .technology-card {
+
+        transition:
+            opacity 0.6s ease,
+            transform 0.6s ease;
+    }
+
+
+    .project-card::after,
+    .featured-project-card::after,
+    .identity-card::after,
+    .engineering-card::after,
+    .technology-card::after {
+
+        width: 160px;
+        height: 160px;
+
+        filter:
+            blur(35px);
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .technology-card::after,
+    .project-card::after,
+    .featured-project-card::after,
+    .identity-card::after,
+    .engineering-card::after {
+
+        width: 140px;
+        height: 140px;
+    }
+}
+
+
+/* =========================================================
+   REDUCE MOTION ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior:
+            auto !important;
+    }
+
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            0.01ms !important;
+
+        scroll-behavior:
+            auto !important;
+    }
+
+
+    .fade-in,
+    .reveal-hidden,
+    .technology-card {
+
+        opacity: 1 !important;
+
+        transform:
+            none !important;
+
+        filter:
+            none !important;
+    }
+
+
+    .pulse-glow {
+
+        animation:
+            none !important;
+
+        filter:
+            none !important;
+    }
+
+
+    .technology-card::after,
+    .project-card::after,
+    .featured-project-card::after,
+    .identity-card::after,
+    .engineering-card::after {
+
+        display: none !important;
+    }
+}
