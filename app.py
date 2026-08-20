@@ -372,6 +372,17 @@ ELOC Technology Lab website contact form.
             )
 
 
+    # -----------------------------------------------------
+    # NORMAL GET REQUEST
+    #
+    # This is what was missing.
+    # It allows /contact to open normally.
+    # -----------------------------------------------------
+
+    return render_template(
+        "contact.html"
+    )
+
 # =========================================================
 # APPLICATION START
 # =========================================================
