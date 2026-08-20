@@ -20,6 +20,77 @@
         content="#03050c"
     >
 
+
+    <!-- =====================================================
+         SOCIAL / LINK PREVIEW METADATA
+    ====================================================== -->
+
+    <meta
+        property="og:title"
+        content="{% block og_title %}ELOC Technology Lab{% endblock %}"
+    >
+
+    <meta
+        property="og:description"
+        content="{% block og_description %}Digital Products, Software and Technology Experiences.{% endblock %}"
+    >
+
+    <meta
+        property="og:type"
+        content="website"
+    >
+
+    <meta
+        property="og:url"
+        content="{{ request.url }}"
+    >
+
+    <meta
+        property="og:image"
+        content="{% block og_image %}{{ url_for('static', filename='images/link-preview.jpg', _external=True) }}{% endblock %}"
+    >
+
+    <meta
+        property="og:image:alt"
+        content="ELOC Technology Lab"
+    >
+
+    <meta
+        property="og:image:width"
+        content="1200"
+    >
+
+    <meta
+        property="og:image:height"
+        content="630"
+    >
+
+
+    <!-- =====================================================
+         TWITTER / X LINK PREVIEW
+    ====================================================== -->
+
+    <meta
+        name="twitter:card"
+        content="summary_large_image"
+    >
+
+    <meta
+        name="twitter:title"
+        content="{% block twitter_title %}ELOC Technology Lab{% endblock %}"
+    >
+
+    <meta
+        name="twitter:description"
+        content="{% block twitter_description %}Digital Products, Software and Technology Experiences.{% endblock %}"
+    >
+
+    <meta
+        name="twitter:image"
+        content="{% block twitter_image %}{{ url_for('static', filename='images/link-preview.jpg', _external=True) }}{% endblock %}"
+    >
+
+
     <!-- =====================================================
          FAVICON
     ====================================================== -->
