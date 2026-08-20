@@ -233,46 +233,133 @@
 
         <!-- GALLERY -->
 
-        <div class="project-gallery-section">
+        <!-- =====================================================
+     PROJECT GALLERY
+====================================================== -->
 
-            <div class="story-heading">
+<div class="project-gallery-section">
 
-                <span>
-                    04
-                </span>
+    <div class="story-heading">
 
-                <h2>
-                    PROJECT
-                    <span>GALLERY.</span>
-                </h2>
+        <span>
+            04
+        </span>
 
-            </div>
+        <h2>
+            PROJECT
+            <span>GALLERY.</span>
+        </h2>
+
+    </div>
 
 
-            <div class="project-gallery">
+    {% if project.gallery %}
 
-                {% for image in project.gallery %}
+        <!-- IMAGE COUNTER -->
 
-                    <div class="gallery-item glass">
+        <div class="gallery-counter">
 
-                        <img
-                            src="{{ url_for(
-                                'static',
-                                filename=image
-                            ) }}"
-                            alt="{{ project.title }} screenshot"
-                        >
+            <strong id="gallery-current">
+                01
+            </strong>
 
-                    </div>
+            <span>
+                /
+            </span>
 
-                {% endfor %}
-
-            </div>
+            <span id="gallery-total">
+                {{ "%02d" | format(project.gallery | length) }}
+            </span>
 
         </div>
 
 
-    </div>
+        <!-- HORIZONTAL GALLERY -->
+
+        <div
+            class="project-gallery"
+            id="project-gallery"
+        >
+
+            {% for image in project.gallery %}
+
+                <button
+                    type="button"
+                    class="gallery-item glass {% if loop.first %}active{% endif %}"
+                    data-index="{{ loop.index }}"
+                    data-image="{{ url_for(
+                        'static',
+                        filename=image
+                    ) }}"
+                    aria-label="View image {{ loop.index }}"
+                >
+
+                    <img
+                        src="{{ url_for(
+                            'static',
+                            filename=image
+                        ) }}"
+                        alt="{{ project.title }} screenshot {{ loop.index }}"
+                        loading="lazy"
+                    >
+
+                </button>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- GALLERY HINT -->
+
+        <div class="gallery-scroll-hint">
+
+            <span>
+                ←
+            </span>
+
+            <span>
+                Swipe or scroll to view more
+            </span>
+
+            <span>
+                →
+            </span>
+
+        </div>
+
+
+        <!-- LARGE PREVIEW -->
+
+        <div
+            class="gallery-preview glass"
+            id="gallery-preview"
+        >
+
+            <img
+                id="gallery-preview-image"
+                src="{{ url_for(
+                    'static',
+                    filename=project.gallery[0]
+                ) }}"
+                alt="{{ project.title }} preview"
+            >
+
+        </div>
+
+    {% else %}
+
+        <div class="gallery-empty glass">
+
+            <span>
+                No gallery images available for this project.
+            </span>
+
+        </div>
+
+    {% endif %}
+
+</div>
 
 </section>
 
