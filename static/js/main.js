@@ -989,3 +989,46 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 });
+
+/* =========================================================
+   PROJECT GALLERY
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const gallery = document.getElementById("project-gallery");
+    const preview = document.getElementById("gallery-preview-image");
+    const current = document.getElementById("gallery-current");
+
+    if (!gallery || !preview || !current) {
+        return;
+    }
+
+    const items = gallery.querySelectorAll(".gallery-item");
+
+    items.forEach(function (item) {
+
+        item.addEventListener("click", function () {
+
+            items.forEach(function (galleryItem) {
+                galleryItem.classList.remove("active");
+            });
+
+            item.classList.add("active");
+
+            preview.src = item.dataset.image;
+
+            current.textContent =
+                String(item.dataset.index).padStart(2, "0");
+
+            item.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest",
+                inline: "center"
+            });
+
+        });
+
+    });
+
+});
