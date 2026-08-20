@@ -29,7 +29,7 @@ def create_app():
     @app.route("/")
     def home():
         return render_template(
-            "home.html",
+            "index.html",
             PROJECTS=PROJECTS
         )
 
