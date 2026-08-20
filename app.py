@@ -19,7 +19,13 @@ from email.message import EmailMessage
 
 
 def create_app():
+
     app = Flask(__name__)
+
+    app.secret_key = os.getenv(
+        "SECRET_KEY",
+        "eloc-technology-lab-change-this-secret"
+    )
 
     app.config.from_object(Config)
 
