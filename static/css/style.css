@@ -18158,3 +18158,253 @@ canvas {
         font-size: 8px;
     }
 }
+
+/* =========================================================
+   PROJECT GALLERY
+   HORIZONTAL SCROLLING GALLERY
+   ========================================================= */
+
+.project-gallery-section {
+    position: relative;
+    width: 100%;
+    margin-top: 100px;
+}
+
+
+/* =========================================================
+   GALLERY COUNTER
+   ========================================================= */
+
+.gallery-counter {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin: 0 0 18px;
+    color: rgba(180, 205, 235, 0.45);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+}
+
+.gallery-counter strong {
+    color: #ffffff;
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   HORIZONTAL GALLERY
+   ========================================================= */
+
+.project-gallery {
+    width: 100%;
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 5px 3px 18px;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(80, 170, 255, 0.45) transparent;
+}
+
+
+/* Chrome / Android scrollbar */
+
+.project-gallery::-webkit-scrollbar {
+    height: 5px;
+}
+
+.project-gallery::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.project-gallery::-webkit-scrollbar-thumb {
+    background: rgba(80, 170, 255, 0.4);
+    border-radius: 20px;
+}
+
+
+/* =========================================================
+   GALLERY ITEM
+   ========================================================= */
+
+.project-gallery .gallery-item {
+    position: relative;
+    flex: 0 0 220px;
+    width: 220px;
+    height: 135px;
+
+    padding: 0;
+    border: 1px solid rgba(120, 180, 240, 0.13);
+    border-radius: 14px;
+
+    overflow: hidden;
+    cursor: pointer;
+
+    scroll-snap-align: start;
+
+    background: rgba(5, 12, 25, 0.75);
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        opacity 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.project-gallery .gallery-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+}
+
+.project-gallery .gallery-item:hover {
+    transform: translateY(-4px);
+    border-color: rgba(80, 175, 255, 0.45);
+}
+
+.project-gallery .gallery-item:hover img {
+    transform: scale(1.04);
+}
+
+
+/* =========================================================
+   ACTIVE IMAGE
+   ========================================================= */
+
+.project-gallery .gallery-item.active {
+    border-color: rgba(75, 175, 255, 0.75);
+    box-shadow:
+        0 0 0 1px rgba(70, 170, 255, 0.18),
+        0 12px 35px rgba(0, 90, 255, 0.16);
+}
+
+.project-gallery .gallery-item.active::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border: 2px solid rgba(90, 185, 255, 0.65);
+    border-radius: 14px;
+}
+
+
+/* =========================================================
+   LARGE PREVIEW
+   ========================================================= */
+
+.gallery-preview {
+    width: 100%;
+    margin-top: 25px;
+    padding: 10px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(5, 12, 25, 0.7);
+}
+
+.gallery-preview img {
+    display: block;
+    width: 100%;
+    max-height: 650px;
+    min-height: 250px;
+    object-fit: contain;
+    border-radius: 14px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+
+/* =========================================================
+   SCROLL HINT
+   ========================================================= */
+
+.gallery-scroll-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    margin-top: 3px;
+
+    color: rgba(170, 200, 235, 0.42);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.gallery-scroll-hint span:first-child,
+.gallery-scroll-hint span:last-child {
+    color: rgba(90, 180, 255, 0.65);
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   EMPTY GALLERY
+   ========================================================= */
+
+.gallery-empty {
+    padding: 50px 25px;
+    text-align: center;
+    border-radius: 18px;
+    color: rgba(190, 210, 235, 0.55);
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .project-gallery-section {
+        margin-top: 75px;
+    }
+
+    .project-gallery {
+        gap: 12px;
+    }
+
+    .project-gallery .gallery-item {
+        flex: 0 0 190px;
+        width: 190px;
+        height: 120px;
+    }
+
+    .gallery-preview {
+        margin-top: 20px;
+        padding: 7px;
+    }
+
+    .gallery-preview img {
+        min-height: 210px;
+        max-height: 500px;
+    }
+
+    .gallery-scroll-hint {
+        font-size: 9px;
+    }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .project-gallery .gallery-item {
+        flex: 0 0 175px;
+        width: 175px;
+        height: 110px;
+    }
+
+    .gallery-preview img {
+        min-height: 180px;
+    }
+}
